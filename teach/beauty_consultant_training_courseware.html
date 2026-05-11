@@ -1,0 +1,896 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#8B3A5A;--rose-light:#C97B9E;--rose-pale:#F7EEF3;--rose-deep:#5C2040;
+  --gold:#C9A86C;--gold-light:#E8D5B0;--cream:#FBF8F4;--ink:#2D1A24;
+  --ink2:#5A3D4A;--ink3:#9C7A87;--white:#FFFFFF;
+  --border:rgba(139,58,90,0.15);--shadow:rgba(92,32,64,0.08);
+}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:0 0 60px}
+.hero{background:linear-gradient(135deg,var(--rose-deep) 0%,var(--rose) 60%,var(--rose-light) 100%);padding:40px 32px 36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(201,168,108,0.15);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-20px;left:60px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.06);pointer-events:none}
+.hero-badge{display:inline-block;background:rgba(201,168,108,0.25);color:var(--gold-light);font-size:11px;letter-spacing:2px;padding:4px 12px;border-radius:20px;border:1px solid rgba(201,168,108,0.4);margin-bottom:14px}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.4}
+.hero p{font-size:13px;color:rgba(255,255,255,0.75);max-width:480px}
+.hero-kpi{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap}
+.kpi-box{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px 18px;text-align:center}
+.kpi-val{font-size:22px;font-weight:700;color:var(--gold-light);font-family:'Noto Serif SC',serif}
+.kpi-label{font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px}
+.nav{display:flex;overflow-x:auto;padding:0 20px;gap:4px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;font-family:'Noto Sans SC',sans-serif;font-size:12px;padding:14px 14px 12px;border:none;background:none;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;font-weight:400}
+.nav-btn.active{color:var(--rose);border-bottom-color:var(--rose);font-weight:500}
+.nav-btn:hover{color:var(--rose-light)}
+.tab{display:none;padding:28px 24px 0}
+.tab.active{display:block}
+.section-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:600;color:var(--rose-deep);margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--ink3);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.card-head{padding:16px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.card-head:hover{background:var(--rose-pale)}
+.card-num{width:28px;height:28px;border-radius:50%;background:var(--rose);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-title{font-size:14px;font-weight:500;color:var(--ink);flex:1}
+.card-tag{font-size:11px;background:var(--rose-pale);color:var(--rose);padding:3px 10px;border-radius:20px;border:1px solid rgba(139,58,90,0.2)}
+.card-arrow{font-size:12px;color:var(--ink3);transition:transform .2s;margin-left:8px}
+.card-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.card-body.open{display:block}
+.card.open .card-arrow{transform:rotate(180deg)}
+.tip{background:var(--rose-pale);border-left:3px solid var(--rose-light);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:13px;color:var(--ink2)}
+.tip strong{color:var(--rose);font-weight:500}
+.gold-tip{background:#FEFBF4;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:13px;color:var(--ink2)}
+.steps{counter-reset:step;margin:12px 0}
+.step{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.step-n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.step-text{font-size:13px;color:var(--ink2);line-height:1.7}
+.step-text b{color:var(--rose-deep);font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.tag{font-size:12px;padding:5px 12px;border-radius:20px;background:var(--rose-pale);color:var(--rose-deep);border:1px solid var(--border)}
+.tag.gold{background:#FBF6EC;color:#8B6820;border-color:rgba(201,168,108,0.3)}
+.tag.green{background:#EEF7EE;color:#2D6A2D;border-color:rgba(45,106,45,0.2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.mini-card{background:var(--rose-pale);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.mini-card h4{font-size:13px;font-weight:500;color:var(--rose-deep);margin-bottom:6px}
+.mini-card p{font-size:12px;color:var(--ink2);line-height:1.6}
+.script{background:#F8F8FA;border-radius:10px;padding:14px 18px;margin:12px 0;border:1px solid rgba(0,0,0,0.07)}
+.script-label{font-size:11px;color:var(--ink3);letter-spacing:1px;margin-bottom:6px}
+.script p{font-size:13px;color:var(--ink);font-style:italic;line-height:1.8}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.flow-item{background:var(--rose);color:#fff;font-size:12px;padding:7px 14px;border-radius:20px}
+.flow-arrow{color:var(--rose-light);font-size:14px}
+.table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.table th{background:var(--rose-pale);color:var(--rose-deep);font-weight:500;padding:10px 14px;text-align:left;border-bottom:2px solid var(--border)}
+.table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top}
+.table tr:last-child td{border-bottom:none}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:12px 0}
+.day-box{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center}
+.day-label{font-size:11px;color:var(--ink3);margin-bottom:6px}
+.day-content{font-size:11px;color:var(--ink2);line-height:1.5}
+.day-box.highlight{background:var(--rose-pale);border-color:rgba(139,58,90,0.3)}
+.day-box.highlight .day-label{color:var(--rose)}
+.progress-bar{background:var(--border);border-radius:10px;height:6px;margin:8px 0}
+.progress-fill{height:6px;border-radius:10px;background:linear-gradient(90deg,var(--rose),var(--rose-light))}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+.badge.warn{background:#FFF7EC;color:#8B6820;border:1px solid rgba(201,168,108,0.4)}
+.badge.danger{background:#FEF0F0;color:#8B2020;border:1px solid rgba(139,32,32,0.2)}
+.badge.success{background:#EFF8EE;color:#2D6A2D;border:1px solid rgba(45,106,45,0.2)}
+.sep{height:1px;background:var(--border);margin:20px 0}
+.icon-row{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+h4{font-size:14px;font-weight:500;color:var(--ink);margin:16px 0 8px}
+p{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:8px}
+ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}.week-grid{grid-template-columns:repeat(4,1fr)}.hero h1{font-size:20px}.hero-kpi{gap:12px}}
+</style>
+
+<div class="wrap">
+<div class="hero">
+  <div class="hero-badge">顾问销售培训体系 · 美容行业</div>
+  <h1>皮肤顾问全流程销售培训课件</h1>
+  <p>从破冰接待到成交复购的完整专业体系，帮助新人7天上手、老人突破成交瓶颈</p>
+  <div class="hero-kpi">
+    <div class="kpi-box"><div class="kpi-val">7天</div><div class="kpi-label">新人上手周期</div></div>
+    <div class="kpi-box"><div class="kpi-val">30%+</div><div class="kpi-label">新客目标成交率</div></div>
+    <div class="kpi-box"><div class="kpi-val">80%+</div><div class="kpi-label">老客目标成交率</div></div>
+    <div class="kpi-box"><div class="kpi-val">8大</div><div class="kpi-label">核心流程模块</div></div>
+  </div>
+</div>
+
+<div class="nav" id="nav">
+  <button class="nav-btn active" onclick="showTab('t0',this)">🧭 新人7天计划</button>
+  <button class="nav-btn" onclick="showTab('t1',this)">💬 破冰技巧</button>
+  <button class="nav-btn" onclick="showTab('t2',this)">🔍 检测问诊</button>
+  <button class="nav-btn" onclick="showTab('t3',this)">📊 皮肤分析</button>
+  <button class="nav-btn" onclick="showTab('t4',this)">✅ 方案设计</button>
+  <button class="nav-btn" onclick="showTab('t5',this)">🪞 效果对比</button>
+  <button class="nav-btn" onclick="showTab('t6',this)">💰 报价成交</button>
+  <button class="nav-btn" onclick="showTab('t7',this)">🌹 送客增值</button>
+  <button class="nav-btn" onclick="showTab('t8',this)">📚 专业知识库</button>
+</div>
+
+<!-- TAB 0: 新人7天计划 -->
+<div class="tab active" id="t0">
+  <div class="section-title">新人7天快速上手计划</div>
+  <div class="section-sub">系统性培训路径，确保新顾问具备独立接客能力与基础成交技巧</div>
+  
+  <div class="week-grid">
+    <div class="day-box highlight"><div class="day-label">Day 1</div><div class="day-content">品牌文化<br>服务理念<br>仪表礼仪</div></div>
+    <div class="day-box highlight"><div class="day-label">Day 2</div><div class="day-content">皮肤基础<br>检测仪器<br>图谱认知</div></div>
+    <div class="day-box highlight"><div class="day-label">Day 3</div><div class="day-content">破冰话术<br>问诊流程<br>角色演练</div></div>
+    <div class="day-box highlight"><div class="day-label">Day 4</div><div class="day-content">方案设计<br>产品知识<br>项目配搭</div></div>
+    <div class="day-box highlight"><div class="day-label">Day 5</div><div class="day-content">报价话术<br>踢单技巧<br>异议处理</div></div>
+    <div class="day-box highlight"><div class="day-label">Day 6</div><div class="day-content">陪同接客<br>实战观摩<br>复盘总结</div></div>
+    <div class="day-box highlight"><div class="day-label">Day 7</div><div class="day-content">独立试接<br>带教辅助<br>考核达标</div></div>
+  </div>
+
+  <div class="card" id="c00">
+    <div class="card-head" onclick="toggleCard('c00')">
+      <div class="card-num">1</div>
+      <div class="card-title">Day 1-2：认知建设——品牌、皮肤、仪器</div>
+      <div class="card-tag">基础课</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <h4>品牌与服务认知</h4>
+      <ul>
+        <li>品牌定位、核心价值观、服务差异点</li>
+        <li>顾问岗位职责与职业形象标准（仪容/着装/话术用语）</li>
+        <li>门店服务流程全貌概览（接待→检测→分析→方案→项目→对比→成交→复购）</li>
+      </ul>
+      <h4>皮肤基础知识（重点）</h4>
+      <div class="grid2">
+        <div class="mini-card"><h4>皮肤结构</h4><p>表皮层、真皮层、皮下组织的功能认知，角质层屏障意义</p></div>
+        <div class="mini-card"><h4>六大皮肤类型</h4><p>干性/油性/混合性/敏感性/衰老性/问题性，判断维度与特征</p></div>
+        <div class="mini-card"><h4>常见肌肤问题</h4><p>痘痘/色斑/敏感/干燥/毛孔/细纹——成因链路理解</p></div>
+        <div class="mini-card"><h4>皮肤代谢周期</h4><p>28天更新周期，年龄与季节对代谢速度的影响，客诉预期管理</p></div>
+      </div>
+      <h4>皮肤检测仪器认知</h4>
+      <ul>
+        <li>VISIA皮肤检测仪各图谱含义（红区/UV紫外线/棕区/交叉偏正/红热力图/冷光图）</li>
+        <li>检测前准备：顾客卸妆、面部清洁标准，光线与角度要求</li>
+        <li>检测后读图逻辑：哪些图重点讲、怎么讲</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" id="c01">
+    <div class="card-head" onclick="toggleCard('c01')">
+      <div class="card-num">2</div>
+      <div class="card-title">Day 3-4：流程话术——问诊、分析、方案</div>
+      <div class="card-tag">核心课</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="tip"><strong>练习方法：</strong>两人一组角色扮演，一人扮顾客（含刁难型/沉默型/急性子型），一人扮顾问，老人点评录音复盘</div>
+      <h4>训练重点</h4>
+      <div class="steps">
+        <div class="step"><div class="step-n">①</div><div class="step-text">背诵并演练<b>五类破冰开场</b>，每类至少3句话术</div></div>
+        <div class="step"><div class="step-n">②</div><div class="step-text">模拟<b>12个核心问诊问题</b>的提问节奏与过渡语</div></div>
+        <div class="step"><div class="step-n">③</div><div class="step-text">学会根据问诊信息<b>现场选图分析</b>（3-4张图的优先级判断）</div></div>
+        <div class="step"><div class="step-n">④</div><div class="step-text">练习<b>结论陈述公式</b>：现象→成因→关联→解决方向</div></div>
+      </div>
+      <h4>方案设计入门</h4>
+      <ul>
+        <li>新客 vs 老客方案逻辑差异</li>
+        <li>项目组合搭配原则（修复优先/功效叠加/周期规划）</li>
+        <li>与美容师交接的7要素（产品用量/浓度/力度/仪器能量/时间/部位/注意点）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" id="c02">
+    <div class="card-head" onclick="toggleCard('c02')">
+      <div class="card-num">3</div>
+      <div class="card-title">Day 5-7：成交能力——报价、异议、实战</div>
+      <div class="card-tag">进阶课</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <h4>报价五步法练习</h4>
+      <div class="flow">
+        <div class="flow-item">获取满意共识</div><div class="flow-arrow">→</div>
+        <div class="flow-item">呈现方案价值</div><div class="flow-arrow">→</div>
+        <div class="flow-item">报出金额</div><div class="flow-arrow">→</div>
+        <div class="flow-item">踢单工具</div><div class="flow-arrow">→</div>
+        <div class="flow-item">引导刷单</div>
+      </div>
+      <h4>常见异议话术练习（必背）</h4>
+      <table class="table">
+        <tr><th>顾客异议</th><th>应对思路</th></tr>
+        <tr><td>太贵了</td><td>价值拆分 + 周期均摊 + 场景感受</td></tr>
+        <tr><td>回家想想</td><td>确认顾虑点 + 限时价值 + 场景共鸣</td></tr>
+        <tr><td>效果不确定</td><td>同类案例图 + 自身护理效果 + 阶段承诺</td></tr>
+        <tr><td>下次来再说</td><td>今日专属加赠 + 皮肤现状紧迫感</td></tr>
+        <tr><td>先试试看</td><td>引导体验级入口 + 后续升级路径</td></tr>
+      </table>
+      <div class="gold-tip"><strong>Day 6-7 实战要求：</strong>跟随老顾问接待真实顾客全程观摩，做接待日志（破冰用了什么/分析说了什么/怎么报价/结果如何/复盘改进）</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 1: 破冰技巧 -->
+<div class="tab" id="t1">
+  <div class="section-title">破冰接待技巧</div>
+  <div class="section-sub">第一印象决定顾客的开放程度，好的破冰让后续问诊和成交事半功倍</div>
+  
+  <div class="card" id="c10">
+    <div class="card-head" onclick="toggleCard('c10')">
+      <div class="card-num">1</div>
+      <div class="card-title">五大破冰切入方式</div>
+      <div class="card-tag">必掌握</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>① 赞美亮点破冰</h4>
+          <p>从顾客身上找真实亮点——发型、妆容、配饰、气质、穿搭，选一个真诚赞美，不要夸到让顾客觉得假</p>
+        </div>
+        <div class="mini-card">
+          <h4>② 共同话题破冰</h4>
+          <p>找到与顾客的共同点——同城市、同爱好、孩子年龄相近、同季节烦恼，拉近距离感</p>
+        </div>
+        <div class="mini-card">
+          <h4>③ 顾客变化切入</h4>
+          <p>敏锐观察上次到现在的变化——发型、穿衣风格、状态气色，说出来让顾客感受到被关注</p>
+        </div>
+        <div class="mini-card">
+          <h4>④ 上次聊天延续</h4>
+          <p>提及上次聊过的内容（孩子、旅行、工作）——"上次你说..."，让顾客感受到被记住</p>
+        </div>
+      </div>
+      <div class="mini-card" style="margin-top:12px">
+        <h4>⑤ 小礼物破冰（物质突破）</h4>
+        <p>准备小而有用的伴手礼——护手霜/小样/节日礼品，第一时间给到顾客，降低防御心理，营造好感氛围</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c11">
+    <div class="card-head" onclick="toggleCard('c11')">
+      <div class="card-num">2</div>
+      <div class="card-title">破冰话术示范（可直接背诵）</div>
+      <div class="card-tag">话术库</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="script">
+        <div class="script-label">赞美型</div>
+        <p>"您今天这个发型好适合您，整个人感觉精神好很多，是刚做的吗？"</p>
+      </div>
+      <div class="script">
+        <div class="script-label">变化观察型</div>
+        <p>"哇，上次来的时候您是长发，现在剪短了！整个人感觉更有精气神了，是换了造型师吗？"</p>
+      </div>
+      <div class="script">
+        <div class="script-label">上次聊天延续型</div>
+        <p>"上次您说要去日本旅游，去了吗？好玩不？皮肤有没有在旅途中出状况？"</p>
+      </div>
+      <div class="script">
+        <div class="script-label">礼物型</div>
+        <p>"这是我们最近进的一款护手霜，特别适合这个季节，我特意给您留了一支，来，先感受一下。"</p>
+      </div>
+      <div class="tip"><strong>禁忌：</strong>不要用"您好，今天来做什么项目？"直接询问服务——这会立刻让顾客进入防御状态，成为普通消费关系而非信任关系</div>
+    </div>
+  </div>
+
+  <div class="card" id="c12">
+    <div class="card-head" onclick="toggleCard('c12')">
+      <div class="card-num">3</div>
+      <div class="card-title">破冰状态标准——如何判断破冰成功</div>
+      <div class="card-tag">自检表</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="steps">
+        <div class="step"><div class="step-n">✓</div><div class="step-text">顾客主动开口说话，不是只回答"嗯/对/好"</div></div>
+        <div class="step"><div class="step-n">✓</div><div class="step-text">顾客身体语言放松，不再紧抱双臂或斜坐</div></div>
+        <div class="step"><div class="step-n">✓</div><div class="step-text">顾客开始主动分享自己的生活/困扰</div></div>
+        <div class="step"><div class="step-n">✓</div><div class="step-text">顾客开始询问你的看法或建议</div></div>
+      </div>
+      <div class="gold-tip"><strong>核心心法：</strong>破冰的目的是建立信任，不是建立交易关系。让顾客感受到"这个顾问真的在关心我"比"这个顾问很专业"更重要——专业可以之后展示，信任要第一时间建立。</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 2: 检测问诊 -->
+<div class="tab" id="t2">
+  <div class="section-title">检测问诊流程</div>
+  <div class="section-sub">问诊是信息收集阶段，不着急下结论，深度挖掘才能精准分析</div>
+
+  <div class="card" id="c20">
+    <div class="card-head" onclick="toggleCard('c20')">
+      <div class="card-num">1</div>
+      <div class="card-title">12项核心问诊维度</div>
+      <div class="card-tag">必问清单</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <table class="table">
+        <tr><th>问诊维度</th><th>核心问题</th><th>目的</th></tr>
+        <tr><td><b>问题存在时间</b></td><td>这个情况大概是什么时候开始的？</td><td>判断急慢性、改善难度</td></tr>
+        <tr><td><b>前后行为对比</b></td><td>出现问题前后，护肤习惯有变化吗？</td><td>找到触发事件</td></tr>
+        <tr><td><b>家居护理习惯</b></td><td>现在在用什么护肤品？早晚怎么护肤？</td><td>排查护肤误区</td></tr>
+        <tr><td><b>反复频次</b></td><td>这个问题是一直有，还是周期性发？</td><td>判断内因/外因</td></tr>
+        <tr><td><b>基因遗传</b></td><td>家里长辈有类似皮肤问题吗？</td><td>评估先天因素影响</td></tr>
+        <tr><td><b>饮食习惯</b></td><td>平时喜欢吃辣/甜/油腻吗？便秘/腹泻频繁吗？</td><td>关联内分泌/代谢</td></tr>
+        <tr><td><b>睡眠作息</b></td><td>睡眠质量怎么样？几点睡？</td><td>关联皮肤修复力</td></tr>
+        <tr><td><b>工作压力</b></td><td>最近工作生活状态如何？压力大吗？</td><td>关联激素/皮脂分泌</td></tr>
+        <tr><td><b>防晒习惯</b></td><td>出门有防晒习惯吗？室内工作为主吗？</td><td>评估光老化风险</td></tr>
+        <tr><td><b>医美史</b></td><td>之前有做过医美项目吗？激光/水光/手术？</td><td>排查禁忌/找关联</td></tr>
+        <tr><td><b>过敏史</b></td><td>对什么成分或食物过敏吗？</td><td>方案安全性把关</td></tr>
+        <tr><td><b>期望目标</b></td><td>您最希望皮肤改善的一个地方是什么？</td><td>对齐需求锁定成交点</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="c21">
+    <div class="card-head" onclick="toggleCard('c21')">
+      <div class="card-num">2</div>
+      <div class="card-title">问诊节奏控制——如何自然地深度问诊</div>
+      <div class="card-tag">技巧</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="tip"><strong>核心原则：</strong>问诊要像朋友聊天，不是警察审讯。每问一个问题后，先共情回应，再追问下一个。</div>
+      <h4>过渡话术模板</h4>
+      <div class="script">
+        <div class="script-label">信息确认型</div>
+        <p>"您刚说经常熬夜，那您有没有发现，皮肤的状态是熬夜第二天特别明显，还是一直都是这个样子？"</p>
+      </div>
+      <div class="script">
+        <div class="script-label">关联引导型</div>
+        <p>"您说平时喜欢吃辣，这个其实对出痘痘影响挺大的——我们等会儿看看检测图，看看内部炎症情况怎么样。"</div>
+      </div>
+      <div class="script">
+        <div class="script-label">共情跟进型</div>
+        <p>"啊，已经有两年了啊，两年都是这样，那您肯定试过很多方法了？都用过什么？效果怎么样？"</p>
+      </div>
+      <div class="gold-tip"><strong>记住：</strong>问诊越详细，分析越精准，顾客越信服。信服之后，成交阻力就会小很多。问诊环节投入10分钟，成交环节省30分钟。</div>
+    </div>
+  </div>
+
+  <div class="card" id="c22">
+    <div class="card-head" onclick="toggleCard('c22')">
+      <div class="card-num">3</div>
+      <div class="card-title">饮食与身体关联对照表（专业支撑）</div>
+      <div class="card-tag">专业知识</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <table class="table">
+        <tr><th>生活习惯</th><th>皮肤关联问题</th><th>分析逻辑</th></tr>
+        <tr><td>嗜甜食</td><td>痘痘、炎症、早衰</td><td>高糖→AGEs糖化反应→胶原损伤→皮脂分泌增加→痘</td></tr>
+        <tr><td>嗜辛辣</td><td>发红、痘痘、玫瑰痤疮</td><td>辛辣扩张毛细血管→面部潮红→炎症加剧</td></tr>
+        <tr><td>便秘</td><td>痘痘、暗哑、色斑</td><td>肠道毒素→血液循环→皮肤代谢缓慢</td></tr>
+        <tr><td>熬夜</td><td>暗沉、眼袋、免疫降低</td><td>生长激素0-2点分泌高峰被打断→修复力下降</td></tr>
+        <tr><td>缺水</td><td>干纹、敏感、紧绷</td><td>皮肤含水量↓→屏障功能下降→外界刺激更易入侵</td></tr>
+        <tr><td>高压力</td><td>痘痘、色斑、敏感</td><td>皮质醇↑→皮脂分泌↑→炎症→痘痘；黑色素刺激</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 3: 皮肤分析 -->
+<div class="tab" id="t3">
+  <div class="section-title">皮肤图谱分析</div>
+  <div class="section-sub">结合检测图像，将数据转化为顾客能听懂、能感受到的皮肤故事</div>
+
+  <div class="card" id="c30">
+    <div class="card-head" onclick="toggleCard('c30')">
+      <div class="card-num">1</div>
+      <div class="card-title">六大检测图谱解读与使用场景</div>
+      <div class="card-tag">核心技能</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <table class="table">
+        <tr><th>图谱类型</th><th>重点看什么</th><th>顾客诉求场景</th></tr>
+        <tr><td><b>红区图</b></td><td>皮肤炎症、毛细血管、敏感分布</td><td>顾客关注健康屏障/修复/敏感问题</td></tr>
+        <tr><td><b>红热力图</b></td><td>皮肤含水量分布、干燥区域</td><td>顾客关注水润补水/干燥脱皮</td></tr>
+        <tr><td><b>UV紫外线图</b></td><td>日晒损伤、皮下色素沉着、代谢堆积</td><td>顾客关注代谢/深层斑点/暗沉</td></tr>
+        <tr><td><b>交叉偏正光图</b></td><td>皮肤纹理、细纹、松弛程度</td><td>顾客关注抗衰/提拉/弹力</td></tr>
+        <tr><td><b>棕区图（冷光）</b></td><td>表皮色素、色斑、肤色不均</td><td>顾客关注肤色提亮/色斑淡化</td></tr>
+        <tr><td><b>冷光色素图</b></td><td>毛孔、角质、表皮粗糙度</td><td>顾客关注毛孔/肤质/细腻度</td></tr>
+      </table>
+      <div class="tip"><strong>选图原则：</strong>根据顾客问诊中表达的最在意问题，优先讲2-3张对应图谱；再用1张关联图引出皮肤问题的深层成因，让分析更立体完整。</div>
+    </div>
+  </div>
+
+  <div class="card" id="c31">
+    <div class="card-head" onclick="toggleCard('c31')">
+      <div class="card-num">2</div>
+      <div class="card-title">皮肤分析结论表达公式</div>
+      <div class="card-tag">话术公式</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="flow">
+        <div class="flow-item">指出图谱现象</div><div class="flow-arrow">→</div>
+        <div class="flow-item">解释成因关联</div><div class="flow-arrow">→</div>
+        <div class="flow-item">链接身体代谢</div><div class="flow-arrow">→</div>
+        <div class="flow-item">得出皮肤结论</div><div class="flow-arrow">→</div>
+        <div class="flow-item">引出解决方向</div>
+      </div>
+      <div class="script">
+        <div class="script-label">示范话术（敏感泛红顾客）</div>
+        <p>"您看这张红区图，在颧骨两侧这里，红色区域比较明显。这说明皮肤里面有轻度的炎症，毛细血管比较浅，容易引发泛红。结合您之前说的——喜欢吃辣、睡眠不太稳定，这两个习惯其实会让皮肤的自我修复能力下降，屏障变弱。所以我们今天的重点是先做修复，把屏障稳定下来，让皮肤不那么容易被刺激到，然后才能做后续的功效护理，不然顺序反了反而会越做越敏感。"</p>
+      </div>
+      <div class="script">
+        <div class="script-label">示范话术（抗衰顾客）</div>
+        <p>"您看这张交叉偏正图，眼角和法令纹这里，纹理比较明显。这个是皮肤深层胶原开始流失的信号，跟您之前说工作压力大、睡眠质量不稳是直接相关的——皮质醇高的时候会加速胶原降解。另外我看到UV图里，面颊有一些还没浮出来的色素沉积，这个如果不处理，再过6-12个月就会变成明显的斑。所以我们今天的方案要同步考虑修复和抗衰……"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c32">
+    <div class="card-head" onclick="toggleCard('c32')">
+      <div class="card-num">3</div>
+      <div class="card-title">有医美史顾客的特殊分析策略</div>
+      <div class="card-tag">进阶场景</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <table class="table">
+        <tr><th>医美类型</th><th>可能的遗留问题</th><th>我们的结合方案</th></tr>
+        <tr><td>双眼皮手术</td><td>上眼皮淋巴循环受阻、营养吸收慢、眼周暗沉</td><td>针对眼周淋巴引流+仪器加速眼周营养吸收</td></tr>
+        <tr><td>水光注射</td><td>微针损伤通道、细菌风险、屏障短暂下降</td><td>急速修复项目+补水屏障重建</td></tr>
+        <tr><td>激光/光子</td><td>光热损伤修复期、色素反弹风险</td><td>舒缓修复+防止PIH（炎症后色沉）</td></tr>
+        <tr><td>注射填充</td><td>局部循环影响、面部不对称感</td><td>仪器辅助均匀按摩、循环激活</td></tr>
+        <tr><td>手术后</td><td>疤痕、水肿、循环恢复慢</td><td>急速消肿修复 + 疤痕管理方案</td></tr>
+      </table>
+      <div class="gold-tip"><strong>话术技巧：</strong>不要否定顾客的医美选择，而要说"医美做得好的基础上，配合我们的护理可以让效果更稳定、恢复更快、维持更久"——这样既不冲突，还能增加项目的粘性。</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 4: 方案设计 -->
+<div class="tab" id="t4">
+  <div class="section-title">方案设计与美容师交接</div>
+  <div class="section-sub">精准的方案设计是成交的核心，完整的交接是效果的保障</div>
+
+  <div class="card" id="c40">
+    <div class="card-head" onclick="toggleCard('c40')">
+      <div class="card-num">1</div>
+      <div class="card-title">新客 vs 老客方案设计逻辑</div>
+      <div class="card-tag">策略</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>新客方案逻辑</h4>
+          <p><b>首要任务：</b>建立信任，让顾客感受到效果</p>
+          <ul style="margin-top:8px">
+            <li>判断是否需要升级：基础单次 vs 疗程入门</li>
+            <li>选顾客最在意的1-2个问题切入</li>
+            <li>以体验感强、见效快的项目为主</li>
+            <li>预期管理：明确告知几次可见效</li>
+            <li>留后续："做完今天我们看看效果，根据结果我再给你规划后续"</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h4>老客方案逻辑</h4>
+          <p><b>首要任务：</b>深化服务，推动升级或加项</p>
+          <ul style="margin-top:8px">
+            <li>回顾上次效果，确认顾客感受</li>
+            <li>根据皮肤阶段进展调整搭配</li>
+            <li>引入新需求：季节变化/新问题/升级功效</li>
+            <li>增加周期绑定：提前储值/疗程续购</li>
+            <li>关联新项目：老问题稳定后的新目标</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c41">
+    <div class="card-head" onclick="toggleCard('c41')">
+      <div class="card-num">2</div>
+      <div class="card-title">美容师交接七要素（标准化交接单）</div>
+      <div class="card-tag">操作规范</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="tip"><strong>重要：</strong>交接不到位，效果打折扣，顾客满意度降低，后续成交更难。交接是顾问对效果负责的体现。</div>
+      <table class="table">
+        <tr><th>#</th><th>交接要素</th><th>说明</th></tr>
+        <tr><td>1</td><td><b>产品用量</b></td><td>精确到ml或g，避免过量刺激或不足无效</td></tr>
+        <tr><td>2</td><td><b>产品浓度</b></td><td>敏感/正常/耐受皮肤的稀释比例或叠加顺序</td></tr>
+        <tr><td>3</td><td><b>操作力度</b></td><td>轻/中/重，针对部位的力度差异说明</td></tr>
+        <tr><td>4</td><td><b>仪器能量</b></td><td>具体档位/能量值/频率，首次客降低能量</td></tr>
+        <tr><td>5</td><td><b>操作时间</b></td><td>每步骤停留时间，整体项目时长节点</td></tr>
+        <tr><td>6</td><td><b>操作部位</b></td><td>重点部位与需要规避/减少操作的区域</td></tr>
+        <tr><td>7</td><td><b>顾客注意点</b></td><td>过敏史/敏感区/顾客情绪状态/今天期望重点</td></tr>
+      </table>
+      <div class="gold-tip"><strong>交接时机：</strong>在美容师进入房间前完成口头+书面双交接，确保美容师了解今天项目对比维度——"今天效果对比重点看【水润度/红区改善/肤色提亮】，做完和我说一下顾客反应。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 5: 效果对比 -->
+<div class="tab" id="t5">
+  <div class="section-title">效果对比引导</div>
+  <div class="section-sub">对比是成交的最强推力，也是顾客续购的核心动力</div>
+
+  <div class="card" id="c50">
+    <div class="card-head" onclick="toggleCard('c50')">
+      <div class="card-num">1</div>
+      <div class="card-title">对比前：与美容师对齐维度</div>
+      <div class="card-tag">操作前</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-text">提前告知美容师：<b>今天顾客最在意的诉求是什么</b>（水润/红区消退/肤色/毛孔）</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-text">确认美容师在房间内将引导顾客关注的<b>体感维度</b>（皮肤变软/变凉/变紧/变亮）</div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-text">确认照片拍摄<b>角度和光线一致</b>（和做前照片同角度、同距离），避免对比失真</div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-text">确认美容师做完会<b>提前告知顾问</b>，让顾问进来主导最后的对比环节</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c51">
+    <div class="card-head" onclick="toggleCard('c51')">
+      <div class="card-num">2</div>
+      <div class="card-title">对比中：互动与继续破冰</div>
+      <div class="card-tag">操作中</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="tip"><strong>等待拍照出结果期间</strong>是黄金互动时间，继续延续破冰话题或深化关系</div>
+      <h4>可聊话题</h4>
+      <div class="tags">
+        <div class="tag">顾客最在意的生活场景（约会/见客户/活动）</div>
+        <div class="tag">最近饮食习惯有没有改变</div>
+        <div class="tag">家居护理有没有按建议做</div>
+        <div class="tag">对今天项目的体感感受</div>
+        <div class="tag">下次安排/计划中的日程</div>
+      </div>
+      <h4>皮测图对比选图原则</h4>
+      <table class="table">
+        <tr><th>顾客诉求</th><th>对比重点图谱</th></tr>
+        <tr><td>修复/敏感/健康</td><td>红区图（炎症减少）</td></tr>
+        <tr><td>补水/水润</td><td>红热力图（水分分布变化）</td></tr>
+        <tr><td>代谢/斑/暗沉</td><td>UV紫外线图（色素代谢）</td></tr>
+        <tr><td>抗衰/提拉</td><td>交叉偏正光图（纹理改善）</td></tr>
+        <tr><td>肤色/色斑</td><td>棕区/冷光色素图</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="c52">
+    <div class="card-head" onclick="toggleCard('c52')">
+      <div class="card-num">3</div>
+      <div class="card-title">对比后：从效果到方案的自然过渡</div>
+      <div class="card-tag">成交引导</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="script">
+        <div class="script-label">对比后引导话术</div>
+        <p>"您看，就今天这一次，红区这块已经有明显变化了，皮肤自己感受到的，肯定也比之前更舒服对吧？这还只是一次的效果——如果我们系统地管理3-6个月，皮肤的状态会稳定在一个很好的水平，不容易反弹。我给您规划一下，接下来每个阶段我们做什么……"</p>
+      </div>
+      <div class="gold-tip"><strong>关键动作：</strong>效果对比后立刻得出阶段性皮肤管理结论，引出下一步规划——不要让顾客自己解读对比，要顾问主导判断和引导，这是专业权威感的体现。</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 6: 报价成交 -->
+<div class="tab" id="t6">
+  <div class="section-title">报价成交流程</div>
+  <div class="section-sub">成交是自然而然的结果，不是强迫——让顾客觉得"不买才是损失"</div>
+
+  <div class="card" id="c60">
+    <div class="card-head" onclick="toggleCard('c60')">
+      <div class="card-num">1</div>
+      <div class="card-title">报价五步法（黄金流程）</div>
+      <div class="card-tag">核心流程</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-text">
+            <b>获取满意共识</b><br>
+            "您今天的体验感觉怎么样？皮肤现在是什么感受？" ——先让顾客表达满意，建立正向情绪锚点，让成交从"买"变成"继续这种好体验"
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-text">
+            <b>呈现方案价值</b><br>
+            介绍完整周期方案：第一阶段做什么→效果是什么→顾客能感受到什么场景变化，用可视化的结果描述（不是产品功能，是顾客体感）
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-text">
+            <b>报出金额</b><br>
+            直接清晰报价，不要绕弯子。配上拆分逻辑："这个方案包含X次，平均每次才X元，比您现在自己买护肤品效果好很多，而且有我们全程跟踪"
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-text">
+            <b>踢单工具组合</b><br>
+            ① 同类顾客对比案例图（3张左右，问题相似）<br>
+            ② 顾问自己的护理前后对比（真实可信）<br>
+            ③ 限时高价值赠送（今天成交才有）<br>
+            ④ 可视化周期结果场景描述
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">5</div>
+          <div class="step-text">
+            <b>引导刷单/不刷单处理</b><br>
+            刷单：引导POS机/扫码，陪伴操作流程，期间继续聊天不要沉默<br>
+            不刷单（异议）：不急，确认顾虑点→一一回应→再次锁定成交
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c61">
+    <div class="card-head" onclick="toggleCard('c61')">
+      <div class="card-num">2</div>
+      <div class="card-title">踢单工具详解</div>
+      <div class="card-tag">工具箱</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>案例图库</h4>
+          <p>按问题类型整理：痘痘/色斑/敏感/抗衰各3-5组对比图，选与当前顾客问题最相近的3张展示，强调"和您情况很像"</p>
+        </div>
+        <div class="mini-card">
+          <h4>顾问自身案例</h4>
+          <p>顾问本人使用同类产品/项目的效果照（最具说服力），搭配"我自己用了X个月，变化在这里……"</p>
+        </div>
+        <div class="mini-card">
+          <h4>限时加赠设计</h4>
+          <p>高感知价值的赠品（单次护理/护肤礼盒/会员权益），强调"今天才有，下次来不一定还有"，制造稀缺感</p>
+        </div>
+        <div class="mini-card">
+          <h4>周期场景化描述</h4>
+          <p>"3个月后，您照镜子会看到……"、"半年后朋友见到您……"，让顾客在脑海里先体验结果</p>
+        </div>
+      </div>
+      <h4>报价时的身体语言</h4>
+      <div class="tags">
+        <div class="tag">面带微笑，不紧张</div>
+        <div class="tag">眼神坚定看顾客</div>
+        <div class="tag">语速平稳不过快</div>
+        <div class="tag">报价后保持沉默等待</div>
+        <div class="tag">不先低头/不先退让</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c62">
+    <div class="card-head" onclick="toggleCard('c62')">
+      <div class="card-num">3</div>
+      <div class="card-title">家居护理建议——增加成交附加价值</div>
+      <div class="card-tag">增值</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="tip"><strong>为什么在成交环节讲家居护理：</strong>给顾客一些"专业干货"，让她感受到你不只是在卖东西，而是真心想帮她把皮肤管好——这会大幅提升信任度，促进成交</div>
+      <h4>家居护理避坑建议示范</h4>
+      <div class="script">
+        <div class="script-label">针对痘痘顾客</div>
+        <p>"在家里，睡前不要用去角质类产品，会破坏您本来就脆弱的屏障；枕套建议两三天换一次，手机屏幕也要定期清洁。这些小细节，很多人都忽略了，但它真的会影响效果。"</p>
+      </div>
+      <div class="script">
+        <div class="script-label">针对色斑顾客</div>
+        <p>"做完美白项目，在家最重要的是防晒——不是室外才需要，开车/坐靠窗也要。我建议您在包里常备一支SPF50+的防晒，随时补涂，这样效果才能稳住。"</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 7: 送客增值 -->
+<div class="tab" id="t7">
+  <div class="section-title">送客与情绪价值</div>
+  <div class="section-sub">送客不是结束，是下一次复购的开始</div>
+
+  <div class="card" id="c70">
+    <div class="card-head" onclick="toggleCard('c70')">
+      <div class="card-num">1</div>
+      <div class="card-title">送客标准动作（不论是否成交）</div>
+      <div class="card-tag">必执行</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-text">不要快速送客，在门口多停留1-2分钟，继续提供情绪价值</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-text">再次<b>给出专业建议总结</b>："今天最重要的一件事，是回家不要用酒精成分的爽肤水……"</div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-text">用<b>模板型专业建议文稿</b>整理发给顾客（填入个性化内容），内容包含：皮肤状态总结/今天项目说明/家居护理重点/下次建议时间</div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-text">为下次来访<b>留好钩子</b>："我下周会整理一下您皮肤第一个月的变化报告，到时候发给您看"</div></div>
+      </div>
+      <div class="gold-tip"><strong>专业建议文稿模板用途：</strong>发给顾客既有服务感，又是下次跟进联系的理由，大幅提高复购率。每次文稿都体现专业性，顾客会主动转介绍。</div>
+    </div>
+  </div>
+
+  <div class="card" id="c71">
+    <div class="card-head" onclick="toggleCard('c71')">
+      <div class="card-title">专业建议文稿模板（可直接使用）</div>
+      <div class="card-tag">模板</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="script">
+        <div class="script-label">发送给顾客的文稿模板</div>
+        <p>
+          亲爱的【顾客姓名】，很高兴今天为您服务 ☺<br><br>
+          <b>【今日皮肤状态评估】</b><br>
+          您目前皮肤主要问题：【填入：如轻度炎症/含水量偏低/色素代谢缓慢】<br>
+          主要成因：【填入：如屏障功能偏弱+饮食习惯】<br><br>
+          <b>【今天项目】</b>【填入项目名称】<br>
+          做完今天的效果重点关注：【填入：如皮肤是否有水润感/泛红是否减少】<br><br>
+          <b>【家居护理提醒】</b><br>
+          ① 接下来3天避免：【填入：如酒精/去角质/热水洗脸】<br>
+          ② 重点补充：【填入：如补水面膜/防晒】<br>
+          ③ 饮食建议：【填入：减少辛辣/多喝水】<br><br>
+          <b>【下次建议时间】</b>【填入】，到时候我们再评估一次，看看皮肤的进展 ✨
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 8: 专业知识库 -->
+<div class="tab" id="t8">
+  <div class="section-title">专业知识补充库</div>
+  <div class="section-sub">顾问的专业深度是顾客信任的基础，以下是岗位必备的核心专业知识体系</div>
+
+  <div class="card" id="c80">
+    <div class="card-head" onclick="toggleCard('c80')">
+      <div class="card-num">1</div>
+      <div class="card-title">皮肤生理学基础（顾问必知）</div>
+      <div class="card-tag">专业知识</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <table class="table">
+        <tr><th>知识点</th><th>顾问需要掌握的程度</th></tr>
+        <tr><td>皮肤屏障功能</td><td>能解释为什么屏障受损会导致各种问题，及修复思路</td></tr>
+        <tr><td>皮肤代谢周期</td><td>28天周期，年龄延长至40-60天，影响顾客对效果的预期</td></tr>
+        <tr><td>胶原蛋白流失</td><td>25岁后每年流失1%，紫外线/糖化/压力加速，顾客能听懂的语言</td></tr>
+        <tr><td>黑色素生成路径</td><td>酪氨酸→多巴→黑色素，干预点在哪，解释美白逻辑</td></tr>
+        <tr><td>皮脂腺与痘痘</td><td>雄激素→皮脂增加→毛孔堵塞→痤疮丙酸杆菌→炎症</td></tr>
+        <tr><td>经皮吸收原理</td><td>分子量<500道尔顿才能透皮，解释为什么仪器辅助吸收有意义</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="c81">
+    <div class="card-head" onclick="toggleCard('c81')">
+      <div class="card-num">2</div>
+      <div class="card-title">成分知识——顾客常问的成分</div>
+      <div class="card-tag">成分库</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <table class="table">
+        <tr><th>成分</th><th>核心功效</th><th>顾客沟通要点</th></tr>
+        <tr><td>玻尿酸（HA）</td><td>保湿、锁水、填充</td><td>不同分子量吸收深度不同，大分子锁水/小分子补水</td></tr>
+        <tr><td>维A醇（Retinol）</td><td>抗衰、代谢加速、淡斑</td><td>初用从低浓度开始，需防晒，敏感期不建议</td></tr>
+        <tr><td>烟酰胺</td><td>美白、控油、收毛孔</td><td>5%浓度效果好，部分人可能有泛红反应</td></tr>
+        <tr><td>视黄醇/A醇</td><td>刺激胶原增生</td><td>需配合防晒，不适合孕期/哺乳期</td></tr>
+        <tr><td>维C（抗坏血酸）</td><td>抗氧化、提亮、美白</td><td>不稳定，需避光保存，与A醇分开用</td></tr>
+        <tr><td>神经酰胺</td><td>修复屏障、保湿</td><td>敏感/受损皮肤首选，加速屏障重建</td></tr>
+        <tr><td>水杨酸（BHA）</td><td>溶解油脂、疏通毛孔</td><td>痘痘/油皮适用，去角质不要过频</td></tr>
+        <tr><td>胜肽类</td><td>仿信号肽，抗衰</td><td>多种胜肽功效不同，组合使用效果叠加</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="c82">
+    <div class="card-head" onclick="toggleCard('c82')">
+      <div class="card-num">3</div>
+      <div class="card-title">顾问心理学——销售情绪管理</div>
+      <div class="card-tag">心理建设</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4>成交心态</h4>
+          <p>相信方案真的能帮助顾客——不是在"卖东西"，是在"提供解决方案"。真诚比技巧更有力量。</p>
+        </div>
+        <div class="mini-card">
+          <h4>拒绝心态</h4>
+          <p>被拒绝是正常的。没有成交=顾客还没准备好，不是你不够好。复盘改进，不要自我否定。</p>
+        </div>
+        <div class="mini-card">
+          <h4>沉默力量</h4>
+          <p>报价后的沉默是最强的压力。不要急着说话填补沉默——那是顾客在思考的时间，不要打断。</p>
+        </div>
+        <div class="mini-card">
+          <h4>情绪稳定</h4>
+          <p>无论顾客态度如何（冷漠/刁难/比价），保持稳定专业的状态，这本身就是最好的信任展示。</p>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <h4>顾问每日自我复盘问题</h4>
+      <ul>
+        <li>今天破冰用了什么方法？顾客的开放程度如何？</li>
+        <li>问诊中最有价值的一个信息是什么？是怎么挖掘出来的？</li>
+        <li>方案呈现时，顾客最有反应的点是什么？</li>
+        <li>成交了：是哪个踢单工具起了关键作用？</li>
+        <li>没成交：顾客的核心顾虑是什么？下次怎么提前化解？</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" id="c83">
+    <div class="card-head" onclick="toggleCard('c83')">
+      <div class="card-num">4</div>
+      <div class="card-title">需要额外补充的岗位关键能力清单</div>
+      <div class="card-tag">能力地图</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="tip"><strong>除了本课件内容，以下能力是顾问进阶必须系统建立的：</strong></div>
+      <table class="table">
+        <tr><th>能力维度</th><th>具体内容</th><th>优先级</th></tr>
+        <tr><td>顾客档案管理</td><td>建立每位顾客的完整档案：皮肤状态/检测记录/项目史/喜好/家庭情况/重要纪念日</td><td><span class="badge success">高</span></td></tr>
+        <tr><td>节点跟进体系</td><td>术后3天/7天/下次来前提醒的跟进话术与频率标准</td><td><span class="badge success">高</span></td></tr>
+        <tr><td>转介绍激活</td><td>何时开口/怎么开口邀请转介绍，对应激励政策表达方式</td><td><span class="badge success">高</span></td></tr>
+        <tr><td>会员体系运用</td><td>不同等级会员的权益说明、升级路径引导话术</td><td><span class="badge warn">中</span></td></tr>
+        <tr><td>竞品对比知识</td><td>主流竞品的定位差异，当顾客比价时的价值差异化表达</td><td><span class="badge warn">中</span></td></tr>
+        <tr><td>季节皮肤护理</td><td>春/夏/秋/冬各季节皮肤特点与对应推荐项目，增加主动外呼素材</td><td><span class="badge warn">中</span></td></tr>
+        <tr><td>社群/私信运营</td><td>朋友圈内容策略，私信沟通节奏，不骚扰式保持存在感</td><td><span class="badge warn">中</span></td></tr>
+        <tr><td>数据追踪意识</td><td>自己的月度成交率/人均客单价/复购率/转介绍数——学会用数据复盘自己</td><td><span class="badge success">高</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+function toggleCard(id){
+  var card=document.getElementById(id);
+  var body=card.querySelector('.card-body');
+  var arrow=card.querySelector('.card-arrow');
+  if(body.classList.contains('open')){
+    body.classList.remove('open');
+    card.classList.remove('open');
+  } else {
+    body.classList.add('open');
+    card.classList.add('open');
+  }
+}
+document.querySelectorAll('.card-body:not(.open)').forEach(function(b){
+  b.style.display='none';
+});
+document.querySelectorAll('.card-body.open').forEach(function(b){
+  b.style.display='block';
+});
+document.querySelectorAll('.card-head').forEach(function(head){
+  head.addEventListener('click',function(){
+    var body=this.parentElement.querySelector('.card-body');
+    if(body.style.display==='none'||body.style.display===''){
+      body.style.display='block';
+      this.parentElement.classList.add('open');
+    } else {
+      body.style.display='none';
+      this.parentElement.classList.remove('open');
+    }
+  });
+});
+</script>

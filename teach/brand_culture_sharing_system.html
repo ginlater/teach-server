@@ -1,0 +1,618 @@
+
+<h2 class="sr-only">企业文化分享体系——新老顾客差异化策略与话术</h2>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#8B3A5A;--rose-light:#C97B9E;--rose-pale:#F7EEF3;--rose-deep:#5C2040;
+  --gold:#C9A86C;--gold-light:#E8D5B0;--cream:#FBF8F4;--ink:#2D1A24;
+  --ink2:#5A3D4A;--ink3:#9C7A87;--white:#FFFFFF;
+  --gr:#2D6A4F;--grp:#EFF7F2;--grl:#6AAE8B;
+  --bl:#2D5A8B;--blp:#EFF4FB;
+  --bd:rgba(139,58,90,0.15);
+}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+.wrap{max-width:900px;margin:0 auto;padding-bottom:60px}
+
+.hero-strip{
+  background:linear-gradient(135deg,var(--rose-deep) 0%,var(--rose) 60%,var(--rose-light) 100%);
+  border-radius:12px;padding:28px 26px;margin-bottom:1.25rem;
+  display:flex;gap:1rem;align-items:flex-start;position:relative;overflow:hidden;
+}
+.hero-strip::before{content:'';position:absolute;top:-25px;right:-25px;width:160px;height:160px;border-radius:50%;background:rgba(201,168,108,0.12);pointer-events:none}
+.hero-icon{font-size:28px;flex-shrink:0;line-height:1;padding-top:2px}
+.hero-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:4px}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6}
+
+.tab-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1rem}
+.tab-btn{font-family:'Noto Sans SC',sans-serif;font-size:12px;padding:6px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab-btn.on{background:var(--rose-pale);color:var(--rose);border-color:var(--rose-light);font-weight:500}
+.tab-pane{display:none}.tab-pane.on{display:block}
+
+.section-label{font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:.05em;text-transform:uppercase;margin:1.5rem 0 .75rem}
+
+.card{background:var(--white);border:1px solid var(--bd);border-radius:12px;margin-bottom:.75rem;overflow:hidden}
+.card-head{padding:.875rem 1.25rem;display:flex;align-items:center;gap:.75rem;cursor:pointer}
+.card-head:hover{background:var(--rose-pale)}
+.card-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;background:var(--rose-pale);color:var(--rose)}
+.card-num.g{background:var(--grp);color:var(--gr)}
+.card-num.b{background:var(--blp);color:var(--bl)}
+.card-num.w{background:#FEFBF4;color:#8B6820}
+.card-title{font-size:13px;font-weight:500;color:var(--ink);flex:1}
+.card-tag{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid;white-space:nowrap}
+.card-tag.r{background:var(--rose-pale);color:var(--rose);border-color:rgba(139,58,90,0.25)}
+.card-tag.g{background:var(--grp);color:var(--gr);border-color:rgba(45,106,79,0.25)}
+.card-tag.b{background:var(--blp);color:var(--bl);border-color:rgba(45,90,139,0.2)}
+.card-tag.w{background:#FEFBF4;color:#8B6820;border-color:rgba(201,168,108,0.35)}
+.card-arrow{font-size:10px;color:var(--ink3);transition:transform .2s}
+.card-body{display:none;padding:0 1.25rem 1.25rem;border-top:1px solid var(--bd)}
+
+.tip{border-left:2px solid;border-radius:0 8px 8px 0;padding:.625rem .875rem;margin:.75rem 0;font-size:12px;line-height:1.65}
+.tip.r{background:var(--rose-pale);border-color:var(--rose-light);color:var(--ink2)}
+.tip.r b{color:var(--rose-deep)}
+.tip.g{background:var(--grp);border-color:var(--grl);color:var(--ink2)}
+.tip.g b{color:var(--gr)}
+.tip.b{background:var(--blp);border-color:#7AA8D8;color:var(--ink2)}
+.tip.b b{color:var(--bl)}
+.tip.w{background:#FEFBF4;border-color:var(--gold);color:var(--ink2)}
+.tip.w b{color:#8B6820}
+
+.script-block{background:#F8F8FA;border-radius:10px;padding:.875rem 1rem;margin:.625rem 0;border:1px solid rgba(0,0,0,0.07)}
+.script-meta{font-size:10px;color:var(--ink3);margin-bottom:.375rem;font-weight:500;letter-spacing:.04em}
+.script-text{font-size:13px;color:var(--ink);line-height:1.8;font-style:italic}
+.script-text b{font-style:normal;color:var(--rose-deep);font-weight:500}
+.script-note{font-size:11px;color:var(--ink3);margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--bd)}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0}
+.mc{border-radius:10px;padding:.875rem 1rem;border:1px solid var(--bd)}
+.mc.r{background:var(--rose-pale);border-color:rgba(139,58,90,0.2)}
+.mc.g{background:var(--grp);border-color:rgba(45,106,79,0.2)}
+.mc.b{background:var(--blp);border-color:rgba(45,90,139,0.15)}
+.mc.w{background:#FEFBF4;border-color:rgba(201,168,108,0.25)}
+.mc h4{font-size:12px;font-weight:500;margin-bottom:.375rem}
+.mc.r h4{color:var(--rose-deep)}.mc.g h4{color:var(--gr)}.mc.b h4{color:var(--bl)}.mc.w h4{color:#7A5A10}
+.mc p,.mc ul{font-size:12px;color:var(--ink2);line-height:1.7}
+.mc ul{padding-left:14px}
+
+.timeline{position:relative;padding-left:48px;margin:.75rem 0}
+.timeline::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:1px;background:var(--bd)}
+.tl-item{position:relative;margin-bottom:1rem}
+.tl-dot{position:absolute;left:-38px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--rose-pale);border:2px solid var(--rose)}
+.tl-dot.g{background:var(--grp);border-color:var(--gr)}
+.tl-dot.b{background:var(--blp);border-color:var(--bl)}
+.tl-dot.w{background:#FEFBF4;border-color:var(--gold)}
+.tl-time{font-size:10px;font-weight:500;color:var(--rose);margin-bottom:3px}
+.tl-time.g{color:var(--gr)}.tl-time.b{color:var(--bl)}.tl-time.w{color:#8B6820}
+.tl-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.tl-desc{font-size:12px;color:var(--ink2);line-height:1.65}
+.tl-desc .cr{color:var(--rose)}.tl-desc .cb{color:var(--bl)}.tl-desc .cg{color:var(--gr)}.tl-desc .cw{color:#8B6820}
+
+.compare-header{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+.ch-box{border-radius:10px;padding:.75rem 1rem;text-align:center}
+.ch-box.new{background:var(--blp);border:1px solid rgba(45,90,139,0.2)}
+.ch-box.old{background:var(--grp);border:1px solid rgba(45,106,79,0.2)}
+.ch-box-label{font-size:11px;font-weight:500;margin-bottom:4px}
+.ch-box.new .ch-box-label{color:var(--bl)}
+.ch-box.old .ch-box-label{color:var(--gr)}
+.ch-box-sub{font-size:11px;color:var(--ink3)}
+
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.5rem}
+.cr-cell{font-size:12px;color:var(--ink2);background:var(--white);border:1px solid var(--bd);border-radius:8px;padding:.75rem;line-height:1.6}
+.cr-cell b{color:var(--ink);font-weight:500}
+
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:20px;font-weight:500;margin-left:4px}
+.badge.must{background:var(--rose-pale);color:var(--rose);border:1px solid rgba(139,58,90,0.25)}
+.badge.key{background:#FEFBF4;color:#8B6820;border:1px solid rgba(201,168,108,0.35)}
+
+p{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:6px}
+ul{padding-left:16px;font-size:12px;color:var(--ink2);line-height:1.9}
+
+@media(max-width:480px){.g2,.compare-header,.compare-row{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+
+<div class="hero-strip">
+  <div class="hero-icon">🏛</div>
+  <div>
+    <div class="hero-title">企业文化是成交的"隐形武器"</div>
+    <div class="hero-sub">不是背公司介绍，而是在对话里自然流露价值观——让顾客感受到"这家店和别家不一样"。分享得对，信任感倍增；分享得错，变成推销感。</div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn on" onclick="st('t0',this)">为什么要分享</button>
+  <button class="tab-btn" onclick="st('t1',this)">什么时候分享</button>
+  <button class="tab-btn" onclick="st('t2',this)">新客分享策略</button>
+  <button class="tab-btn" onclick="st('t3',this)">老客分享策略</button>
+  <button class="tab-btn" onclick="st('t4',this)">话术脚本</button>
+  <button class="tab-btn" onclick="st('t5',this)">新老对比总览</button>
+</div>
+
+<!-- ===== 为什么要分享 ===== -->
+<div class="tab-pane on" id="t0">
+
+  <div class="card" id="c00">
+    <div class="card-head" onclick="tc('c00')">
+      <div class="card-num">核</div>
+      <div class="card-title">企业文化对成交的真实作用——不是软实力，是硬杠杆</div>
+      <div class="card-tag r">必读</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <p>顾客在考虑是否购买时，内心有三道关：</p>
+      <div class="g2">
+        <div class="mc r"><h4>第一道：这个产品/项目有没有效</h4><p>检测图 + 分析话术解决这道关——你已经有这套体系了</p></div>
+        <div class="mc b"><h4>第二道：这家店靠不靠谱</h4><p>企业文化解决这道关——顾客在判断"我把脸和钱交给你们，你们值不值得"</p></div>
+        <div class="mc w"><h4>第三道：这个顾问关心不关心我</h4><p>顾问的个人态度 + 文化传递共同解决——让顾客感受到"她不只是在卖我东西"</p></div>
+        <div class="mc g"><h4>三道关都过了才能成交</h4><p>很多门店只做第一道，忽略第二三道，所以顾客分析听完觉得有道理，但还是说"再想想"</p></div>
+      </div>
+      <div class="tip r">企业文化分享的本质：<b>让顾客相信这家店的出发点是为她好，不只是为了赚她的钱</b>——这个相信一旦建立，成交阻力会降低60%以上</div>
+    </div>
+  </div>
+
+  <div class="card" id="c01">
+    <div class="card-head" onclick="tc('c01')">
+      <div class="card-num g">类</div>
+      <div class="card-title">企业文化分享的三个维度——选对维度说对的话</div>
+      <div class="card-tag g">框架</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="g2">
+        <div class="mc b">
+          <h4>维度①：品牌理念（我们为什么做这件事）</h4>
+          <ul>
+            <li>创始人故事/创立初心</li>
+            <li>品牌的核心价值观</li>
+            <li>我们和其他地方的根本区别</li>
+            <li>什么样的顾客是我们最想服务的</li>
+          </ul>
+        </div>
+        <div class="mc w">
+          <h4>维度②：服务标准（我们怎么对待顾客）</h4>
+          <ul>
+            <li>不超卖的原则（只推荐真正需要的）</li>
+            <li>效果承诺和诚实预期</li>
+            <li>出了问题怎么处理</li>
+            <li>顾客的知情权和选择权</li>
+          </ul>
+        </div>
+        <div class="mc g">
+          <h4>维度③：团队文化（我们是什么样的人）</h4>
+          <ul>
+            <li>团队的专业培养体系</li>
+            <li>顾问本人的护肤习惯和真实体验</li>
+            <li>我们对顾客建议的真实态度</li>
+            <li>长期主义vs短期业绩的选择</li>
+          </ul>
+        </div>
+        <div class="mc r">
+          <h4>说哪个维度取决于顾客的疑虑</h4>
+          <ul>
+            <li>担心被套路→说维度②服务标准</li>
+            <li>不了解品牌→说维度①品牌理念</li>
+            <li>对顾问专业性存疑→说维度③团队文化</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 什么时候分享 ===== -->
+<div class="tab-pane" id="t1">
+
+  <div class="section-label">时机决定效果——说对的话，也要在对的时间说</div>
+
+  <div class="card" id="c10">
+    <div class="card-head" onclick="tc('c10')">
+      <div class="card-num">时</div>
+      <div class="card-title">全流程时机图——7个自然切入点</div>
+      <div class="card-tag r">核心</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="tip r">原则：<b>文化分享要像聊天时自然流露，不是独立的"品牌介绍"环节</b>——顾客一旦感受到"这是在做品牌宣传"，信任感反而下降</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">时机 01 · 破冰阶段</div>
+          <div class="tl-title">顾客进门、等待检测时</div>
+          <div class="tl-desc">最自然的时机——顾客还没进入"防御状态"，这时候聊品牌故事像朋友闲聊，不像推销<br>
+          <span style="color:#8B3A5A;font-size:11px">→ 适合说：品牌理念、为什么做这件事</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot b"></div>
+          <div class="tl-time b">时机 02 · 问诊过程中</div>
+          <div class="tl-title">顾客说"之前在别家做了但没效果"</div>
+          <div class="tl-desc">天然的对比切入点——顾客自己说出了不好的体验，这时候说我们的不同，她会主动想了解<br>
+          <span style="color:#2D5A8B;font-size:11px">→ 适合说：服务标准、我们和别家的根本区别</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot g"></div>
+          <div class="tl-time g">时机 03 · 皮肤分析时</div>
+          <div class="tl-title">解释为什么这样分析、为什么这样推荐</div>
+          <div class="tl-desc">专业性展示的同时带出价值观——"我们不是每个人都推同一套方案，是因为……"<br>
+          <span style="color:#2D6A4F;font-size:11px">→ 适合说：不超卖原则、个性化服务理念</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot w"></div>
+          <div class="tl-time w">时机 04 · 方案设计时</div>
+          <div class="tl-title">解释为什么这么搭配，为什么不推更多</div>
+          <div class="tl-desc">这是打消"过度销售"疑虑的黄金时机——说出来"我本来可以推更多，但是……"<br>
+          <span style="color:#8B6820;font-size:11px">→ 适合说：只推真正需要的原则、长期关系理念</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">时机 05 · 报价成交前</div>
+          <div class="tl-title">顾客犹豫时、问"靠不靠谱"时</div>
+          <div class="tl-desc">成交前最关键的信任加固时刻——用文化背书替代单纯的"促销"手段<br>
+          <span style="color:#8B3A5A;font-size:11px">→ 适合说：效果承诺原则、顾客案例+价值观故事</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot b"></div>
+          <div class="tl-time b">时机 06 · 项目做完后</div>
+          <div class="tl-title">效果对比时、顾客感受到变化时</div>
+          <div class="tl-desc">情绪最好的时刻——顾客对结果满意，是加深品牌认同的最好时机<br>
+          <span style="color:#2D5A8B;font-size:11px">→ 适合说：我们的服务哲学、为什么这么设计方案</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot g"></div>
+          <div class="tl-time g">时机 07 · 送客时</div>
+          <div class="tl-title">离开前、给顾客发护肤建议时</div>
+          <div class="tl-desc">最后留下印象的机会——这时候说的话顾客记忆最深，影响下次是否回来<br>
+          <span style="color:#2D6A4F;font-size:11px">→ 适合说：我们对顾客的长期承诺、下次来的期待</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c11">
+    <div class="card-head" onclick="tc('c11')">
+      <div class="card-num b">禁</div>
+      <div class="card-title">什么时候不要说企业文化——3个错误时机</div>
+      <div class="card-tag b">避开</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="g2">
+        <div class="mc r">
+          <h4>错误①：进门第一句就说"我们品牌……"</h4>
+          <p>顾客还没建立关系感，这时候说品牌介绍，100%像推销开场白——顾客会立刻防御</p>
+        </div>
+        <div class="mc r">
+          <h4>错误②：顾客正在说话时插入品牌故事</h4>
+          <p>打断顾客讲品牌，顾客感受是"她不在听我说话，她只想推销我"——信任感大跌</p>
+        </div>
+        <div class="mc r">
+          <h4>错误③：连续背诵品牌故事超过2分钟</h4>
+          <p>超过90秒的连续品牌介绍会让顾客感觉在"上课"——无论内容多好，她都不会进入吸收状态</p>
+        </div>
+        <div class="mc g">
+          <h4>正确做法</h4>
+          <p>每次分享控制在<b>30-60秒</b>，用顾客的问题或状态作为引子，自然带出文化点——不是独立环节，是聊天的一部分</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 新客策略 ===== -->
+<div class="tab-pane" id="t2">
+
+  <div class="section-label">新客分享方向——建立第一印象，解除戒心</div>
+
+  <div class="card" id="c20">
+    <div class="card-head" onclick="tc('c20')">
+      <div class="card-num b">新</div>
+      <div class="card-title">新客的心理状态——先理解，再策略</div>
+      <div class="card-tag b">理解顾客</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <p>新客进门时的内心独白：</p>
+      <div class="g2">
+        <div class="mc b">
+          <h4>她在想什么</h4>
+          <ul>
+            <li>"这家会不会乱推销我？"</li>
+            <li>"效果是不是真的像说的那么好？"</li>
+            <li>"我要不要把脸真的交给她们？"</li>
+            <li>"别家说的我听到过太多了……"</li>
+          </ul>
+        </div>
+        <div class="mc r">
+          <h4>所以新客最需要感受到</h4>
+          <ul>
+            <li>这里不一样——有具体证据的不一样</li>
+            <li>她是被当成人而不是业绩来对待的</li>
+            <li>顾问是真的在帮她，不是在卖她</li>
+            <li>这家店值得信任的理由</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip b">新客文化分享的核心目标：<b>消除"被套路"的预判，建立"这家和别家真的不一样"的第一印象</b></div>
+    </div>
+  </div>
+
+  <div class="card" id="c21">
+    <div class="card-head" onclick="tc('c21')">
+      <div class="card-num b">内</div>
+      <div class="card-title">新客分享的5个核心内容方向</div>
+      <div class="card-tag b">内容</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+
+      <div class="script-block">
+        <div class="script-meta">方向①：我们为什么这样检测（体现严谨）</div>
+        <div class="script-text">"我们每个顾客进来第一步都是检测，不管你现在皮肤状态是好是差——因为<b>不看数据就给建议，是在猜，不是在帮你</b>。很多人在别的地方进门就被推产品，我们觉得这样不负责任。"</div>
+        <div class="script-note">传递的文化点：以数据为基础，不主观猜测，负责任的专业态度</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向②：我们不会推你不需要的（体现诚信）</div>
+        <div class="script-text">"我今天根据你的情况会给你一个建议——<b>但我有一个原则，就是你不需要的我不会推你</b>。有时候顾客来了，我看完觉得她现在做的已经够了，我就会直接说，不需要加什么。你可以感受一下今天我给你的方向是不是这样。"</div>
+        <div class="script-note">传递的文化点：不超卖原则，长期关系大于单次业绩</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向③：顾问本人的真实体验（体现真实）</div>
+        <div class="script-text">"我自己也一直在用我们的项目——<b>不是因为工作要求，是因为我自己试过觉得好才会推给别人</b>。上次有个顾客问我，你自己的皮肤是怎么保养的，我就直接给她看我用的方案，和我给她推荐的是一样的。"</div>
+        <div class="script-note">传递的文化点：顾问言行一致，不卖自己不信的东西</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向④：出了问题怎么处理（体现担当）</div>
+        <div class="script-text">"我们有一个内部要求——<b>顾客如果做完之后有任何不舒服，24小时内必须回应，不能让顾客等</b>。不是说不会出问题，是出了问题我们怎么对待这件事，这个才是关键。你可以问问身边来过我们这里的朋友，看看他们说什么。"</div>
+        <div class="script-note">传递的文化点：负责任的售后态度，信任要靠口碑验证</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向⑤：创立初心/品牌故事（体现使命感）</div>
+        <div class="script-text">"我们做这个的初心很简单——<b>就是希望来这里的顾客，每次走出去都感觉比进来的时候状态好</b>，不只是皮肤，是整个人的状态。如果做完了你只是花了钱但没有这个感觉，那我们就没有做好。"</div>
+        <div class="script-note">传递的文化点：以顾客体验为标准，而不是以成交为标准</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 老客策略 ===== -->
+<div class="tab-pane" id="t3">
+
+  <div class="section-label">老客分享方向——深化认同，激活转介绍</div>
+
+  <div class="card" id="c30">
+    <div class="card-head" onclick="tc('c30')">
+      <div class="card-num g">老</div>
+      <div class="card-title">老客的心理状态——已信任，但需要深化</div>
+      <div class="card-tag g">理解顾客</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <p>老客和新客最大的不同：</p>
+      <div class="g2">
+        <div class="mc g">
+          <h4>老客已经有的</h4>
+          <ul>
+            <li>基础信任已建立</li>
+            <li>对我们的服务有了解</li>
+            <li>愿意继续来的理由</li>
+            <li>在朋友面前会提到我们</li>
+          </ul>
+        </div>
+        <div class="mc w">
+          <h4>老客还需要的</h4>
+          <ul>
+            <li>感受到"被特别对待"</li>
+            <li>对品牌有更深的情感认同</li>
+            <li>有主动推荐给朋友的理由</li>
+            <li>成为品牌故事的一部分</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip g">老客文化分享的核心目标：<b>从"信任"升级到"认同"，让老客觉得来这里不只是做护肤，是找到了一个和自己价值观一致的地方</b>——这种认同会直接驱动转介绍</div>
+    </div>
+  </div>
+
+  <div class="card" id="c31">
+    <div class="card-head" onclick="tc('c31')">
+      <div class="card-num g">内</div>
+      <div class="card-title">老客分享的5个核心内容方向</div>
+      <div class="card-tag g">内容</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+
+      <div class="script-block">
+        <div class="script-meta">方向①：认可老客的贡献（让她成为故事的一部分）</div>
+        <div class="script-text">"您知道吗，我们很多来的新顾客，都是老顾客介绍过来的——<b>这对我们来说比任何广告都重要，因为老顾客愿意介绍，说明她真的觉得这里值得</b>。您有没有朋友或者同事聊到过皮肤的问题？"</div>
+        <div class="script-note">传递文化点：口碑是我们最看重的指标，老客是品牌最重要的伙伴</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向②：分享品牌的进化和坚持（让她感受到成长）</div>
+        <div class="script-text">"我们最近在培训团队的一件事——<b>就是要求所有顾问，顾客不需要的项目，宁可不成交也不推</b>。短期来看可能少了一些收入，但我们觉得只有这样，顾客才会一直回来。您这几次来，有没有感觉到这个？"</div>
+        <div class="script-note">传递文化点：长期主义，不为短期业绩妥协，邀请老客验证感受</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向③：让老客参与品牌的改进（给她主人翁感）</div>
+        <div class="script-text">"您来这么久了，<b>我特别想听听您的真实感受——有没有什么您觉得我们做得还不够好的地方？</b>不用客气，真的批评性的意见对我们最有价值。我们有一个内部规定，每次顾客提的建议，必须在两周内给出回应。"</div>
+        <div class="script-note">传递文化点：开放性的反馈文化，把顾客当真正的合作伙伴</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向④：分享品牌内部不一样的事（给她"内部消息感"）</div>
+        <div class="script-text">"跟您说一个我们内部一直在做的事——<b>我们每周都要做培训，就是专门学怎么更好地帮顾客判断皮肤问题，不是学怎么卖东西</b>。最近我刚学了一个新的检测分析角度，今天我们看图的时候我跟您多说几个维度，看看有没有新发现。"</div>
+        <div class="script-note">传递文化点：持续学习文化，专业进步是为了更好地服务顾客</div>
+      </div>
+
+      <div class="script-block">
+        <div class="script-meta">方向⑤：感谢+展望（加深情感连接）</div>
+        <div class="script-text">"您来了这么久，我有时候想，<b>我们能做到今天，是因为有很多像您这样的顾客愿意把信任给我们</b>。这不是客套话——真的，每次有老顾客回来，我的状态都会特别好，因为我知道我们做的事是值得的。"</div>
+        <div class="script-note">传递文化点：感恩文化，把每位老客当真实关系而非消费关系</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 话术脚本 ===== -->
+<div class="tab-pane" id="t4">
+
+  <div class="section-label">完整场景脚本——不同情境下的自然分享方式</div>
+
+  <div class="card" id="c40">
+    <div class="card-head" onclick="tc('c40')">
+      <div class="card-num">场1</div>
+      <div class="card-title">新客说"之前在别家做了没效果，你们和他们有什么区别"</div>
+      <div class="card-tag r">最高频</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="script-block">
+        <div class="script-meta">正确应对——不说别人的坏话，说自己的不同</div>
+        <div class="script-text">"这个问题问得好。我不说别家怎么样——<b>我只说我们自己是怎么做的，您感受一下今天的过程，自己判断</b>。<br><br>我们有一个原则，就是不管这个顾客今天能不能成交，我们给的分析和建议是一样的——因为我们觉得，<b>你今天带着收获走，比你今天花了钱但没收获更重要</b>。很多来过我们这里的顾客说，哪怕没有买什么，光是那次分析就觉得很值。<br><br>所以您今天先感受一下，我们的分析是不是真的针对您的情况，而不是每个人说一样的话。"</div>
+        <div class="script-note">✦ 不攻击竞品 ｜ 用"让她自己感受"代替"我告诉你我们有多好" ｜ 强调"你今天带走的收获"而不是成不成交</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c41">
+    <div class="card-head" onclick="tc('c41')">
+      <div class="card-num">场2</div>
+      <div class="card-title">新客报价后犹豫说"我回家想想"</div>
+      <div class="card-tag r">成交关键</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="script-block">
+        <div class="script-meta">在踢单工具之前——用文化做信任背书</div>
+        <div class="script-text">"您回家想想完全可以——不过我想先问一下，<b>是哪里让您还没确定？是效果不确定，还是对我们这里还没有足够的了解？</b><br><br>如果是效果的问题，我们今天的对比图已经说明了一些。<br>如果是对我们的信任问题，我觉得这个很正常——<b>我们做这行有一个很简单的原则，就是效果说话</b>。您可以问问我们家来过的顾客，我也可以给您看一些真实的顾客记录，不是选出来的好看的，是随机的。<br><br>我们不会要求您今天必须决定——<b>但我想让您带走的，是今天这次分析给您的东西，而不只是还没想好去哪里做的困惑</b>。"</div>
+        <div class="script-note">✦ 先确认顾虑是什么 ｜ 用"效果说话"原则代替降价 ｜ 给顾客选择权而不是压迫感</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c42">
+    <div class="card-head" onclick="tc('c42')">
+      <div class="card-num g">场3</div>
+      <div class="card-title">老客说"我朋友问我这里怎么样，我不知道怎么介绍"</div>
+      <div class="card-tag g">转介绍激活</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="script-block">
+        <div class="script-meta">借机给老客一个"好介绍的理由"</div>
+        <div class="script-text">"其实很简单——<b>你就告诉她，这里会认真听你说什么，然后告诉你你的皮肤真正的问题是什么，不是每个人都说一样的话</b>。<br><br>如果她来了觉得没有这个感受，那说明我们没做好。但大部分来了的人，第一次就能感觉出来——你当时第一次来是什么感觉？<br><br>你不用帮我们说'效果很好'——<b>你只要说'可以去体验一下，让她们帮你看看皮肤'就够了</b>。我们用结果说话，不用你帮我们宣传。"</div>
+        <div class="script-note">✦ 给老客简单易说的话术 ｜ 引导老客回忆自己的第一次体验 ｜ 降低转介绍的心理门槛</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="c43">
+    <div class="card-head" onclick="tc('c43')">
+      <div class="card-num w">场4</div>
+      <div class="card-title">顾问如何在方案设计时自然带出文化</div>
+      <div class="card-tag w">方案时机</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="script-block">
+        <div class="script-meta">在说"为什么这样搭配"时带入文化</div>
+        <div class="script-text">"我给您设计这个方案，<b>其实比您想象的要少</b>——因为我本来可以给您多加两个项目，从皮肤角度加也合理，但我没有。<br><br>原因是，<b>我们有一个内部的原则，就是第一步做最重要的事，等这个稳定了再加下一步</b>。不是因为我们不想多卖，是因为顾客做了太多一下子，皮肤反而吸收不了，我们自己也觉得那样没有意义。<br><br>您今天的方案重点是先解决最影响您的那个问题——您之前说最希望改善的是什么，我们就先把那个做好。"</div>
+        <div class="script-note">✦ 主动说"我本来可以多推" ｜ 解释背后的原则逻辑 ｜ 回扣顾客自己说的期望目标</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 新老对比 ===== -->
+<div class="tab-pane" id="t5">
+
+  <div class="section-label">新客 vs 老客——文化分享的核心差异对比</div>
+
+  <div class="tip b">内容方向不同，但底层价值观一致——新客需要"建立信任"，老客需要"深化认同"。不能把新客的话术用在老客身上，会显得关系没有进展；也不能把老客的话术用在新客身上，会显得太深入太快。</div>
+
+  <div class="compare-header">
+    <div class="ch-box new"><div class="ch-box-label">新客</div><div class="ch-box-sub">第一次到店 · 防御心强<br>目标：消除戒心，建立信任</div></div>
+    <div class="ch-box old"><div class="ch-box-label">老客</div><div class="ch-box-sub">多次到店 · 基础信任有<br>目标：深化认同，激活口碑</div></div>
+  </div>
+
+  <div class="compare-row">
+    <div class="cr-cell"><b>主要疑虑</b><br>"会不会被套路？这家靠不靠谱？"</div>
+    <div class="cr-cell"><b>主要需求</b><br>"感受到被特别对待，有主动推荐的理由"</div>
+  </div>
+  <div class="compare-row">
+    <div class="cr-cell"><b>分享切入点</b><br>她说出的不满或疑虑，用文化来回应</div>
+    <div class="cr-cell"><b>分享切入点</b><br>她的成长变化，邀请她参与品牌故事</div>
+  </div>
+  <div class="compare-row">
+    <div class="cr-cell"><b>核心内容方向</b><br>不超卖原则、数据驱动、出了问题怎么处理、顾问本人的真实体验</div>
+    <div class="cr-cell"><b>核心内容方向</b><br>品牌的坚持与进化、感谢老客贡献、邀请反馈、转介绍的意义</div>
+  </div>
+  <div class="compare-row">
+    <div class="cr-cell"><b>语气和方式</b><br>客观陈述 + 让她自己感受（"你今天感受一下是不是这样"）</div>
+    <div class="cr-cell"><b>语气和方式</b><br>情感共鸣 + 让她参与进来（"您一直来，是我们很重要的力量"）</div>
+  </div>
+  <div class="compare-row">
+    <div class="cr-cell"><b>说多少</b><br>每次30-60秒，一个接待过程最多2-3个文化点，不要集中灌输</div>
+    <div class="cr-cell"><b>说多少</b><br>可以稍深入，但仍然要自然引出，不是"让我给你讲一下我们的文化"</div>
+  </div>
+  <div class="compare-row">
+    <div class="cr-cell"><b>成功标志</b><br>顾客开始主动问"你们是怎么培训的？""你们的团队多少人？"</div>
+    <div class="cr-cell"><b>成功标志</b><br>顾客说"我有朋友要来，我帮你们推荐一下"</div>
+  </div>
+  <div class="compare-row">
+    <div class="cr-cell"><b>禁忌</b><br>进门就介绍品牌、说竞品坏话、连续讲超过2分钟</div>
+    <div class="cr-cell"><b>禁忌</b><br>把老客当新客对待（重复已说过的内容）、忘记她的成长历程</div>
+  </div>
+
+  <div class="card" id="c50" style="margin-top:1rem">
+    <div class="card-head" onclick="tc('c50')">
+      <div class="card-num w">总</div>
+      <div class="card-title">企业文化分享的5个通用原则——新老顾客都适用</div>
+      <div class="card-tag w">核心</div>
+      <div class="card-arrow">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="g2">
+        <div class="mc w"><h4>原则①：行为证明比语言有力</h4><p>"今天感受一下是不是这样"——用顾客的真实体验验证文化，比说一百遍更有说服力</p></div>
+        <div class="mc w"><h4>原则②：自然引出，不要独立讲</h4><p>把文化点融进正常对话，不要单独说"我们品牌……"——那样一听就是在做品牌宣传</p></div>
+        <div class="mc w"><h4>原则③：用顾客的话来激活</h4><p>用顾客说过的话作为引子——"您刚才说……正好说到我们一个原则……"——顾客会觉得你在认真听她</p></div>
+        <div class="mc w"><h4>原则④：每次只讲一个文化点</h4><p>贪多嚼不烂。一次接待讲清楚一个文化点，比讲5个都没讲透效果好</p></div>
+      </div>
+      <div class="mc r" style="margin-top:.75rem"><h4>原则⑤：顾问自己要真信——最重要</h4><p>说出来的文化点，顾问自己要真的认同。顾客的感受力很强，如果顾问在背台词，顾客是能感受到的。企业文化培训的第一步，是让顾问自己对品牌有真实的认同感——这是整个分享体系的根基。</p></div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+function st(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+function tc(id){
+  var c=document.getElementById(id);
+  var b=c.querySelector('.card-body');
+  var a=c.querySelector('.card-arrow');
+  if(!b)return;
+  var open=b.style.display==='block';
+  b.style.display=open?'none':'block';
+  if(a)a.style.transform=open?'':'rotate(180deg)';
+}
+document.querySelectorAll('.card-body').forEach(b=>b.style.display='none');
+document.querySelectorAll('.card').forEach(c=>{
+  var b=c.querySelector('.card-body');
+  if(b){b.style.display='block';var a=c.querySelector('.card-arrow');if(a)a.style.transform='rotate(180deg)';}
+});
+document.querySelectorAll('.tab-pane:not(.on) .card-body').forEach(b=>b.style.display='none');
+document.querySelectorAll('.tab-pane:not(.on) .card-arrow').forEach(a=>a.style.transform='');
+</script>

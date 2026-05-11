@@ -1,0 +1,751 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --r:#8B3A5A;--rl:#C97B9E;--rp:#F7EEF3;--rd:#5C2040;
+  --o:#8B5A1A;--op:#FBF5EB;--ol:#E8C87A;
+  --s:#5A7A3A;--sp:#EEF5E8;--sl:#8BBE5A;
+  --a:#3A5A8B;--ap:#EBF0F8;--al:#7A9ECC;
+  --d:#6A3A8B;--dp:#F0EAF8;--dl:#A87ACC;
+  --ink:#281820;--ink2:#504050;--ink3:#907880;
+  --bg:#FAF8F5;--wh:#fff;--bd:rgba(100,60,80,0.12);
+}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:14px}
+.w{max-width:960px;margin:0 auto;padding-bottom:60px}
+
+/* Hero */
+.hero{padding:28px 24px 24px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1A0A10,#3D1828 40%,#6A2848 75%,#4A2060)}
+.hero::before{content:'';position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;background:rgba(184,144,58,0.1)}
+.htag{display:inline-block;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:2px;padding:3px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);margin-bottom:10px}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:20px;color:#fff;line-height:1.45;margin-bottom:6px}
+.hero p{font-size:12px;color:rgba(255,255,255,0.62)}
+.hrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.hchip{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.78)}
+.hchip.o{background:rgba(139,90,26,0.25)}.hchip.s{background:rgba(90,122,58,0.25)}
+.hchip.a{background:rgba(58,90,139,0.25)}.hchip.d{background:rgba(106,58,139,0.25)}
+
+/* Nav */
+.nav{display:flex;overflow-x:auto;background:var(--wh);border-bottom:1px solid var(--bd);padding:0 10px;position:sticky;top:0;z-index:200;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nb{flex-shrink:0;font-size:11px;padding:11px 11px 9px;border:none;background:none;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap;font-family:'Noto Sans SC',sans-serif;transition:all .2s}
+.nb.on{font-weight:500}
+.nb.oo.on{color:var(--o);border-bottom-color:var(--o)}
+.nb.ss.on{color:var(--s);border-bottom-color:var(--s)}
+.nb.aa.on{color:var(--a);border-bottom-color:var(--a)}
+.nb.dd.on{color:var(--d);border-bottom-color:var(--d)}
+
+/* Tab */
+.tab{display:none;padding:20px 16px 0}
+.tab.on{display:block}
+
+/* Skin header */
+.skin-hero{border-radius:12px;padding:20px 20px 16px;margin-bottom:18px;position:relative;overflow:hidden}
+.skin-hero.o{background:linear-gradient(135deg,#5A3A0A,var(--o) 60%,#C8903A)}
+.skin-hero.s{background:linear-gradient(135deg,#1E3A10,var(--s) 60%,#7AAE3A)}
+.skin-hero.a{background:linear-gradient(135deg,#0A1E3A,var(--a) 60%,#5A82BB)}
+.skin-hero.d{background:linear-gradient(135deg,#2A0A3A,var(--d) 60%,#9A60CC)}
+.skin-hero::after{content:'';position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.07)}
+.sh-tag{display:inline-block;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);font-size:10px;letter-spacing:2px;padding:2px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.25);margin-bottom:8px}
+.skin-hero h2{font-family:'Noto Serif SC',serif;font-size:19px;color:#fff;margin-bottom:5px}
+.skin-hero p{font-size:12px;color:rgba(255,255,255,0.68)}
+.sh-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.sh-chip{font-size:11px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.82);padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.18)}
+
+/* Card */
+.card{background:var(--wh);border:1px solid var(--bd);border-radius:12px;margin-bottom:11px;overflow:hidden}
+.ch{padding:11px 15px;display:flex;align-items:center;gap:8px;cursor:pointer}
+.ch:hover{background:rgba(139,58,90,0.04)}
+.cn{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#fff}
+.cn.o{background:var(--o)}.cn.s{background:var(--s)}.cn.a{background:var(--a)}.cn.d{background:var(--d)}.cn.r{background:var(--r)}
+.ct{font-size:13px;font-weight:500;color:var(--ink);flex:1}
+.ctg{font-size:10px;padding:2px 8px;border-radius:20px;white-space:nowrap;border:1px solid}
+.ctg.o{background:var(--op);color:var(--o);border-color:rgba(139,90,26,0.22)}
+.ctg.s{background:var(--sp);color:var(--s);border-color:rgba(90,122,58,0.22)}
+.ctg.a{background:var(--ap);color:var(--a);border-color:rgba(58,90,139,0.22)}
+.ctg.d{background:var(--dp);color:var(--d);border-color:rgba(106,58,139,0.22)}
+.ctg.r{background:var(--rp);color:var(--r);border-color:rgba(139,58,90,0.2)}
+.arr{font-size:10px;color:var(--ink3);transition:transform .2s}
+.cb{display:none;padding:0 15px 15px;border-top:1px solid var(--bd)}
+
+/* Q block */
+.qb{border:1px solid var(--bd);border-radius:10px;margin:9px 0;overflow:hidden}
+.qbh{padding:9px 13px;display:flex;align-items:center;gap:7px}
+.qbh.o{background:var(--op)}.qbh.s{background:var(--sp)}.qbh.a{background:var(--ap)}.qbh.d{background:var(--dp)}
+.qn{font-size:11px;font-weight:700;padding:2px 9px;border-radius:11px;color:#fff}
+.qn.o{background:var(--o)}.qn.s{background:var(--s)}.qn.a{background:var(--a)}.qn.d{background:var(--d)}
+.qph{font-size:11px;font-weight:500}
+.qph.o{color:var(--o)}.qph.s{color:var(--s)}.qph.a{color:var(--a)}.qph.d{color:var(--d)}
+.qgl{font-size:10px;color:var(--ink3);margin-left:auto;background:rgba(0,0,0,0.06);padding:2px 8px;border-radius:10px}
+.qbody{padding:11px 13px;background:var(--wh)}
+.ql{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--ink3);margin-bottom:3px;margin-top:9px}
+.ql:first-child{margin-top:0}
+.qask{font-size:13px;color:var(--ink);font-style:italic;border-radius:8px;padding:8px 12px;line-height:1.85}
+.qask.o{background:#FBF7F0;border-left:3px solid var(--ol)}.qask.s{background:#F2F8EE;border-left:3px solid var(--sl)}
+.qask.a{background:#EDF2FA;border-left:3px solid var(--al)}.qask.d{background:#F3EDF8;border-left:3px solid var(--dl)}
+.qask b{font-style:normal;font-weight:500}
+.qask.o b{color:var(--o)}.qask.s b{color:var(--s)}.qask.a b{color:var(--a)}.qask.d b{color:var(--d)}
+.qfol{font-size:12px;color:var(--ink2);border-radius:8px;padding:8px 12px;margin-top:6px;line-height:1.75}
+.qfol.o{background:var(--op)}.qfol.s{background:var(--sp)}.qfol.a{background:var(--ap)}.qfol.d{background:var(--dp)}
+.qfol b{font-weight:500}
+.qfol.o b{color:var(--o)}.qfol.s b{color:var(--s)}.qfol.a b{color:var(--a)}.qfol.d b{color:var(--d)}
+.qwhy{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.6;padding:0 1px}
+.qwhy b{color:var(--rd)}
+.qpro{font-size:11px;border-radius:8px;padding:7px 11px;margin-top:6px;line-height:1.6}
+.qpro.o{background:var(--op);color:var(--o)}.qpro.s{background:var(--sp);color:var(--s)}
+.qpro.a{background:var(--ap);color:var(--a)}.qpro.d{background:var(--dp);color:var(--d)}
+
+/* Tips */
+.tip{background:var(--rp);border-left:3px solid var(--rl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.tip b{color:var(--rd)}
+.otip{background:var(--op);border-left:3px solid var(--ol);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.otip b{color:var(--o)}
+.stip{background:var(--sp);border-left:3px solid var(--sl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.stip b{color:var(--s)}
+.atip{background:var(--ap);border-left:3px solid var(--al);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.atip b{color:var(--a)}
+.dtip{background:var(--dp);border-left:3px solid var(--dl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.dtip b{color:var(--d)}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:9px 0}
+.mc{border-radius:10px;padding:11px 13px;border:1px solid var(--bd)}
+.mc.o{background:var(--op);border-color:rgba(139,90,26,0.18)}.mc.s{background:var(--sp);border-color:rgba(90,122,58,0.15)}
+.mc.a{background:var(--ap);border-color:rgba(58,90,139,0.15)}.mc.d{background:var(--dp);border-color:rgba(106,58,139,0.15)}
+.mc.r{background:var(--rp);border-color:rgba(139,58,90,0.15)}
+.mc h4{font-size:12px;font-weight:500;margin-bottom:5px}
+.mc.o h4{color:var(--o)}.mc.s h4{color:var(--s)}.mc.a h4{color:var(--a)}.mc.d h4{color:var(--d)}.mc.r h4{color:var(--rd)}
+.mc p,.mc ul{font-size:12px;color:var(--ink2);line-height:1.7}
+.mc ul{padding-left:14px}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin:9px 0}
+.tbl th{font-weight:500;padding:8px 11px;text-align:left;border-bottom:1.5px solid var(--bd)}
+.tbl td{padding:8px 11px;border-bottom:1px solid var(--bd);color:var(--ink2);vertical-align:top;line-height:1.7}
+.tbl tr:last-child td{border-bottom:none}
+.tbl.o th{background:var(--op);color:var(--o)}.tbl.s th{background:var(--sp);color:var(--s)}
+.tbl.a th{background:var(--ap);color:var(--a)}.tbl.d th{background:var(--dp);color:var(--d)}
+
+/* Chat */
+.chat-box{border:1px solid var(--bd);border-radius:10px;margin:10px 0;overflow:hidden}
+.chat-head{padding:8px 13px;font-size:12px;font-weight:500;color:#fff;display:flex;align-items:center;gap:6px}
+.chat-head.o{background:var(--o)}.chat-head.s{background:var(--s)}.chat-head.a{background:var(--a)}.chat-head.d{background:var(--d)}
+.chat-body{padding:12px 13px;background:var(--wh)}
+.cr{display:flex;gap:8px;margin-bottom:9px;align-items:flex-start}
+.cr.rt{flex-direction:row-reverse}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;color:#fff}
+.av.o{background:var(--o)}.av.s{background:var(--s)}.av.a{background:var(--a)}.av.d{background:var(--d)}.av.k{background:#3A6050}
+.bub{font-size:12px;line-height:1.75;padding:8px 11px;border-radius:10px;max-width:87%}
+.bub.o{background:var(--op);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bub.s{background:var(--sp);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bub.a{background:var(--ap);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bub.d{background:var(--dp);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bub.k{background:#EEF5F0;color:var(--ink2);border-radius:10px 2px 10px 10px}
+.bub b{font-weight:500}
+.bub.o b{color:var(--o)}.bub.s b{color:var(--s)}.bub.a b{color:var(--a)}.bub.d b{color:var(--d)}
+.chat-note{font-size:10px;color:var(--ink3);text-align:center;padding:3px;font-style:italic}
+
+/* Compare */
+.cp{border-radius:10px;overflow:hidden;margin:8px 0;border:1px solid var(--bd)}
+.cpbad{background:#FDF0F0;padding:8px 12px;border-bottom:1px solid var(--bd)}
+.cpgood{padding:8px 12px}
+.cpgood.o{background:var(--op)}.cpgood.s{background:var(--sp)}.cpgood.a{background:var(--ap)}.cpgood.d{background:var(--dp)}
+.cplbl{font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:3px}
+.cpbad .cplbl{color:#8B2020}
+.cpgood.o .cplbl{color:var(--o)}.cpgood.s .cplbl{color:var(--s)}.cpgood.a .cplbl{color:var(--a)}.cpgood.d .cplbl{color:var(--d)}
+.cptxt{font-size:12px;color:var(--ink2);line-height:1.75;font-style:italic}
+
+h4{font-size:13px;font-weight:500;color:var(--ink);margin:11px 0 6px}
+p{font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:5px}
+ul,ol{padding-left:15px;font-size:12px;color:var(--ink2);line-height:1.9}
+.sep{height:1px;background:var(--bd);margin:11px 0}
+@media(max-width:620px){.g2,.g3{grid-template-columns:1fr}}
+</style>
+
+<div class="w">
+<div class="hero">
+  <div class="htag">四大皮肤专项 · 完整问诊脚本</div>
+  <h1>油皮 · 敏感肌 · 衰老肌 · 暗沉黄气<br>专项发问全内容</h1>
+  <p>按照同一模型生成——类型判断 × 10问完整话术 × 对话示范 × 冒昧vs专业对比</p>
+  <div class="hrow">
+    <div class="hchip o">🫧 油皮专项</div>
+    <div class="hchip s">🌿 敏感肌专项</div>
+    <div class="hchip a">⏳ 衰老专项</div>
+    <div class="hchip d">🌑 暗沉黄气专项</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nb oo on" onclick="st('t0',this)">🫧 油皮专项</button>
+  <button class="nb ss" onclick="st('t1',this)">🌿 敏感肌专项</button>
+  <button class="nb aa" onclick="st('t2',this)">⏳ 衰老专项</button>
+  <button class="nb dd" onclick="st('t3',this)">🌑 暗沉黄气专项</button>
+</div>
+
+<!-- ====== 油皮 ====== -->
+<div class="tab on" id="t0">
+  <div class="skin-hero o">
+    <div class="sh-tag">油皮专项问诊</div>
+    <h2>🫧 油皮 · 毛孔 · 痘痘反复</h2>
+    <p>出油 ≠ 皮肤健康，油皮背后成因复杂，缺水/内分泌/饮食/清洁过度都能导致——问对方向才能真正控油</p>
+    <div class="sh-chips">
+      <div class="sh-chip">缺水性出油</div><div class="sh-chip">内分泌型出油</div>
+      <div class="sh-chip">清洁过度型</div><div class="sh-chip">痘痘反复型</div>
+    </div>
+  </div>
+
+  <div class="card" id="o0">
+    <div class="ch" onclick="tc('o0')"><div class="cn o">原</div><div class="ct">油皮4大类型——发问前先判断方向</div><div class="ctg o">必读</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc o"><h4>缺水性出油</h4><p>表皮缺水→皮肤代偿分泌更多皮脂→越洗越油<br><span style="color:var(--o)">问诊重点：洗脸频率、用不用保湿产品、出油在什么时候</span></p></div>
+        <div class="mc o"><h4>内分泌型出油</h4><p>雄激素偏高→皮脂腺过度活跃→持续出油<br><span style="color:var(--o)">问诊重点：生理周期、压力、油量是否与情绪状态相关</span></p></div>
+        <div class="mc r"><h4>清洁过度型</h4><p>过度清洁破坏皮脂膜→皮肤警报分泌更多油<br><span style="color:var(--rd)">问诊重点：洁面次数、洁面产品类型、洗后感受</span></p></div>
+        <div class="mc r"><h4>饮食/代谢型</h4><p>高糖高辣高油→刺激皮脂腺→T区油痘<br><span style="color:var(--rd)">问诊重点：饮食习惯、便秘、油量和饮食的关联</span></p></div>
+      </div>
+      <div class="otip"><b>核心认知：</b>"越油越要控油"是误区——很多油皮是因为缺水、清洁过度、内分泌失调，越控越差。问诊要帮顾客找到真正的原因</div>
+    </div>
+  </div>
+
+  <div class="card" id="o1">
+    <div class="ch" onclick="tc('o1')"><div class="cn o">问</div><div class="ct">油皮10个专项问题——完整话术</div><div class="ctg o">核心脚本</div><div class="arr">▼</div></div>
+    <div class="cb">
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油1</div><div class="qph o">出油时间与部位</div><div class="qgl">判断类型入口</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"您的出油，<b>主要是哪里出得多</b>——T区为主，还是整张脸都油？大概<b>几个小时之后开始明显</b>，早上洗完脸两小时？还是下午才开始？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol o">"出油之后，感觉皮肤是<b>油而水润</b>，还是<b>油而干燥</b>——表面是油光，但用手摸其实有点紧绷的感觉？"</div>
+        <div class="qwhy">T区出油→正常皮脂腺分布较多；全脸出油→缺水性代偿或内分泌问题；<b>油而紧绷→典型缺水性出油，补水才是根本，控油反而更差</b></div>
+        <div class="qpro o">问"油而干"——顾客通常以为出油就是水分多，你问这个会让她发现"原来我摸起来其实是紧的"，触发认知反转，开始对"缺水性出油"产生好奇</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油2</div><div class="qph o">洗脸方式与频率</div><div class="qgl">排查清洁过度</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"一天洗几次脸？用的什么洁面——强效控油泡沫型，还是温和型？<b>洗完之后皮肤什么感觉</b>？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol o">"有没有觉得，<b>洗完越干净，出油反而越快</b>？比如洗完一小时就开始出油了？"</div>
+        <div class="qwhy"><b>洗完越快出油，是皮脂膜被过度清洁的信号</b>——皮肤检测到皮脂膜缺失，会立刻加速分泌来补偿。很多油皮就是这样越洗越油</div>
+        <div class="qpro o">顾客可能以为出油快是"体质问题"，你说"越洗越快出油是皮脂膜的自我保护"——她会有强烈的"原来如此！一直搞错了"的体验，信任感暴增</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油3</div><div class="qph o">保湿护肤习惯</div><div class="qgl">排查缺水性出油</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"洗完脸之后，有没有做保湿——涂水乳或者乳液？还是觉得<b>本来就油，不需要保湿</b>？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol o">"<b>油皮最常见的误区就是不保湿</b>——表皮缺水，皮肤会用分泌更多皮脂来'代偿'，也就是用油来补水。您不保湿，皮脂腺反而分泌更多，越不保湿越油。您用没用保湿产品，情况有没有任何区别？"</div>
+        <div class="qpro o">说"用油来补水"——这个比喻顾客完全没听过，她会因为这个比喻对你建立很强的专业印象，同时开始反思自己的护肤逻辑</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油4</div><div class="qph o">痘痘的情况</div><div class="qgl">评估炎症程度</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"出油的同时，有没有伴随长痘的情况？痘主要长在哪里——<b>下巴、两颊、额头、还是全脸</b>？是白头黑头为主，还是红肿的炎性痘？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol o">"长完痘之后，<b>会留下痘印吗</b>——是红色的，还是暗褐色的？有没有抠痘的习惯？"</div>
+        <div class="qwhy">痘的位置判断成因：<b>下巴/下颌→内分泌；额头→压力/消化；两颊→饮食/肺；鼻子→消化/肠道</b>；痘印颜色判断处理方向</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油5</div><div class="qph o">生理期与激素关联</div><div class="qgl">判断内分泌因素</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"您注意过吗——<b>生理期前一周</b>，出油和痘痘会不会特别明显？比平时多很多？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol o">"<b>生理期前雄激素相对升高，皮脂腺会被刺激分泌更多皮脂</b>——如果您这时候明显变油变痘，说明内分泌对您皮肤的影响比较大。这种情况，单靠外用产品控油效果有限，要从内调入手。您有没有这个规律？"</div>
+        <div class="qpro o">顾客听到"单靠外用产品效果有限"——她会想"那用什么"，好奇心被调动，为后续方案设计铺垫了需求</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油6</div><div class="qph o">饮食与出油的关联</div><div class="qgl">找食源性成因</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"平时饮食上，<b>喜欢吃辣、甜食、油炸、奶制品</b>（奶茶、牛奶、芝士）吗？您有没有发现，吃了某些东西之后，皮肤出油或者痘痘会特别容易爆发？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol o">"<b>高糖食物会让胰岛素快速升高，胰岛素会刺激皮脂腺分泌</b>——奶制品里有IGF-1（胰岛素样生长因子），也会激活皮脂腺。所以爱喝奶茶、爱吃甜食的人，出油通常会更严重。您有没有试过少吃这些，皮肤有没有变好过？"</div>
+        <div class="qpro o">提到"奶茶里有IGF-1"——这个信息很多人完全不知道，顾客会非常惊讶，然后反思自己喝奶茶的习惯，越来越觉得这次问诊打开了新世界</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油7</div><div class="qph o">压力与出油关联</div><div class="qgl">评估内源性激素影响</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"压力大的时候，您有没有发现<b>皮肤特别油、特别容易长痘</b>——比如考试、赶项目、或者发生什么事情的那段时间？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol o">"<b>皮质醇（压力激素）升高→雄激素跟着升高→皮脂腺被激活</b>——这是为什么压力大时皮肤特别容易出油爆痘。您有没有这个规律？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油8</div><div class="qph o">毛孔的具体情况</div><div class="qgl">区分毛孔类型</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"毛孔这个问题——是<b>鼻子和鼻翼两侧毛孔大</b>，还是整个脸颊毛孔都明显？毛孔里有没有黑头或者白头？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol o">"<b>毛孔大分两种原因</b>：一种是皮脂腺分泌旺盛，油脂把毛孔撑开了；另一种是皮肤弹性下降，毛孔周围支撑结构松弛了。前者是油皮问题，后者是老化问题——您的感觉更像哪种？"</div>
+        <div class="qpro o">让顾客自己判断是哪种——她会认真思考，开始主动分析自己的皮肤，这种参与感让整个问诊变得有趣</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油9</div><div class="qph o">曾经用过的控油产品</div><div class="qgl">找过往方向是否正确</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"之前有没有专门用过控油产品？<b>用了之后效果怎么样</b>——能控住，还是用的时候有点效果、停了又回来？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol o">"控油产品控住表面，但<b>没有解决根本原因</b>的话，停了就会反弹。根本原因是缺水、内分泌、还是清洁过度——不同的原因，解决方案完全不一样。等会儿我们看检测图，可以判断您属于哪一种。"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh o"><div class="qn o">油10</div><div class="qph o">期望锁定（油皮版）</div><div class="qgl">成交锚点</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask o">"如果出油问题改善了，您最希望是哪个变化——<b>下午不再出油返光、毛孔细腻看不出来、还是痘痘不再反复</b>？"</div>
+        <div class="qfol o">"<b>[复述顾客答案]</b>——好，记住了，这是我们今天最核心的目标。"</div>
+        <div class="qpro o">三个选项各有侧重（表面油光/毛孔/痘痘），顾客选哪个，就说明她的真实在意点，报价时直接引用这个目标</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card" id="o2">
+    <div class="ch" onclick="tc('o2')"><div class="cn o">话</div><div class="ct">油皮完整对话示范</div><div class="ctg o">对话版</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="chat-box">
+        <div class="chat-head o">油皮顾客 · 25岁 · 职场 · 出油+下巴痘 · 习惯过度洗脸</div>
+        <div class="chat-body">
+          <div class="cr"><div class="av o">顾</div><div class="bub o">"出油是一直都有，还是最近特别明显？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"一直都有，超级油，每天都要用控油纸巾，午饭前就出油了。"</div></div>
+          <div class="cr"><div class="av o">顾</div><div class="bub o">"出油这么快——我问一下，<b>洗完脸之后涂保湿产品吗</b>？还是觉得本来就油，不需要？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"不涂，感觉已经很油了，再涂不是更油？"</div></div>
+          <div class="cr"><div class="av o">顾</div><div class="bub o">"<b>这个我要跟您说一个很多油皮都不知道的事情</b>——表皮缺水的时候，皮肤会用分泌更多皮脂来'代偿'补水，也就是用油来补水的机制。不保湿，皮脂腺就一直处于应急状态，越不保湿越油。您试过用清爽保湿产品吗？用了和不用有没有差别？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"没有专门试过……感觉出油和生理期也有关，那几天特别严重。"</div></div>
+          <div class="cr"><div class="av o">顾</div><div class="bub o">"<b>生理期前出油加重——这个非常关键</b>，说明您的出油有内分泌的因素，雄激素在那段时间会升高，皮脂腺被刺激。这种情况单纯控油效果很有限，要同时调节内部。平时喜欢吃甜食或者喝奶茶吗？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"很喜欢喝奶茶……几乎每天一杯。"</div></div>
+          <div class="cr"><div class="av o">顾</div><div class="bub o">"<b>奶茶是油皮的大敌</b>——奶制品里有一种叫IGF-1的成分，会直接激活皮脂腺，加上糖分刺激胰岛素，双重刺激出油。您有没有感觉，喝了奶茶之后出油特别快？等会儿我们看检测图，看看皮脂腺的活跃程度……"</div></div>
+          <div class="chat-note">✦ 全程顾问都在用顾客不知道的信息连接她的回答——顾客越来越想知道"那怎么办"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 敏感肌 ====== -->
+<div class="tab" id="t1">
+  <div class="skin-hero s">
+    <div class="sh-tag">敏感肌专项问诊</div>
+    <h2>🌿 敏感肌 · 泛红 · 刺激反应</h2>
+    <p>敏感≠天生，后天护肤误区、屏障受损、生活习惯都会导致敏感——找到根源才能真正改善</p>
+    <div class="sh-chips">
+      <div class="sh-chip">屏障受损型</div><div class="sh-chip">激素/药物型</div>
+      <div class="sh-chip">神经性敏感</div><div class="sh-chip">接触性过敏</div>
+    </div>
+  </div>
+
+  <div class="card" id="s0">
+    <div class="ch" onclick="tc('s0')"><div class="cn s">原</div><div class="ct">敏感肌4大类型</div><div class="ctg s">必读</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc s"><h4>屏障受损型（最常见）</h4><p>过度去角质/刷酸/洁面→屏障薄弱→什么都容易刺激<br><span style="color:var(--s)">问诊：用酸经历、去角质频率、换品后反应</span></p></div>
+        <div class="mc s"><h4>激素/药物依赖型</h4><p>长期用激素类护肤品或药膏→停了就发红发痒<br><span style="color:var(--s)">问诊：用过什么特效类产品、有没有依赖某款感觉停不了</span></p></div>
+        <div class="mc r"><h4>神经性敏感型</h4><p>皮肤神经末梢过度活跃→温度/情绪/食物都触发<br><span style="color:var(--rd)">问诊：触发因素、与情绪/月经周期的关联</span></p></div>
+        <div class="mc r"><h4>接触性过敏型</h4><p>对特定成分/材料真正过敏→有明确过敏原<br><span style="color:var(--rd)">问诊：确认过哪些过敏原、有没有做过斑贴测试</span></p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s1">
+    <div class="ch" onclick="tc('s1')"><div class="cn s">问</div><div class="ct">敏感肌10个专项问题——完整话术</div><div class="ctg s">核心脚本</div><div class="arr">▼</div></div>
+    <div class="cb">
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏1</div><div class="qph s">敏感的具体表现</div><div class="qgl">判断类型入口</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"您说皮肤敏感——具体是什么感觉？<b>发红、刺痛、瘙痒、灼热感、还是脱皮？</b>是一直都有，还是接触某些东西之后才出现？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol s">"<b>发红是持续的，还是一阵一阵的</b>——比如运动、喝热饮、温度变化之后特别明显，静下来又会好一点？"</div>
+        <div class="qwhy">持续泛红→毛细血管扩张/玫瑰痤疮；阵发性泛红→神经性敏感；接触性反应→屏障受损或接触性过敏；<b>不同表现对应不同处理方向</b></div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏2</div><div class="qph s">触发因素排查</div><div class="qgl">定位刺激源</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"有没有发现什么情况下<b>特别容易发？</b>比如——换季、温度变化、运动出汗之后、吃了辣或者喝了酒之后、精神压力大的时候、还是换了护肤品之后？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol s">"<b>每次发了，大概多久会自己好转</b>？是当天能平复，还是要好几天？"</div>
+        <div class="qpro s">列出多个触发因素让顾客勾选——她会从"我的皮肤很奇怪"变成"哦原来是这些触发的"，从焦虑变成有方向感，开始信任你的判断</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏3</div><div class="qph s">护肤品使用史</div><div class="qgl">排查屏障受损原因</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"最近有没有<b>换过护肤品</b>？换了之后皮肤有没有反应？<br>有没有用过<b>刷酸产品（果酸、水杨酸）、去角质、或者含酒精的爽肤水？</b>"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol s">"<b>酸类产品和过度去角质是屏障受损最常见的原因</b>——皮肤屏障变薄之后，什么护肤品都容易刺激，甚至连之前用得好的产品也会开始'不耐受'。您有没有这个经历——以前用没问题，最近突然觉得刺激？"</div>
+        <div class="qpro s">顾客听到"以前没事，最近才开始"的解释，会有"啊！就是这样！"的认同感——她感受到你把她的经历准确说出来了</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏4</div><div class="qph s">激素类产品排查</div><div class="qgl">排查激素依赖</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"有没有用过<b>含激素的面霜或者药膏</b>——比如医院开的皮炎药膏、湿疹膏、或者用了之后皮肤'特别好'但停了就发的护肤品？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol s">"<b>激素类产品短期效果很好，但长期用会让皮肤产生依赖——停了皮肤会反弹、泛红、变薄</b>，这叫激素依赖性皮炎。不是您皮肤变差了，是皮肤在戒断。您有没有这种情况？"</div>
+        <div class="qpro s">说"皮肤在戒断"这个比喻——顾客会有"原来不是我皮肤变差，是这个原因"的释怀感，同时开始信任你能帮她解决</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏5</div><div class="qph s">过敏史与成分禁忌</div><div class="qgl">安全基础</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"皮肤或者食物，有<b>确认过的过敏原</b>吗？做过过敏测试吗？有没有某种成分——比如香精、酒精、防腐剂——用了就会有反应？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol s">"有没有某款护肤品，<b>一用就起疹子或者红肿</b>的？那个成分您知道是什么吗？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏6</div><div class="qph s">饮食与敏感关联</div><div class="qgl">食源性过敏评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"吃了<b>辣的、酒、芒果、海鲜、坚果</b>这些之后，皮肤有没有明显的反应？比如更红、更痒、或者起小疹子？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol s">"<b>辛辣食物会扩张毛细血管，让泛红加剧；酒精也有同样的作用</b>。而海鲜、坚果、芒果这些是常见的过敏原，会触发免疫反应。您有没有发现吃某种东西之后皮肤特别'配合着发作'？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏7</div><div class="qph s">季节与环境变化</div><div class="qgl">外因评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"敏感有没有<b>季节规律</b>——春季花粉季、冬季干冷的时候特别严重？换城市或者换工作环境之后有没有明显变化？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol s">"工作环境是室内多还是室外多？有没有接触化学类物质、油烟、或者粉尘这些？"</div>
+        <div class="qwhy"><b>季节性明显→环境/过敏原触发</b>；<b>换了环境就好/就差→环境因素为主</b>——找到这个关联，顾客会非常认同你的分析</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏8</div><div class="qph s">洁面方式深问</div><div class="qgl">排查清洁损伤</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"卸妆用什么——卸妆油、卸妆水，还是洁面巾？卸妆的时候<b>用力揉搓还是轻轻化开</b>？洗脸用毛巾擦，还是用纸巾按干？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol s">"<b>毛巾是细菌温床，每次用可能带来大量细菌刺激已经脆弱的屏障</b>。卸妆时用力揉搓，对薄弱屏障来说物理刺激很大。敏感肌这两个环节要格外轻柔。您现在的方式是哪种？"</div>
+        <div class="qpro s">说"毛巾是细菌温床"——顾客从来没想过这个，会产生强烈的"学到了"感，同时意识到自己一直做错了，对后续建议高度重视</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏9</div><div class="qph s">睡眠与免疫关联</div><div class="qgl">免疫力评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"睡眠质量怎么样？<b>有没有感觉睡不好的时候，皮肤特别容易发</b>——更红、更痒、更容易有反应？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol s">"<b>睡眠不足会让免疫系统过度活跃，皮肤神经末梢的敏感度也会升高</b>——有些顾客连续熬夜就会触发敏感发作，睡好了就恢复了，这是身体在告诉你屏障修复的时间不够。"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh s"><div class="qn s">敏10</div><div class="qph s">期望锁定（敏感肌版）</div><div class="qgl">成交锚点</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask s">"如果敏感改善了，您最希望是——<b>不再一阵一阵发红、用护肤品不再刺激怕刺激、还是皮肤变得没那么'脆弱'，能用更多种类的产品</b>？"</div>
+        <div class="qfol s">"<b>[复述顾客答案]</b>——记住了，这是我们今天的目标方向。"</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card" id="s2">
+    <div class="ch" onclick="tc('s2')"><div class="cn s">话</div><div class="ct">敏感肌完整对话示范</div><div class="ctg s">对话版</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="chat-box">
+        <div class="chat-head s">敏感肌顾客 · 29岁 · 屏障受损 · 刷酸史 · 什么都不敢用</div>
+        <div class="chat-body">
+          <div class="cr"><div class="av s">顾</div><div class="bub s">"敏感具体是什么感觉——发红、刺痛还是痒？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"就是容易红，而且什么护肤品都不敢用，用什么都有点刺激。"</div></div>
+          <div class="cr"><div class="av s">顾</div><div class="bub s">"'用什么都刺激'——这个症状很典型，我问一下，<b>是从什么时候开始的？之前有没有用过刷酸产品，或者密集地去角质？</b>"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"用过，之前用水杨酸，用了大概半年，然后感觉皮肤越来越敏感就停了。"</div></div>
+          <div class="cr"><div class="av s">顾</div><div class="bub s">"<b>找到原因了</b>——长期用酸，皮肤屏障被过度剥脱，变薄了。屏障薄的皮肤就像没有外壳的鸡蛋，什么都能穿进去，所以什么都刺激。这不是您皮肤本来就敏感，是后天受损的，<b>好消息是后天受损可以修复，只是需要时间和正确的方式</b>。您现在还在用酸吗？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"停了，但也不知道能用什么。"</div></div>
+          <div class="cr"><div class="av s">顾</div><div class="bub s">"停酸是对的。修复期间皮肤需要的是'什么都不刺激'——简化护肤步骤，只用修复类成分，神经酰胺、积雪草、B5这些。您现在卸妆用什么？毛巾擦脸还是纸巾按干？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"毛巾擦。"</div></div>
+          <div class="cr"><div class="av s">顾</div><div class="bub s">"<b>毛巾建议换成一次性棉柔巾</b>——毛巾上有大量细菌，每次擦脸都是在给已经受损的屏障增加细菌刺激。这个小细节，敏感肌顾客改了之后很多人都说感觉皮肤没那么容易发了……"</div></div>
+          <div class="chat-note">✦ 给出具体可执行的改变建议（毛巾换棉柔巾），顾客感受到立竿见影的价值，对后续方案更有期待</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 衰老 ====== -->
+<div class="tab" id="t2">
+  <div class="skin-hero a">
+    <div class="sh-tag">衰老肌肤专项问诊</div>
+    <h2>⏳ 衰老 · 松弛 · 胶原流失 · 法令纹</h2>
+    <p>衰老不只是年龄——糖化、光老化、压力、睡眠都在加速——找到顾客的加速因素，方案才精准</p>
+    <div class="sh-chips">
+      <div class="sh-chip">自然老化型</div><div class="sh-chip">光老化型</div>
+      <div class="sh-chip">糖化加速型</div><div class="sh-chip">压力加速型</div>
+    </div>
+  </div>
+
+  <div class="card" id="a0">
+    <div class="ch" onclick="tc('a0')"><div class="cn a">原</div><div class="ct">衰老4大类型与加速因素</div><div class="ctg a">必读</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc a"><h4>自然老化型</h4><p>25岁后每年胶原流失约1%，皮脂腺功能退化，这是基础底色<br><span style="color:var(--a)">问诊重点：年龄段、遗传因素、基础护理情况</span></p></div>
+        <div class="mc a"><h4>光老化型（加速最快）</h4><p>UVA穿透真皮→胶原断裂→纹路早于年龄出现<br><span style="color:var(--a)">问诊重点：防晒习惯、户外暴露时间、车窗/玻璃防晒盲区</span></p></div>
+        <div class="mc r"><h4>糖化加速型</h4><p>高糖饮食→AGEs→胶原硬化变黄→皮肤暗而松<br><span style="color:var(--rd)">问诊重点：甜食、精制碳水、奶茶习惯</span></p></div>
+        <div class="mc r"><h4>压力/睡眠加速型</h4><p>皮质醇升高→胶原降解酶活跃→修复时间不足<br><span style="color:var(--rd)">问诊重点：睡眠质量、压力水平、是否真的进入深睡眠</span></p></div>
+      </div>
+      <div class="atip"><b>问诊核心：</b>找到顾客的老化"加速器"——同龄人里她为什么显老，一定有具体原因。找到了，分析就有说服力，方案就有针对性</div>
+    </div>
+  </div>
+
+  <div class="card" id="a1">
+    <div class="ch" onclick="tc('a1')"><div class="cn a">问</div><div class="ct">衰老肌10个专项问题——完整话术</div><div class="ctg a">核心脚本</div><div class="arr">▼</div></div>
+    <div class="cb">
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰1</div><div class="qph a">在意的衰老部位</div><div class="qgl">定位问题核心</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"您最在意的是哪个部位——<b>眼角纹、法令纹、额头纹、还是整体感觉松弛下垂</b>？照镜子的时候哪里最让您不开心？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol a">"这个感觉是<b>最近突然明显了，还是慢慢一直在加重</b>？有没有某段时间觉得老了特别多——比如一场大病、一段压力特别大的时期之后？"</div>
+        <div class="qwhy">突然明显的老化往往有触发事件（减重/大病/极度压力）；慢慢积累的老化是长期因素叠加——<b>找到"那段时间"就找到了关键成因</b></div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰2</div><div class="qph a">防晒深度排查</div><div class="qgl">光老化评估——最重要</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"防晒做得怎么样？出门有涂吗？<b>开车呢？室内靠窗工作呢？</b>防晒涂的SPF多少？大概几个小时补涂一次？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol a">"<b>光老化是所有老化类型里最可以干预的</b>——皮肤科研究显示，80%的面部老化是紫外线造成的，而不是时间。车窗和室内玻璃只能挡UVB，挡不住UVA——UVA才是穿透真皮、断裂胶原的那个。您之前知道这个区别吗？"</div>
+        <div class="qpro a">"80%的老化是紫外线造成的"——这个数字很多顾客没想到，听到之后会立刻重新审视自己的防晒习惯，对防晒类建议和产品的接受度大幅提升</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰3</div><div class="qph a">糖化排查</div><div class="qgl">AGEs加速因素</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"饮食上，<b>甜食、精制碳水（白米白面）、甜饮料</b>吃得多吗？您喜欢喝果汁吗——包括'新鲜榨'的？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol a">"<b>高糖饮食会引起皮肤糖化——专业叫AGEs（晚期糖基化终产物）</b>，糖分子附着在胶原蛋白上，让胶原变硬、变脆、变黄，弹性消失，纹路加深。这个过程是不可逆的，只能阻止继续累积。您有没有感觉皮肤有点发黄发暗，不只是暗沉，是有点'黄而旧'的感觉？"</div>
+        <div class="qpro a">说"新鲜榨的果汁也算"——这是很多健康意识强的顾客没想到的，她以为健康的东西不会导致糖化，你说出来之后她会很震惊，对你的专业深度产生强烈信任</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰4</div><div class="qph a">睡眠质量深问</div><div class="qgl">修复时间评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"睡眠——<b>是真的能睡沉、睡深，还是睡了够时间但醒来还是很疲惫</b>？睡前有没有玩手机的习惯？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol a">"<b>皮肤胶原合成的高峰在晚上11点到凌晨2点的深度睡眠期</b>——睡得浅、睡前玩手机（蓝光抑制褪黑素）都会影响进入深睡眠。有些人睡够了8小时，但一直没进入深睡眠，胶原合成还是不足。您睡眠质量属于哪种？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰5</div><div class="qph a">体重变化史</div><div class="qgl">脂肪垫与松弛</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"近两三年，<b>体重有没有明显波动</b>？特别是减重——减了多少，用多长时间减的？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol a">"<b>快速减重，皮下脂肪垫减少，皮肤来不及收缩，就会松弛下垂，法令纹和下颌线尤其明显</b>。这种原因导致的松弛，单纯做胶原类项目效果会有限，需要配合面部轮廓的支撑类方案。"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰6</div><div class="qph a">工作性质与表情习惯</div><div class="qgl">动态纹成因</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"工作的时候<b>需要对着电脑、经常眯眼看屏幕吗</b>？平时表情丰富吗——爱笑、爱皱眉？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol a">"<b>眯眼这个动作，一天会重复几千次，眼角纹就是这样刻进去的</b>。爱皱眉的人额纹会比同龄人早出现、更深。表情习惯是动态纹里很重要的因素——当然这不是让您不笑不表情，而是让我们针对这个方向做干预。"</div>
+        <div class="qpro a">说"眯眼一天几千次"——这个具体形象的说法让顾客立刻理解为什么眼角纹深，同时她会开始回想自己是不是经常眯眼，代入感很强</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰7</div><div class="qph a">遗传因素</div><div class="qgl">先天基准评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"您妈妈或者家里女性长辈，<b>皮肤老化情况怎么样？法令纹、松弛这些是早早就有还是比较晚？</b>"</div>
+        <div class="ql">解释</div>
+        <div class="qfol a">"遗传决定了你的<b>'老化基准线'</b>——如果家里长辈老化早，你需要比别人更早开始干预；如果家里长辈保养好，说明皮肤基础不错，但后天习惯同样重要。您家里情况怎么样？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰8</div><div class="qph a">抗氧化习惯</div><div class="qgl">日常护理评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"护肤品里有没有用含<b>维C、虾青素、白藜芦醇</b>这类抗氧化成分的？有没有口服过胶原蛋白、维C、抗氧化类的保健品？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol a">"<b>抗氧化是抗衰里最基础、最有效的一步</b>——自由基是加速老化的主要内因，维C能中和自由基，同时促进胶原合成。口服维C配合外用，效果会更好。您现在的护肤里有没有这个方向？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰9</div><div class="qph a">医美抗衰经历</div><div class="qgl">配合借力方向</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"做过医美抗衰的项目吗——<b>热玛吉、超声刀、射频、填充、肉毒素</b>这些？效果怎么样，维持了多久？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol a">"做过这些的话，我们的项目可以<b>帮您延长医美的效果</b>——比如做完热玛吉之后，配合胶原修复和导入，刺激出来的胶原增生效率会更高；射频之后配合抗氧化，可以减少热损伤的炎症。您做完之后有没有专门做过护理？"</div>
+        <div class="qpro a">说"帮您延长医美效果"而不是"我们和医美不冲突"——前者是正向价值，后者是防御性的。顾客听到前者会感觉"原来可以配合"，主动开放</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh a"><div class="qn a">衰10</div><div class="qph a">期望锁定（衰老版）</div><div class="qgl">成交锚点</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask a">"如果皮肤状态改善了，您最希望是——<b>照镜子感觉年轻了几岁、皮肤更紧致不那么松、还是特定部位的纹路变浅</b>？或者是三个月后身边的人主动说'你最近状态好好'？"</div>
+        <div class="qfol a">"<b>[复述顾客答案]</b>——好，这是我们今天的目标，全部方案围绕这个来。"</div>
+        <div class="qpro a">"身边人主动说你状态好"——这个选项命中很多人不好意思说出来的真实愿望（被看见、被夸），说出来之后顾客会有被理解的感动，成交欲望大幅提升</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 暗沉黄气 ====== -->
+<div class="tab" id="t3">
+  <div class="skin-hero d">
+    <div class="sh-tag">暗沉黄气专项问诊</div>
+    <h2>🌑 暗沉 · 黄气 · 气色差 · 肤色不均</h2>
+    <p>暗沉≠色斑——代谢慢/缺氧/糖化/角质堆积/肝脏代谢都会导致黄气暗沉，问清楚才能对症</p>
+    <div class="sh-chips">
+      <div class="sh-chip">代谢型暗沉</div><div class="sh-chip">角质堆积型</div>
+      <div class="sh-chip">糖化黄气型</div><div class="sh-chip">血液循环型</div>
+    </div>
+  </div>
+
+  <div class="card" id="d0">
+    <div class="ch" onclick="tc('d0')"><div class="cn d">原</div><div class="ct">暗沉黄气4大类型</div><div class="ctg d">必读</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc d"><h4>代谢型暗沉</h4><p>肠道/肝脏代谢慢→废物从皮肤走→发黄发暗<br><span style="color:var(--d)">问诊重点：便秘、饮水、睡眠、排毒习惯</span></p></div>
+        <div class="mc d"><h4>角质堆积型</h4><p>代谢周期慢→死皮堆积→光线折射差→暗沉<br><span style="color:var(--d)">问诊重点：去角质频率、皮肤是否粗糙、底妆服帖度</span></p></div>
+        <div class="mc r"><h4>糖化黄气型</h4><p>AGEs沉积→胶原变黄→皮肤整体色调偏黄<br><span style="color:var(--rd)">问诊重点：甜食习惯、皮肤黄色调是否明显</span></p></div>
+        <div class="mc r"><h4>血液循环型</h4><p>末梢循环差→皮肤供氧不足→面色苍白带灰暗<br><span style="color:var(--rd)">问诊重点：手脚冷、久坐、运动习惯、贫血史</span></p></div>
+      </div>
+      <div class="dtip"><b>关键区分：</b>暗沉是"灰暗"（代谢型/循环型）还是"黄暗"（糖化型）还是"粗暗"（角质堆积型）——问清楚顾客描述的具体颜色感觉，方向完全不同</div>
+    </div>
+  </div>
+
+  <div class="card" id="d1">
+    <div class="ch" onclick="tc('d1')"><div class="cn d">问</div><div class="ct">暗沉黄气10个专项问题——完整话术</div><div class="ctg d">核心脚本</div><div class="arr">▼</div></div>
+    <div class="cb">
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗1</div><div class="qph d">暗沉的具体颜色感</div><div class="qgl">类型判断入口</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"您说的暗沉，更像是哪种感觉——<b>整体灰蒙蒙的、还是偏黄、还是皮肤摸起来粗糙看起来暗</b>？自然光下和灯光下差别大吗？"</div>
+        <div class="ql">追问</div>
+        <div class="qfol d">"<b>睡了一觉之后，第二天早上气色会不会好一些</b>——还是不管怎么睡都是这个状态？"</div>
+        <div class="qwhy">睡后好转→代谢型/循环型（睡眠改善了循环）；睡后不变→糖化型/角质型（需要干预，自然改善不了）；<b>这个问题一问，顾客就自动分了类</b></div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗2</div><div class="qph d">肠道与代谢</div><div class="qgl">内源性暗沉核心</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"排便规律吗？<b>大概几天一次？是否有排完感觉不畅快、排不干净的情况？</b>"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol d">"<b>肠道是皮肤的'第二张脸'</b>——肠道代谢不畅，代谢废物无法正常排出，身体会让这些废物走其他通道，皮肤就是其中一个，体现出来就是发黄发暗、气色差。您有没有感觉，排便好的那几天，皮肤状态会相对好一点？"</div>
+        <div class="qpro d">"肠道是皮肤的第二张脸"——这个比喻很形象，顾客一听就懂，同时开始联系自己的排便情况，越想越觉得说得对，对你的判断非常认同</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗3</div><div class="qph d">饮水习惯</div><div class="qgl">水分代谢评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"平时一天大概<b>喝多少水</b>？主要喝温水、还是饮料、咖啡为主？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol d">"<b>充足的水分是代谢废物的'运输工具'</b>——喝水少，废物运不走，积在皮肤里就是暗沉。咖啡和含糖饮料反而有利尿作用，喝越多越缺水。您一天喝水大概多少？"</div>
+        <div class="qpro d">说"水是废物的运输工具"——比"水对皮肤好"这种泛泛的说法更具体形象，顾客能清晰理解喝水和暗沉的关系</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗4</div><div class="qph d">睡眠与作息</div><div class="qgl">代谢窗口评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"几点睡觉？睡眠质量好吗？<b>有没有长期熬夜、或者作息不规律</b>的情况？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol d">"<b>肝脏排毒高峰在晚上11点到凌晨3点</b>——这段时间如果还没睡，肝脏的代谢功能打折扣，毒素排不掉，皮肤第二天就会发黄发暗。熬夜的人气色差，根本原因就在这里。您有这个习惯吗？"</div>
+        <div class="qpro d">说"肝脏排毒高峰在11点到3点"——给出具体时间，顾客会立刻回想"我平时几点睡"，代入感很强，对这个解释的接受度极高</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗5</div><div class="qph d">血液循环评估</div><div class="qgl">末梢循环型暗沉</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"手脚<b>容易冷</b>吗？工作大部分时间是<b>坐着不动</b>的吗？有没有运动习惯？"</div>
+        <div class="ql">追问与解释</div>
+        <div class="qfol d">"<b>末梢循环不好，皮肤的供氧和营养输送就不够</b>——皮肤细胞在缺氧状态下，代谢产物清除慢，就会发暗发灰。手脚容易冷、久坐少动都是循环差的信号。您有没有感觉站起来走动之后，气色会稍微好一点？"</div>
+        <div class="qpro d">问"站起来走动之后气色会好一点吗"——让顾客自己验证循环和气色的关系，她一想"好像还真是这样"，就完全认同了你的判断</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗6</div><div class="qph d">糖化排查</div><div class="qgl">黄气成因</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"甜食、精制碳水、甜饮料吃得多吗？皮肤的暗沉，<b>是灰暗还是偏黄</b>——照白色的背景看，有没有一种'黄旧感'？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol d">"<b>糖化产生的AGEs会附着在胶原蛋白上让皮肤变黄——这种黄不是色素，是胶原本身变色了</b>，所以用美白产品没用，要从抗糖化入手。您照镜子的时候有没有感觉皮肤不是'黑'，是'黄而旧'？"</div>
+        <div class="qpro d">区分"暗"和"黄"——这个细分让顾客感受到你的判断非常精准，大多数顾问不会做这个区分，你做了，顾客会觉得"她真的懂皮肤"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗7</div><div class="qph d">角质代谢情况</div><div class="qgl">角质堆积型评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"皮肤摸起来<b>光滑还是有点粗糙</b>？上底妆是否服帖——有没有容易卡粉、浮粉的情况？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol d">"<b>角质代谢慢的话，死皮堆在表面，皮肤就像蒙了一层灰</b>——光线折射出来不均匀，就显暗显沉。上妆卡粉也是这个原因。您有没有去角质的习惯？多久去一次？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗8</div><div class="qph d">护肤品吸收情况</div><div class="qgl">评估代谢通道是否畅通</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"用了美白或者提亮类的护肤品，<b>感觉有没有效果</b>？涂上去有没有那种'进去了'的感觉，还是感觉浮在表面？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol d">"<b>吸收差通常意味着角质层代谢慢，皮肤的'通道'堵了</b>——产品再好也进不去，钱就浪费了。先疏通代谢通道，再做功效类护理，才是正确顺序。您用的是什么顺序护肤的？"</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗9</div><div class="qph d">饮食与肝脏代谢</div><div class="qgl">系统性代谢评估</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"平时<b>喝酒吗？油腻食物吃得多吗？</b>有没有在吃什么药物或者保健品？"</div>
+        <div class="ql">解释</div>
+        <div class="qfol d">"<b>酒精和高脂饮食会增加肝脏负担——肝脏忙着解毒，皮肤的代谢废物就没人管</b>，体现在皮肤上就是气色差、偏黄。某些药物也会影响皮肤代谢，特别是长期服用的。您有没有长期在吃什么？"</div>
+        <div class="qpro d">酒精和皮肤的关联顾客知道个大概，但"肝脏忙着解毒，皮肤代谢废物就没人管"这个形象说法，会让她豁然开朗</div>
+      </div></div>
+
+      <div class="qb"><div class="qbh d"><div class="qn d">暗10</div><div class="qph d">期望锁定（暗沉版）</div><div class="qgl">成交锚点</div></div>
+      <div class="qbody">
+        <div class="ql">标准问法</div>
+        <div class="qask d">"如果暗沉黄气改善了，您最希望是——<b>自然光下皮肤更亮、不用底妆也气色好、还是拍照不显暗不显黄</b>？"</div>
+        <div class="qfol d">"<b>[复述顾客答案]</b>——记住了，这是我们今天的核心目标。"</div>
+        <div class="qpro d">"拍照不显暗不显黄"——现代人对拍照效果极其在意，这个选项说到了很多人心坎里，会让顾客感受到"她懂我的生活场景"</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card" id="d2">
+    <div class="ch" onclick="tc('d2')"><div class="cn d">话</div><div class="ct">暗沉黄气完整对话示范</div><div class="ctg d">对话版</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="chat-box">
+        <div class="chat-head d">暗沉顾客 · 33岁 · 久坐 · 爱喝咖啡 · 睡眠晚 · 气色差</div>
+        <div class="chat-body">
+          <div class="cr"><div class="av d">顾</div><div class="bub d">"暗沉这个感觉，更像是灰蒙蒙，还是偏黄？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"感觉两个都有，整体就是暗黄，气色差。"</div></div>
+          <div class="cr"><div class="av d">顾</div><div class="bub d">"暗黄——<b>两个方向都有，说明成因可能不止一个</b>。我问几个问题来判断。睡眠几点睡，规律吗？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"一般12点多，有时候更晚，睡不着。"</div></div>
+          <div class="cr"><div class="av d">顾</div><div class="bub d">"<b>12点多——肝脏排毒高峰是11点到凌晨3点，您每次都错过了</b>。肝脏没有充分排毒，代谢废物会从皮肤走，就是黄气的一个来源。平时喝水多吗，还是咖啡喝得多？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"咖啡一天两杯，水喝得不太够。"</div></div>
+          <div class="cr"><div class="av d">顾</div><div class="bub d">"<b>咖啡有利尿作用，喝越多越缺水，代谢废物的'运输工具'不够</b>，就排不出去，堆在皮肤里。工作是坐办公室的吗？手脚容易冷？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"对，坐一整天，手脚还挺冷的。"</div></div>
+          <div class="cr"><div class="av d">顾</div><div class="bub d">"<b>久坐+手脚冷——末梢循环不好，皮肤供氧不足</b>，这是'灰暗'的部分。加上肝脏代谢的问题，所以是暗黄复合型。另外问一下，甜食和奶茶喝得多吗？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"奶茶还挺喜欢的，经常喝。"</div></div>
+          <div class="cr"><div class="av d">顾</div><div class="bub d">"<b>奶茶里的糖会引起糖化——胶原蛋白被糖分子附着，会变黄变硬</b>，这是'黄气'的部分。所以您的情况是三重因素叠加——循环差、代谢慢、糖化。等会儿检测图上，我们可以分别看到这三个方向的具体情况……"</div></div>
+          <div class="chat-note">✦ 顾问把三个成因都找出来了，顾客感受到分析精准，对后续方案的接受度会极高</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function st(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+function tc(id){
+  var c=document.getElementById(id);
+  var b=c.querySelector('.cb');
+  var a=c.querySelector('.arr');
+  if(!b)return;
+  if(b.style.display==='none'||!b.style.display){
+    b.style.display='block';
+    if(a)a.style.transform='rotate(180deg)';
+  }else{
+    b.style.display='none';
+    if(a)a.style.transform='';
+  }
+}
+document.querySelectorAll('.cb').forEach(b=>{b.style.display='none'});
+document.querySelectorAll('.tab').forEach(tab=>{
+  var f=tab.querySelector('.cb');
+  if(f){f.style.display='block';var a=f.parentElement.querySelector('.arr');if(a)a.style.transform='rotate(180deg)';}
+});
+</script>

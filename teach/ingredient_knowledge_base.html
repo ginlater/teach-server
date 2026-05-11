@@ -1,0 +1,860 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --r:#8B3A5A;--rl:#C97B9E;--rp:#F7EEF3;--rd:#5C2040;
+  --g:#7A5A18;--gp:#FBF6EA;--gl:#E8C87A;
+  --gr:#2A6049;--grp:#EEF7F2;--grl:#5EAA84;
+  --bl:#1E5C8A;--blp:#EDF3FA;--bll:#6AA0CC;
+  --pu:#5A3A8B;--pup:#F0EDF9;--pul:#9A7ACC;
+  --tl:#1A7070;--tlp:#EAF5F5;
+  --or:#8B4A1A;--orp:#FBF2EA;
+  --ink:#281820;--ink2:#504050;--ink3:#907880;
+  --bg:#FAF8F5;--wh:#fff;--bd:rgba(100,60,80,0.11);
+}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:14px}
+.w{max-width:960px;margin:0 auto;padding-bottom:60px}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#1A0810,#3A1828 35%,#6A2848 65%,#3A2060);padding:28px 24px 24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;background:rgba(184,144,58,0.1)}
+.htag{display:inline-block;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:2px;padding:3px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);margin-bottom:10px}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:20px;color:#fff;line-height:1.45;margin-bottom:6px}
+.hero p{font-size:12px;color:rgba(255,255,255,0.62)}
+.hrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.hchip{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.78);background:rgba(255,255,255,0.08)}
+
+/* Nav */
+.nav{display:flex;overflow-x:auto;background:var(--wh);border-bottom:1px solid var(--bd);padding:0 10px;position:sticky;top:0;z-index:200;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nb{flex-shrink:0;font-size:11px;padding:11px 11px 9px;border:none;background:none;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap;font-family:'Noto Sans SC',sans-serif;transition:all .2s}
+.nb.on{color:var(--r);border-bottom-color:var(--r);font-weight:500}
+
+/* Tabs */
+.tab{display:none;padding:20px 16px 0}
+.tab.on{display:block}
+.stitle{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--rd);margin-bottom:4px}
+.ssub{font-size:12px;color:var(--ink3);padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--bd)}
+
+/* Card */
+.card{background:var(--wh);border:1px solid var(--bd);border-radius:12px;margin-bottom:11px;overflow:hidden}
+.ch{padding:12px 16px;display:flex;align-items:center;gap:9px;cursor:pointer}
+.ch:hover{background:rgba(139,58,90,0.04)}
+.cn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#fff}
+.cn.r{background:var(--r)}.cn.g{background:var(--g)}.cn.gr{background:var(--gr)}
+.cn.bl{background:var(--bl)}.cn.pu{background:var(--pu)}.cn.tl{background:var(--tl)}.cn.or{background:var(--or)}
+.ct{font-size:13px;font-weight:500;color:var(--ink);flex:1}
+.ctg{font-size:10px;padding:2px 8px;border-radius:20px;white-space:nowrap;border:1px solid}
+.ctg.r{background:var(--rp);color:var(--r);border-color:rgba(139,58,90,0.2)}
+.ctg.g{background:var(--gp);color:var(--g);border-color:rgba(122,90,24,0.2)}
+.ctg.gr{background:var(--grp);color:var(--gr);border-color:rgba(42,96,73,0.2)}
+.ctg.bl{background:var(--blp);color:var(--bl);border-color:rgba(30,92,138,0.2)}
+.ctg.pu{background:var(--pup);color:var(--pu);border-color:rgba(90,58,139,0.2)}
+.ctg.tl{background:var(--tlp);color:var(--tl);border-color:rgba(26,112,112,0.2)}
+.ctg.or{background:var(--orp);color:var(--or);border-color:rgba(139,74,26,0.2)}
+.arr{font-size:10px;color:var(--ink3);transition:transform .2s}
+.cb{display:none;padding:0 16px 16px;border-top:1px solid var(--bd)}
+
+/* Ingredient card – main display */
+.ing{border:1px solid var(--bd);border-radius:11px;margin:10px 0;overflow:hidden}
+.ing-head{padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.ing-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ing-meta{flex:1}
+.ing-name{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.ing-aka{font-size:11px;color:var(--ink3)}
+.ing-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.itag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500}
+.itag.moist{background:#EDF6FB;color:#1A6080;border:1px solid rgba(26,96,128,0.2)}
+.itag.bright{background:#FBF8EA;color:#806010;border:1px solid rgba(128,96,16,0.2)}
+.itag.repair{background:var(--grp);color:var(--gr);border:1px solid rgba(42,96,73,0.2)}
+.itag.anti{background:var(--pup);color:var(--pu);border:1px solid rgba(90,58,139,0.2)}
+.itag.acne{background:#FBF0F4;color:var(--r);border:1px solid rgba(139,58,90,0.2)}
+.itag.oil{background:var(--orp);color:var(--or);border:1px solid rgba(139,74,26,0.2)}
+.itag.sens{background:#F0FAF5;color:var(--gr);border:1px solid rgba(42,96,73,0.2)}
+.ing-body{padding:0 14px 13px;background:var(--wh)}
+.ing-sec{margin-bottom:10px}
+.ing-sec-title{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--ink3);margin-bottom:4px}
+.ing-simple{font-size:13px;color:var(--ink);background:#F9F6F8;border-radius:8px;padding:9px 12px;line-height:1.8;border-left:3px solid var(--rl)}
+.ing-simple b{color:var(--rd);font-weight:500}
+.ing-pro{font-size:12px;color:var(--ink2);background:var(--rp);border-radius:8px;padding:8px 12px;line-height:1.75;margin-top:5px}
+.ing-pro b{color:var(--r);font-weight:500}
+.ing-warn{font-size:11px;color:#8B3A1A;background:#FBF0EA;border-radius:8px;padding:7px 11px;margin-top:5px;line-height:1.6;border-left:3px solid #D07040}
+.ing-use{font-size:12px;color:var(--ink2);line-height:1.75}
+.ing-skin{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+
+/* Compatibility chart */
+.compat{border-radius:10px;overflow:hidden;margin:9px 0;border:1px solid var(--bd)}
+.compat-head{padding:8px 13px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.compat-head.good{background:var(--grp);color:var(--gr)}
+.compat-head.bad{background:#FEF0F0;color:#8B2020}
+.compat-head.ok{background:var(--gp);color:var(--g)}
+.compat-body{padding:10px 13px;background:var(--wh)}
+.compat-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px}
+.compat-row:last-child{margin-bottom:0}
+.compat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.compat-dot.good{background:var(--gr)}.compat-dot.bad{background:#C03020}.compat-dot.ok{background:var(--g)}
+.compat-text{font-size:12px;color:var(--ink2);line-height:1.7}
+.compat-text b{font-weight:500}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:9px 0}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin:9px 0}
+.mc{border-radius:10px;padding:11px 13px;border:1px solid var(--bd)}
+.mc.r{background:var(--rp)}.mc.g{background:var(--gp);border-color:rgba(122,90,24,0.18)}
+.mc.gr{background:var(--grp);border-color:rgba(42,96,73,0.15)}
+.mc.bl{background:var(--blp);border-color:rgba(30,92,138,0.15)}
+.mc.pu{background:var(--pup);border-color:rgba(90,58,139,0.15)}
+.mc.tl{background:var(--tlp);border-color:rgba(26,112,112,0.15)}
+.mc.or{background:var(--orp);border-color:rgba(139,74,26,0.15)}
+.mc h4{font-size:12px;font-weight:500;margin-bottom:5px}
+.mc.r h4{color:var(--rd)}.mc.g h4{color:var(--g)}.mc.gr h4{color:var(--gr)}
+.mc.bl h4{color:var(--bl)}.mc.pu h4{color:var(--pu)}.mc.tl h4{color:var(--tl)}.mc.or h4{color:var(--or)}
+.mc p,.mc ul{font-size:12px;color:var(--ink2);line-height:1.7}
+.mc ul{padding-left:14px}
+
+/* Tips */
+.tip{background:var(--rp);border-left:3px solid var(--rl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.tip b{color:var(--rd)}
+.gtip{background:var(--gp);border-left:3px solid var(--gl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.gtip b{color:var(--g)}
+.grtip{background:var(--grp);border-left:3px solid var(--grl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.grtip b{color:var(--gr)}
+.bltip{background:var(--blp);border-left:3px solid var(--bll);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.bltip b{color:var(--bl)}
+.putip{background:var(--pup);border-left:3px solid var(--pul);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.putip b{color:var(--pu)}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin:9px 0}
+.tbl th{font-weight:500;padding:8px 11px;text-align:left;border-bottom:1.5px solid var(--bd)}
+.tbl td{padding:8px 11px;border-bottom:1px solid var(--bd);color:var(--ink2);vertical-align:top;line-height:1.7}
+.tbl tr:last-child td{border-bottom:none}
+.tbl.r th{background:var(--rp);color:var(--rd)}
+.tbl.g th{background:var(--gp);color:var(--g)}
+.tbl.gr th{background:var(--grp);color:var(--gr)}
+.tbl.bl th{background:var(--blp);color:var(--bl)}
+.tbl.pu th{background:var(--pup);color:var(--pu)}
+.tbl.tl th{background:var(--tlp);color:var(--tl)}
+
+/* Level badge */
+.lv{display:inline-block;font-size:10px;padding:1px 8px;border-radius:10px;font-weight:700}
+.lv1{background:#FEF0F0;color:#C03020;border:1px solid rgba(192,48,32,0.2)}
+.lv2{background:var(--gp);color:var(--g);border:1px solid rgba(122,90,24,0.2)}
+.lv3{background:var(--grp);color:var(--gr);border:1px solid rgba(42,96,73,0.2)}
+
+/* Script line */
+.sline{font-size:13px;color:var(--ink);font-style:italic;background:#F8F5F8;border-radius:8px;padding:9px 12px;border-left:3px solid var(--rl);line-height:1.85;margin:6px 0}
+.sline b{color:var(--rd);font-style:normal}
+
+/* Skin match */
+.skin-match{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0}
+.sm{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--rp);color:var(--rd);border:1px solid rgba(139,58,90,0.2)}
+.sm.ok{background:var(--grp);color:var(--gr);border-color:rgba(42,96,73,0.2)}
+.sm.no{background:#FEF0F0;color:#8B2020;border:1px solid rgba(139,32,32,0.18)}
+.sm.care{background:var(--gp);color:var(--g);border-color:rgba(122,90,24,0.2)}
+
+/* Conc bar */
+.conc-row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.conc-label{font-size:11px;color:var(--ink3);width:60px;flex-shrink:0}
+.conc-bar{flex:1;background:var(--bd);border-radius:6px;height:5px}
+.conc-fill{height:5px;border-radius:6px}
+.conc-val{font-size:11px;font-weight:500;width:40px;flex-shrink:0}
+
+/* Chat */
+.chat-box{border:1px solid var(--bd);border-radius:10px;margin:10px 0;overflow:hidden}
+.chat-head{padding:8px 13px;font-size:12px;font-weight:500;color:#fff;background:var(--rd)}
+.chat-body{padding:11px 13px;background:var(--wh)}
+.cr{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+.cr.rt{flex-direction:row-reverse}
+.av{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;color:#fff}
+.av.c{background:var(--r)}.av.k{background:var(--gr)}
+.bub{font-size:12px;line-height:1.75;padding:8px 11px;border-radius:10px;max-width:88%}
+.bub.c{background:var(--rp);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bub.k{background:var(--grp);color:var(--ink2);border-radius:10px 2px 10px 10px}
+.bub b{font-weight:500;color:var(--rd)}
+
+h4{font-size:13px;font-weight:500;color:var(--ink);margin:11px 0 6px}
+p{font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:5px}
+ul,ol{padding-left:15px;font-size:12px;color:var(--ink2);line-height:1.9}
+.sep{height:1px;background:var(--bd);margin:11px 0}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.g2,.g3,.g4{grid-template-columns:1fr}}
+</style>
+
+<div class="w">
+<div class="hero">
+  <div class="htag">顾问专业知识库 · 成分篇</div>
+  <h1>皮肤顾问成分知识库<br>——顾客问得出，你答得上</h1>
+  <p>核心成分 · 顾客版解释 · 搭配禁忌 · 浓度选择 · 实战话术</p>
+  <div class="hrow">
+    <div class="hchip">💧 保湿修复</div><div class="hchip">✨ 美白提亮</div>
+    <div class="hchip">⏳ 抗衰抗氧</div><div class="hchip">🫧 控油祛痘</div>
+    <div class="hchip">🔗 搭配指南</div><div class="hchip">💬 实战话术</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nb on" onclick="st('t0',this)">📖 怎么用成分知识</button>
+  <button class="nb" onclick="st('t1',this)">💧 保湿修复类</button>
+  <button class="nb" onclick="st('t2',this)">✨ 美白提亮类</button>
+  <button class="nb" onclick="st('t3',this)">⏳ 抗衰抗氧类</button>
+  <button class="nb" onclick="st('t4',this)">🫧 控油祛痘类</button>
+  <button class="nb" onclick="st('t5',this)">🔗 搭配指南</button>
+  <button class="nb" onclick="st('t6',this)">💬 实战话术</button>
+</div>
+
+<!-- ===== 怎么用 ===== -->
+<div class="tab on" id="t0">
+  <div class="stitle">成分知识——顾问为什么要懂，怎么用</div>
+  <div class="ssub">不是让你变成成分党，而是用成分知识建立专业权威感，让顾客觉得"她真的懂"</div>
+
+  <div class="card" id="u0">
+    <div class="ch" onclick="tc('u0')"><div class="cn r">为</div><div class="ct">顾问懂成分的3个核心价值</div><div class="ctg r">必读</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g3">
+        <div class="mc r"><h4>价值①：建立专业信任</h4><p>顾客问"这个产品用了什么成分、有没有酒精/香精"——你答得上，她信任你；答不上，她会去网上查，可能被带走</p></div>
+        <div class="mc r"><h4>价值②：分析时更有说服力</h4><p>说"这个成分叫神经酰胺，是皮肤屏障的砖块结构"比说"这个产品很滋润"专业10倍，顾客更信分析结论</p></div>
+        <div class="mc r"><h4>价值③：识别顾客的护肤误区</h4><p>顾客说"我用了XX产品"，你能判断里面的成分是否适合她的皮肤，找出问题所在——这是最强的专业感体现</p></div>
+      </div>
+      <div class="tip"><b>核心原则：</b>成分知识不是用来炫耀的，是用来帮顾客"发现问题"和"理解方案"的。每次说成分，后面立刻跟上"所以对您来说……"，把成分和顾客的具体情况连起来</div>
+    </div>
+  </div>
+
+  <div class="card" id="u1">
+    <div class="ch" onclick="tc('u1')"><div class="cn r">法</div><div class="ct">成分知识的表达公式——专业但不难懂</div><div class="ctg r">话术公式</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tip"><b>黄金公式：成分名 + （一句话解释） + 和顾客情况的关联</b></div>
+      <table class="tbl r">
+        <tr><th>成分</th><th>❌ 只说名字</th><th>✅ 公式表达</th></tr>
+        <tr><td>神经酰胺</td><td>"这个含有神经酰胺。"</td><td>"神经酰胺（就是皮肤屏障的'砖块'）——您屏障受损，正好需要补充这个，修复速度会快很多。"</td></tr>
+        <tr><td>烟酰胺</td><td>"这个有烟酰胺，可以美白。"</td><td>"烟酰胺（阻断黑色素传递的成分）——对您这种表皮色素沉积，4-5%浓度效果比较好，但要注意……"</td></tr>
+        <tr><td>A醇</td><td>"A醇抗衰很好。"</td><td>"A醇（维A醇，刺激胶原增生最有效的成分之一）——您的纹路已经是真皮层的了，A醇是目前最有科学依据的外用抗衰成分，但需要从低浓度开始……"</td></tr>
+        <tr><td>水杨酸</td><td>"水杨酸可以控油。"</td><td>"水杨酸（脂溶性酸，能钻进毛孔溶解油脂堵塞）——您毛孔里的黑头白头正好是它擅长的，不过用多了会破坏屏障，用法很重要……"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="u2">
+    <div class="ch" onclick="tc('u2')"><div class="cn g">图</div><div class="ct">成分与皮肤检测图的连接——让分析更有力</div><div class="ctg g">检测关联</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="gtip"><b>核心技巧：</b>看到检测图的问题，立刻说出"对应需要什么成分"——让顾客感受到"检测→问题→成分→方案"是一条完整的逻辑链</div>
+      <table class="tbl g">
+        <tr><th>检测图显示</th><th>对应问题</th><th>需要的核心成分</th><th>话术连接</th></tr>
+        <tr><td>红区图炎症明显</td><td>屏障受损/敏感</td><td>神经酰胺、积雪草苷、泛醇(B5)</td><td>"这里炎症信号，需要修复屏障——神经酰胺就是专门修复这个的"</td></tr>
+        <tr><td>红热力图水分低</td><td>表皮缺水</td><td>透明质酸(HA)、甘油、尿素</td><td>"含水量低，需要大分子锁水+小分子补水双管齐下"</td></tr>
+        <tr><td>UV紫外线图色素沉积</td><td>皮下色素</td><td>维C、熊果苷、烟酰胺、传明酸</td><td>"皮下已经有色素在累积，需要从抑制黑色素合成入手"</td></tr>
+        <tr><td>棕区图表皮色斑</td><td>表皮色素</td><td>烟酰胺、维C、曲酸</td><td>"这层是表皮色素，外用美白成分可以直接作用到"</td></tr>
+        <tr><td>交叉偏正图纹理深</td><td>胶原流失</td><td>A醇、胜肽类、维C</td><td>"真皮层胶原在流失，A醇和胜肽是目前最有依据的方向"</td></tr>
+        <tr><td>冷光图角质堆积</td><td>代谢慢/暗沉</td><td>果酸(AHA)、水杨酸(BHA)、A醇</td><td>"角质代谢慢，需要温和促进代谢的成分疏通通道"</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 保湿修复 ===== -->
+<div class="tab" id="t1">
+  <div class="stitle">💧 保湿修复类成分——屏障、补水、锁水</div>
+  <div class="ssub">最基础也最重要——所有问题的根基都是屏障健康，这类成分是顾问最高频用到的</div>
+
+  <div class="card" id="m0">
+    <div class="ch" onclick="tc('m0')"><div class="cn bl">成分</div><div class="ct">透明质酸（玻尿酸）Hyaluronic Acid</div><div class="ctg bl">保湿之王</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:var(--blp)">💧</div>
+          <div class="ing-meta">
+            <div class="ing-name">透明质酸（HA）<span class="lv lv3">基础必会</span></div>
+            <div class="ing-aka">又叫：玻尿酸 / 透明质酸钠 / Sodium Hyaluronate</div>
+            <div class="ing-tags"><span class="itag moist">保湿</span><span class="itag repair">屏障支撑</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"透明质酸是皮肤<b>天然就有的保湿因子</b>——一个分子能锁住1000倍重量的水。皮肤里的透明质酸随年龄流失，补充它就是帮皮肤恢复天然的储水能力。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">专业加分说法（让顾客觉得你更懂）</div>
+            <div class="ing-pro"><b>大分子HA（锁水）</b>：留在皮肤表面，形成保湿膜，防止水分蒸发；<b>小分子HA（补水）</b>：渗入角质层深处，直接补充皮肤内部水分。好的HA产品要两种都有，光有大分子是治标，光有小分子留不住。</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">所有肤质</span><span class="sm ok">干皮首选</span><span class="sm ok">敏感肌安全</span><span class="sm ok">孕期可用</span></div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">使用注意</div>
+            <div class="ing-warn">⚠️ 干燥环境中单独使用大分子HA，可能反吸皮肤里的水——必须在后面叠加封闭类产品（乳液/面霜）锁住水分，否则更干</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:#F0F5EE">🧱</div>
+          <div class="ing-meta">
+            <div class="ing-name">神经酰胺 Ceramide<span class="lv lv3">基础必会</span></div>
+            <div class="ing-aka">又叫：ceramide NP / AP / EOP（不同类型）</div>
+            <div class="ing-tags"><span class="itag repair">屏障修复</span><span class="itag sens">敏感修护</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"神经酰胺是皮肤屏障的<b>'砖块'</b>——皮肤就像一面墙，神经酰胺是黏合砖块的水泥，占屏障脂质的40%-50%。屏障受损（敏感/刷酸过度/干燥），就是这面墙裂了，补神经酰胺就是在修墙。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">什么情况下一定要用</div>
+            <div class="ing-pro">刷酸后恢复期 ｜ 敏感肌日常维护 ｜ 屏障受损（用什么都刺激）｜ 换季皮肤不稳定 ｜ 医美术后修复——<b>这五种情况，神经酰胺是第一优先级成分</b></div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">敏感肌必备</span><span class="sm ok">干皮</span><span class="sm ok">术后修复</span><span class="sm care">油皮（选轻薄配方）</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:#EEF5FB">🩹</div>
+          <div class="ing-meta">
+            <div class="ing-name">泛醇（维生素B5）Panthenol<span class="lv lv3">基础必会</span></div>
+            <div class="ing-aka">又叫：右旋泛醇 / B5 / Dexpanthenol</div>
+            <div class="ing-tags"><span class="itag repair">修复</span><span class="itag moist">保湿</span><span class="itag sens">舒缓</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"B5是皮肤<b>自我修复的'燃料'</b>——进入皮肤后会转化成泛酸，促进皮肤细胞再生，同时有强效保湿和消炎作用。医院烫伤用的药膏里就有这个成分。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">为什么和其他成分不同</div>
+            <div class="ing-pro">B5是极少数<b>既能补水、又能修复、又能消炎</b>的成分——一个顶三个用，而且温和到几乎零刺激。敏感肌、术后修复、受损皮肤，B5是最安全也最有效的选择之一</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">所有肤质</span><span class="sm ok">敏感肌</span><span class="sm ok">术后首选</span><span class="sm ok">痘肌（消炎）</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:#F0F8F0">🌿</div>
+          <div class="ing-meta">
+            <div class="ing-name">积雪草苷 Centella Asiatica<span class="lv lv2">进阶了解</span></div>
+            <div class="ing-aka">又叫：虎耳草素 / 积雪草提取物 / CICA</div>
+            <div class="ing-tags"><span class="itag repair">屏障修复</span><span class="itag sens">舒缓红肿</span><span class="itag anti">促胶原</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"积雪草是一种植物提取物，<b>有三重作用：消炎、促进皮肤愈合、刺激胶原合成</b>。最近几年'CICA'系列护肤品大火，就是这个成分。受损皮肤的修复里，它是明星成分。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">敏感泛红</span><span class="sm ok">痘后修复</span><span class="sm ok">术后恢复</span><span class="sm ok">屏障受损</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 美白提亮 ===== -->
+<div class="tab" id="t2">
+  <div class="stitle">✨ 美白提亮类成分——淡斑、均匀肤色、抑制黑色素</div>
+  <div class="ssub">美白成分方向各不同——抑制合成/阻断传递/加速代谢，用错方向，花多少钱都没效果</div>
+
+  <div class="card" id="b0">
+    <div class="ch" onclick="tc('b0')"><div class="cn g">全</div><div class="ct">美白成分作用路径——先理解再推荐</div><div class="ctg g">框架</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="gtip"><b>黑色素生成三步路径：</b>酪氨酸酶激活 → 黑色素合成 → 黑色素传递到角质细胞 → 积累形成色斑</div>
+      <div class="g3">
+        <div class="mc g"><h4>第一步：抑制酪氨酸酶</h4><p>阻止黑色素"生产线"启动</p><p style="color:var(--g)">代表成分：熊果苷、曲酸、维C、传明酸</p></div>
+        <div class="mc g"><h4>第二步：阻断黑色素传递</h4><p>让黑色素造出来但传不到皮肤表面</p><p style="color:var(--g)">代表成分：烟酰胺（主要作用在这步）</p></div>
+        <div class="mc g"><h4>第三步：加速代谢排出</h4><p>已有的色素加速代谢排掉</p><p style="color:var(--g)">代表成分：果酸、A醇（促进角质代谢）</p></div>
+      </div>
+      <div class="gtip"><b>话术应用：</b>顾客问"为什么我用美白产品没效果"→ "美白成分有三个方向，方向选错了，效果就不对——您现在皮肤的问题更需要[哪个方向]，我给您推荐[对应成分]"</div>
+    </div>
+  </div>
+
+  <div class="card" id="b1">
+    <div class="ch" onclick="tc('b1')"><div class="cn g">成分</div><div class="ct">烟酰胺 Niacinamide——最常见美白成分</div><div class="ctg g">必会</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:var(--gp)">✨</div>
+          <div class="ing-meta">
+            <div class="ing-name">烟酰胺 Niacinamide<span class="lv lv3">基础必会</span></div>
+            <div class="ing-aka">又叫：维生素B3 / 尼克酰胺</div>
+            <div class="ing-tags"><span class="itag bright">美白</span><span class="itag oil">控油</span><span class="itag acne">收毛孔</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"烟酰胺的美白原理是<b>阻断黑色素传递</b>——黑色素造出来了，但烟酰胺把'运输通道'堵住，黑色素传不到皮肤表面，肤色就会提亮。同时它还能控油、收缩毛孔。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">浓度选择（这个顾客最爱问）</div>
+            <div class="conc-row"><div class="conc-label">2%（入门）</div><div class="conc-bar"><div class="conc-fill" style="width:30%;background:var(--grl)"></div></div><div class="conc-val" style="color:var(--gr)">敏感肌</div></div>
+            <div class="conc-row"><div class="conc-label">4-5%（主力）</div><div class="conc-bar"><div class="conc-fill" style="width:65%;background:var(--g)"></div></div><div class="conc-val" style="color:var(--g)">最佳效果</div></div>
+            <div class="conc-row"><div class="conc-label">10%+（高浓）</div><div class="conc-bar"><div class="conc-fill" style="width:90%;background:var(--r)"></div></div><div class="conc-val" style="color:var(--r)">易刺激</div></div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">注意事项</div>
+            <div class="ing-warn">⚠️ 部分人对高浓度烟酰胺会有"烟酸冲洗反应"（脸红发热）——不是过敏，是血管扩张反应，通常几分钟后消退。建议从低浓度开始，敏感肌更要谨慎</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">暗沉/肤色不均</span><span class="sm ok">油皮控油</span><span class="sm ok">痘后色沉</span><span class="sm care">敏感肌（低浓度）</span><span class="sm no">屏障受损期暂缓</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="b2">
+    <div class="ch" onclick="tc('b2')"><div class="cn g">成分</div><div class="ct">维C（抗坏血酸）Vitamin C</div><div class="ctg g">必会</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:#FBF8EA">🍋</div>
+          <div class="ing-meta">
+            <div class="ing-name">维生素C / 抗坏血酸<span class="lv lv3">基础必会</span></div>
+            <div class="ing-aka">又叫：L-抗坏血酸 / 维C / 抗坏血酸磷酸酯钠（稳定型）</div>
+            <div class="ing-tags"><span class="itag bright">美白</span><span class="itag anti">抗氧化</span><span class="itag anti">促胶原</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"维C是皮肤<b>最重要的抗氧化成分</b>——一边抑制黑色素酶（让斑不容易生成），一边中和自由基（防止加速老化），同时还能促进胶原蛋白合成。美白+抗老+抗氧化，三合一。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">稳定性问题（最常被问到）</div>
+            <div class="ing-pro"><b>纯维C（L-抗坏血酸）</b>：效果最强，但极不稳定，见光/见空气就氧化变黄，需要避光保存，开封后尽快用完。<br><b>稳定型维C（抗坏血酸磷酸酯钠/镁）</b>：稳定性好，但需要转化才能发挥作用，效果略慢但更持久温和。</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">使用注意</div>
+            <div class="ing-warn">⚠️ 高浓度纯维C（10%+）刺激性较强，敏感肌慎用 ｜ 使用维C后必须做好防晒，否则氧化的维C反而可能促进色沉 ｜ 不建议和A醇同时使用（可分早晚）</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">暗沉色斑</span><span class="sm ok">抗老需求</span><span class="sm ok">日晒损伤</span><span class="sm care">敏感肌（稳定型）</span><span class="sm no">屏障受损慎用</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="b3">
+    <div class="ch" onclick="tc('b3')"><div class="cn g">成分</div><div class="ct">传明酸 Tranexamic Acid + 熊果苷 Arbutin</div><div class="ctg g">进阶</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="ing" style="margin:0">
+          <div class="ing-head"><div class="ing-icon" style="background:#FBF5F8">🌸</div>
+          <div class="ing-meta"><div class="ing-name">传明酸<span class="lv lv2">进阶</span></div><div class="ing-aka">Tranexamic Acid / 氨甲环酸</div><div class="ing-tags"><span class="itag bright">淡斑</span><span class="itag bright">黄褐斑</span></div></div></div>
+          <div class="ing-body">
+            <div class="ing-simple" style="font-size:12px">"传明酸是目前淡<b>黄褐斑最有科学依据</b>的外用成分之一——它能抑制黑色素细胞被紫外线激活，特别适合因内分泌、日晒导致的蝴蝶斑。"</div>
+            <div class="ing-warn" style="font-size:11px">⚠️ 对细小雀斑效果一般，适合边界模糊的黄褐斑</div>
+          </div>
+        </div>
+        <div class="ing" style="margin:0">
+          <div class="ing-head"><div class="ing-icon" style="background:#F5F0FB">🫐</div>
+          <div class="ing-meta"><div class="ing-name">熊果苷<span class="lv lv2">进阶</span></div><div class="ing-aka">Arbutin / α-熊果苷（效果更强）</div><div class="ing-tags"><span class="itag bright">美白</span><span class="itag bright">抑制酪氨酸酶</span></div></div></div>
+          <div class="ing-body">
+            <div class="ing-simple" style="font-size:12px">"熊果苷直接<b>抑制酪氨酸酶活性</b>——阻止黑色素在源头就生成。α-熊果苷（α-Arbutin）效果比β版强5-10倍，但价格也更贵。"</div>
+            <div class="ing-warn" style="font-size:11px">⚠️ 高浓度β-熊果苷有光解风险，不建议白天使用</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 抗衰抗氧 ===== -->
+<div class="tab" id="t3">
+  <div class="stitle">⏳ 抗衰抗氧类成分——胶原、弹性、自由基、糖化</div>
+  <div class="ssub">抗衰≠贵，成分选对才是关键——A醇是最有科学依据的，胜肽是精准修复，抗氧化是基础</div>
+
+  <div class="card" id="aa0">
+    <div class="ch" onclick="tc('aa0')"><div class="cn pu">成分</div><div class="ct">A醇（维A醇）Retinol——抗衰之王</div><div class="ctg pu">重点</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:var(--pup)">👑</div>
+          <div class="ing-meta">
+            <div class="ing-name">A醇 / 维A醇 Retinol<span class="lv lv1">高阶掌握</span></div>
+            <div class="ing-aka">同族：视黄醛（更强）/ 视黄酸（处方级）/ 羟基频哪酮视黄酸酯（最温和）</div>
+            <div class="ing-tags"><span class="itag anti">抗衰</span><span class="itag anti">促胶原</span><span class="itag bright">淡斑加速代谢</span><span class="itag acne">抗痘</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"A醇是目前<b>外用抗衰成分里有最多科学研究支撑</b>的——它能直接刺激真皮层的胶原蛋白合成，同时加速角质代谢（所以也有淡斑效果）。抗衰成分里，没有哪个的临床数据比A醇更扎实。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">浓度梯度（顾客必问）</div>
+            <div class="conc-row"><div class="conc-label">0.025%（入门）</div><div class="conc-bar"><div class="conc-fill" style="width:20%;background:var(--grl)"></div></div><div class="conc-val" style="color:var(--gr)">A醇新手</div></div>
+            <div class="conc-row"><div class="conc-label">0.1%（初级）</div><div class="conc-bar"><div class="conc-fill" style="width:35%;background:var(--grl)"></div></div><div class="conc-val" style="color:var(--gr)">适应后用</div></div>
+            <div class="conc-row"><div class="conc-label">0.3-0.5%（主力）</div><div class="conc-bar"><div class="conc-fill" style="width:60%;background:var(--g)"></div></div><div class="conc-val" style="color:var(--g)">效果明显</div></div>
+            <div class="conc-row"><div class="conc-label">1%+（强效）</div><div class="conc-bar"><div class="conc-fill" style="width:90%;background:var(--r)"></div></div><div class="conc-val" style="color:var(--r)">需耐受</div></div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">使用规则（必须告诉顾客）</div>
+            <div class="ing-warn">⚠️ <b>四个必须：①</b> 从最低浓度开始，每周用1-2次，逐渐增加频率 <b>②</b> 只在晚上用（光照会分解A醇）<b>③</b> 第二天早上防晒必须做好（A醇加速角质代谢，皮肤更脆弱）<b>④</b> 开始用的前2-4周可能会有"A醇反应期"（轻微脱皮/发红），正常现象，不是过敏</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">抗老需求</span><span class="sm ok">痘肌（抗痘效果好）</span><span class="sm ok">暗沉（促代谢）</span><span class="sm no">敏感肌暂缓</span><span class="sm no">孕期禁用</span><span class="sm no">屏障受损期禁用</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="aa1">
+    <div class="ch" onclick="tc('aa1')"><div class="cn pu">成分</div><div class="ct">胜肽类 Peptides——精准抗衰</div><div class="ctg pu">进阶</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:var(--pup)">🔬</div>
+          <div class="ing-meta">
+            <div class="ing-name">胜肽（多肽）Peptides<span class="lv lv2">进阶了解</span></div>
+            <div class="ing-aka">常见：六胜肽（类肉毒）/ 铜胜肽（修复）/ 棕榈酰三肽-1（促胶原）</div>
+            <div class="ing-tags"><span class="itag anti">抗衰</span><span class="itag anti">促胶原</span><span class="itag repair">修复</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"胜肽是<b>氨基酸片段</b>，相当于给皮肤发送'信号'——告诉皮肤细胞'去合成胶原蛋白'或者'放松表情肌'。不同的胜肽发不同的信号，针对性很强。比如六胜肽被称为'类肉毒成分'，因为它能轻微放松表情肌，减少动态纹。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">胜肽类型速查</div>
+            <table class="tbl pu" style="font-size:11px">
+              <tr><th>胜肽名称</th><th>主要作用</th><th>顾客说法</th></tr>
+              <tr><td>六胜肽（Argireline）</td><td>轻微放松表情肌</td><td>"类肉毒，减少动态纹"</td></tr>
+              <tr><td>棕榈酰三肽-1</td><td>刺激胶原/弹性蛋白合成</td><td>"促胶原增生，改善纹路"</td></tr>
+              <tr><td>铜胜肽（GHK-Cu）</td><td>修复+促胶原+抗炎</td><td>"修复+抗老双效，蓝铜胜肽"</td></tr>
+              <tr><td>五胜肽</td><td>促真皮层胶原合成</td><td>"真皮层抗衰"</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="aa2">
+    <div class="ch" onclick="tc('aa2')"><div class="cn pu">成分</div><div class="ct">虾青素 + 辅酶Q10——强效抗氧化</div><div class="ctg pu">进阶</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="ing" style="margin:0">
+          <div class="ing-head"><div class="ing-icon" style="background:#FBF0EA">🦐</div>
+          <div class="ing-meta"><div class="ing-name">虾青素<span class="lv lv2">进阶</span></div><div class="ing-aka">Astaxanthin / 雨生红球藻提取</div><div class="ing-tags"><span class="itag anti">超强抗氧化</span></div></div></div>
+          <div class="ing-body">
+            <div class="ing-simple" style="font-size:12px">"虾青素的<b>抗氧化能力是维C的6000倍</b>——中和自由基效率极高，是目前已知最强的天然抗氧化成分。虾和三文鱼是橙红色，就是因为里面有虾青素。"</div>
+          </div>
+        </div>
+        <div class="ing" style="margin:0">
+          <div class="ing-head"><div class="ing-icon" style="background:#FBF8E8">⚡</div>
+          <div class="ing-meta"><div class="ing-name">辅酶Q10<span class="lv lv2">进阶</span></div><div class="ing-aka">Coenzyme Q10 / CoQ10 / 泛醌</div><div class="ing-tags"><span class="itag anti">抗氧化</span><span class="itag anti">细胞能量</span></div></div></div>
+          <div class="ing-body">
+            <div class="ing-simple" style="font-size:12px">"辅酶Q10是细胞的<b>'发电机'</b>——给皮肤细胞提供能量，同时有强抗氧化作用。25岁后体内Q10含量开始下降，外用补充能改善肤色暗沉、细纹。"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 控油祛痘 ===== -->
+<div class="tab" id="t4">
+  <div class="stitle">🫧 控油祛痘类成分——疏通毛孔、消炎、代谢油脂</div>
+  <div class="ssub">酸类成分最容易用错——脂溶性水溶性分清楚，浓度和停留时间记准确</div>
+
+  <div class="card" id="ac0">
+    <div class="ch" onclick="tc('ac0')"><div class="cn or">对比</div><div class="ct">三大酸类成分对比——AHA / BHA / PHA</div><div class="ctg or">核心</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tip"><b>最多顾客搞混的问题：</b>"果酸和水杨酸有什么区别？"——一句话说清楚：果酸（AHA）是水溶性，作用在表皮；水杨酸（BHA）是脂溶性，能钻进毛孔——油皮/痘肌首选BHA，代谢暗沉首选AHA</div>
+      <table class="tbl r">
+        <tr><th>成分</th><th>类型</th><th>作用层面</th><th>最适合</th><th>顾客说法</th></tr>
+        <tr><td><b>果酸（AHA）</b><br>甘醇酸/乳酸/苦杏仁酸</td><td>水溶性</td><td>表皮角质层</td><td>暗沉、角质堆积、色斑代谢</td><td>"溶解死皮，让皮肤更亮更新"</td></tr>
+        <tr><td><b>水杨酸（BHA）</b><br>Salicylic Acid</td><td>脂溶性</td><td>毛孔内部</td><td>油皮、毛孔堵塞、黑白头、痘痘</td><td>"钻进毛孔，溶解毛孔里的油脂堵塞"</td></tr>
+        <tr><td><b>PHA（葡糖酸）</b></td><td>大分子水溶性</td><td>表皮最浅层</td><td>敏感肌、需要温和去角质</td><td>"最温和的酸，敏感肌也能用"</td></tr>
+        <tr><td><b>杏仁酸（苦杏仁酸）</b></td><td>AHA中脂溶性偏高</td><td>表皮+浅层毛孔</td><td>油皮+暗沉同时有</td><td>"温和版水杨酸，适合首次刷酸"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="ac1">
+    <div class="ch" onclick="tc('ac1')"><div class="cn or">成分</div><div class="ct">水杨酸——油皮痘肌必知</div><div class="ctg or">必会</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ing">
+        <div class="ing-head">
+          <div class="ing-icon" style="background:var(--orp)">🧴</div>
+          <div class="ing-meta">
+            <div class="ing-name">水杨酸 Salicylic Acid（BHA）<span class="lv lv3">基础必会</span></div>
+            <div class="ing-aka">又叫：柳酸 / β羟基酸</div>
+            <div class="ing-tags"><span class="itag oil">控油</span><span class="itag acne">祛痘</span><span class="itag acne">疏通毛孔</span></div>
+          </div>
+        </div>
+        <div class="ing-body">
+          <div class="ing-sec">
+            <div class="ing-sec-title">顾客能听懂的解释</div>
+            <div class="ing-simple">"水杨酸是<b>脂溶性的</b>——它能溶解油脂，所以可以顺着皮脂分泌的通道钻进毛孔，把毛孔里堆积的油脂、黑头、角质栓统统溶解清除。普通水溶性成分根本进不了毛孔，这是水杨酸的核心优势。"</div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">浓度说明</div>
+            <div class="conc-row"><div class="conc-label">0.5-1%（日常）</div><div class="conc-bar"><div class="conc-fill" style="width:30%;background:var(--grl)"></div></div><div class="conc-val" style="color:var(--gr)">日常护理</div></div>
+            <div class="conc-row"><div class="conc-label">2%（主力）</div><div class="conc-bar"><div class="conc-fill" style="width:60%;background:var(--g)"></div></div><div class="conc-val" style="color:var(--g)">效果明显</div></div>
+            <div class="conc-row"><div class="conc-label">20-30%（刷酸）</div><div class="conc-bar"><div class="conc-fill" style="width:95%;background:var(--r)"></div></div><div class="conc-val" style="color:var(--r)">专业操作</div></div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">适合皮肤</div>
+            <div class="skin-match"><span class="sm ok">油皮</span><span class="sm ok">痘肌</span><span class="sm ok">毛孔粗大</span><span class="sm ok">黑白头</span><span class="sm no">干皮慎用</span><span class="sm no">敏感肌慎用</span><span class="sm no">孕期禁高浓度</span></div>
+          </div>
+          <div class="ing-sec">
+            <div class="ing-sec-title">使用禁忌</div>
+            <div class="ing-warn">⚠️ 阿司匹林过敏者禁用（同族成分）｜ 不能和A醇同时使用（刺激叠加）｜ 高浓度使用后防晒必做 ｜ 皮肤屏障受损期间不用</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="ac2">
+    <div class="ch" onclick="tc('ac2')"><div class="cn or">成分</div><div class="ct">壬二酸 + 积雪草——痘痘消炎修复</div><div class="ctg or">进阶</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="ing" style="margin:0">
+          <div class="ing-head"><div class="ing-icon" style="background:#F8F0EC">🌾</div>
+          <div class="ing-meta"><div class="ing-name">壬二酸<span class="lv lv2">进阶</span></div><div class="ing-aka">Azelaic Acid / 杜鹃花酸</div><div class="ing-tags"><span class="itag acne">消炎祛痘</span><span class="itag bright">淡痘印</span></div></div></div>
+          <div class="ing-body">
+            <div class="ing-simple" style="font-size:12px">"壬二酸同时有<b>抗菌消炎+淡化色素</b>两个作用——特别适合既有痘痘又有痘印的皮肤，是少数能同时解决两个问题的成分。"</div>
+            <div class="skin-match" style="margin-top:6px"><span class="sm ok">活跃痘肌</span><span class="sm ok">痘后色沉</span><span class="sm ok">玫瑰痤疮</span></div>
+          </div>
+        </div>
+        <div class="ing" style="margin:0">
+          <div class="ing-head"><div class="ing-icon" style="background:var(--grp)">🌿</div>
+          <div class="ing-meta"><div class="ing-name">马齿苋提取物<span class="lv lv2">进阶</span></div><div class="ing-aka">Portulaca Oleracea</div><div class="ing-tags"><span class="itag sens">舒缓</span><span class="itag acne">消炎</span></div></div></div>
+          <div class="ing-body">
+            <div class="ing-simple" style="font-size:12px">"马齿苋有<b>强效消炎舒缓</b>作用——痘肌发炎期间，搭配积雪草、马齿苋这类舒缓成分，可以加快红痘消退，减少炎症后色沉。"</div>
+            <div class="skin-match" style="margin-top:6px"><span class="sm ok">痘肌</span><span class="sm ok">敏感泛红</span><span class="sm ok">所有肤质</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 搭配指南 ===== -->
+<div class="tab" id="t5">
+  <div class="stitle">🔗 成分搭配指南——哪些可以叠加，哪些绝对不能同时用</div>
+  <div class="ssub">成分搭配错误，轻则无效，重则刺激皮肤——这是顾客最需要你帮她把关的地方</div>
+
+  <div class="card" id="cp0">
+    <div class="ch" onclick="tc('cp0')"><div class="cn r">禁</div><div class="ct">绝对不能同时用的组合</div><div class="ctg r">高危</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="compat">
+        <div class="compat-head bad">❌ A醇 × 酸类（果酸/水杨酸）——刺激叠加，屏障崩溃</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot bad"></div><div class="compat-text">A醇已经在加速角质代谢，酸类再叠加，相当于双重剥脱——皮肤屏障会快速崩溃，出现严重脱皮、灼热、敏感</div></div>
+          <div class="compat-row"><div class="compat-dot bad"></div><div class="compat-text"><b>正确方式：</b>A醇和酸类要分开——如果想两个都用，可以隔天交替，或A醇晚上用，酸类产品换到另外几天</div></div>
+        </div>
+      </div>
+      <div class="compat">
+        <div class="compat-head bad">❌ A醇 × 高浓度维C——pH值冲突，互相失效</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot bad"></div><div class="compat-text">维C（纯维C）在酸性pH下稳定，A醇在中性pH下稳定——两个同时用，pH冲突导致双方效果都大打折扣</div></div>
+          <div class="compat-row"><div class="compat-dot bad"></div><div class="compat-text"><b>正确方式：</b>维C早上用（搭配防晒），A醇晚上用——自然错开，互不影响</div></div>
+        </div>
+      </div>
+      <div class="compat">
+        <div class="compat-head bad">❌ 多种高浓度功效成分叠加——越用越差</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot bad"></div><div class="compat-text">很多顾客"成分焦虑"——买了一堆精华都要用，结果成分互相干扰，皮肤应接不暇，反而状态越来越差</div></div>
+          <div class="compat-row"><div class="compat-dot bad"></div><div class="compat-text"><b>正确方式：</b>每次只专注1-2个核心成分，其他的做基础保湿就好——简单有效胜过复杂无效</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="cp1">
+    <div class="ch" onclick="tc('cp1')"><div class="cn gr">佳</div><div class="ct">最佳搭配黄金组合</div><div class="ctg gr">推荐</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="compat">
+        <div class="compat-head good">✅ 透明质酸 + 神经酰胺——补水锁水最佳拍档</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot good"></div><div class="compat-text">HA补充水分→神经酰胺修复屏障锁住水分——两个成分相辅相成，是保湿修复的黄金组合，几乎适合所有肤质</div></div>
+        </div>
+      </div>
+      <div class="compat">
+        <div class="compat-head good">✅ 维C（早）+ A醇（晚）——美白抗老全天覆盖</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot good"></div><div class="compat-text">早上维C抗氧化+防晒协同，抵抗白天的紫外线自由基；晚上A醇促胶原增生修复——一白一老，两个方向同时进行，是最高效的抗衰+美白方案</div></div>
+        </div>
+      </div>
+      <div class="compat">
+        <div class="compat-head good">✅ 烟酰胺 + 传明酸——淡斑组合拳</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot good"></div><div class="compat-text">传明酸在上游阻断黑色素激活，烟酰胺在中游阻断传递——两步协同，淡斑效果比单用其中一个强很多</div></div>
+        </div>
+      </div>
+      <div class="compat">
+        <div class="compat-head good">✅ 水杨酸（刷酸后）+ 积雪草/B5——痘肌疏通+修复</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot good"></div><div class="compat-text">水杨酸疏通毛孔后，皮肤通道打开，积雪草和B5的修复消炎成分更容易渗入——先疏通再修复，事半功倍</div></div>
+        </div>
+      </div>
+      <div class="compat">
+        <div class="compat-head good">✅ 胜肽 + 神经酰胺——抗老修复双管齐下</div>
+        <div class="compat-body">
+          <div class="compat-row"><div class="compat-dot good"></div><div class="compat-text">胜肽发信号促胶原合成，神经酰胺维护屏障完整——两个方向都温和，搭配使用不刺激，特别适合敏感肌也想抗老的顾客</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="cp2">
+    <div class="ch" onclick="tc('cp2')"><div class="cn g">表</div><div class="ct">早晚护肤成分分配示意表</div><div class="ctg g">实用工具</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc g">
+          <h4>☀️ 早上——防御为主</h4>
+          <ul>
+            <li>抗氧化：维C（对抗白天自由基）</li>
+            <li>保湿：HA + 神经酰胺</li>
+            <li>防晒：SPF30+（最后一步）</li>
+            <li>⚠️ 早上不用A醇/酸类</li>
+          </ul>
+        </div>
+        <div class="mc r">
+          <h4>🌙 晚上——修复为主</h4>
+          <ul>
+            <li>促更新：A醇 或 酸类（二选一）</li>
+            <li>修复：神经酰胺 + B5</li>
+            <li>功效：胜肽 / 传明酸 / 烟酰胺</li>
+            <li>最后：面霜锁住所有成分</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grtip"><b>给顾客的话术：</b>"护肤步骤其实有个逻辑——<b>白天防御（抗氧化+防晒），晚上修复（代谢+胶原）</b>，分工明确才高效。很多人早晚用一样的东西，其实没有发挥到最大作用。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 实战话术 ===== -->
+<div class="tab" id="t6">
+  <div class="stitle">💬 成分知识实战话术——遇到顾客问成分怎么说</div>
+  <div class="ssub">不是背答案，是用成分知识在对话中自然建立专业感，同时连接到顾客的皮肤问题和方案</div>
+
+  <div class="card" id="sc0">
+    <div class="ch" onclick="tc('sc0')"><div class="cn r">场1</div><div class="ct">顾客问："这个产品里面有什么成分？"</div><div class="ctg r">高频</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="chat-box">
+        <div class="chat-head">✅ 正确应对方式——成分+功能+和顾客情况连接</div>
+        <div class="chat-body">
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"这个精华里面有什么成分，有没有酒精？"</div></div>
+          <div class="cr"><div class="av c">顾</div><div class="bub c">"这个产品主要是神经酰胺和B5——<b>神经酰胺是修复皮肤屏障的核心成分，B5是消炎+促进愈合的，</b>两个搭配是修复敏感受损皮肤的黄金组合。您刚才说您皮肤用什么都有点刺激，正是因为屏障受损了，这两个成分就是专门修这个的。<b>没有酒精、没有香精，成分很干净</b>，敏感肌放心用。"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"哦那这两个成分的区别是什么？"</div></div>
+          <div class="cr"><div class="av c">顾</div><div class="bub c">"简单说——<b>神经酰胺是皮肤屏障的'砖块'，B5是加速细胞修复的'燃料'</b>。砖块填补了屏障的缺口，燃料让修复速度更快。两个同时用，比单用一个效果好很多，就是1+1>2的效果。"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="sc1">
+    <div class="ch" onclick="tc('sc1')"><div class="cn r">场2</div><div class="ct">顾客说："我用了烟酰胺，但感觉脸红了"</div><div class="ctg r">高频</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="chat-box">
+        <div class="chat-head">✅ 专业解释——不是过敏，是烟酸冲洗反应</div>
+        <div class="chat-body">
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"我买了含烟酰胺的精华，用了之后脸有点红，是不是过敏了？"</div></div>
+          <div class="cr"><div class="av c">顾</div><div class="bub c">"不一定是过敏——烟酰胺有一种叫<b>'烟酸冲洗反应'</b>的现象，是烟酰胺代谢后产生的微量烟酸扩张毛细血管，会让皮肤短暂发红发热，通常<b>10-20分钟内自行消退</b>，之后皮肤没有其他异常的话，就不是过敏，是正常反应。您脸红了之后有没有其他症状——比如痒、起疹子、或者第二天还没好？"</div></div>
+          <div class="cr rt"><div class="av k">客</div><div class="bub k">"就是红，没有其他的，过了一会就好了。"</div></div>
+          <div class="cr"><div class="av c">顾</div><div class="bub c">"那就是烟酸冲洗反应，不是过敏。<b>降低浓度（从5%降到2%）、从小面积开始用，反应会慢慢减轻直到消失</b>。如果这个反应让您不舒服，我们也有传明酸方向的方案，美白效果一样好但没有这个反应——您更想哪个方向？"</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="sc2">
+    <div class="ch" onclick="tc('sc2')"><div class="cn r">场3</div><div class="ct">顾客问："A醇和胶原蛋白哪个效果更好？"</div><div class="ctg r">高频</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="sline">"<b>A醇</b>是目前科学研究最多、最有证据支撑的外用抗衰成分——它刺激皮肤自己合成胶原蛋白，是从内部'生产'。<b>口服或外用胶原蛋白</b>的问题是，分子量太大很难被皮肤或肠道直接吸收——涂上去不一定进得去，吃进去大部分会被消化成氨基酸，不一定到达皮肤。所以同等价格下，A醇的效率更高。不过A醇有刺激性、需要适应期，<b>如果皮肤基础好、耐受性强，A醇是首选；如果皮肤敏感，胜肽类是更温和的抗老方向</b>。您的皮肤现在属于哪种状态，我帮您判断一下……"</div>
+    </div>
+  </div>
+
+  <div class="card" id="sc3">
+    <div class="ch" onclick="tc('sc3')"><div class="cn r">场4</div><div class="ct">顾客问："我在用A醇，可以同时用你们的美白精华吗？"</div><div class="ctg r">专业判断</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="sline">"要看美白精华里的成分——如果是<b>烟酰胺或者传明酸</b>，可以和A醇搭配，但要<b>分早晚用</b>（美白白天，A醇晚上）。如果是<b>高浓度纯维C</b>，不建议同一时间用，因为pH值不同会互相影响效果，还是要分开。如果是<b>果酸或水杨酸类的美白产品</b>，A醇在用的期间最好停用酸类，否则刺激叠加皮肤会受不了。您现在用的美白精华主要是哪个成分——我帮您看一下成分表……"</div>
+    </div>
+  </div>
+
+  <div class="card" id="sc4">
+    <div class="ch" onclick="tc('sc4')"><div class="cn r">场5</div><div class="ct">顾客说："网上说XX成分不好，你们的产品有这个"</div><div class="ctg r">异议处理</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="sline">"网上的说法有时候是片面的——很多成分单独看'有风险'，但在正确浓度和配方下是安全有效的。比如<b>酒精，被很多人说'伤皮肤'</b>——高浓度纯酒精确实刺激，但低浓度的乙醇在配方里是帮助渗透的，敏感肌才需要避开。我帮您看一下您看到的是哪种说法，以及这个产品里的实际含量——成分表里排列越靠前，含量越高，排在后几位的量其实很少。"</div>
+      <div class="grtip"><b>核心原则：</b>不否定顾客的信息来源，而是帮她"正确解读"——顾客感受到的是你在帮她判断，而不是在维护产品</div>
+    </div>
+  </div>
+
+  <div class="card" id="sc5">
+    <div class="ch" onclick="tc('sc5')"><div class="cn gr">速</div><div class="ct">成分速查口袋卡——接客前5分钟复习</div><div class="ctg gr">工具</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <table class="tbl gr">
+        <tr><th>成分</th><th>一句话记忆</th><th>适合</th><th>禁忌</th></tr>
+        <tr><td><b>透明质酸HA</b></td><td>锁水砖，大分子+小分子双效</td><td>所有肤质</td><td>干燥环境单用反更干，后面加封闭剂</td></tr>
+        <tr><td><b>神经酰胺</b></td><td>屏障砖块，修复之王</td><td>敏感、受损、术后</td><td>几乎无禁忌</td></tr>
+        <tr><td><b>B5泛醇</b></td><td>补水+修复+消炎，三合一</td><td>所有肤质，孕期可用</td><td>几乎无禁忌</td></tr>
+        <tr><td><b>烟酰胺</b></td><td>阻断黑色素传递，4-5%最佳</td><td>暗沉、油皮</td><td>部分人有烟酸冲洗反应（非过敏）</td></tr>
+        <tr><td><b>维C</b></td><td>抗氧化+美白+促胶原</td><td>暗沉、抗老</td><td>不稳定，不和A醇同时用，必须防晒</td></tr>
+        <tr><td><b>传明酸</b></td><td>黄褐斑特效，阻断激活</td><td>黄褐斑、内分泌色斑</td><td>细小雀斑效果一般</td></tr>
+        <tr><td><b>A醇</b></td><td>抗衰之王，促胶原加速代谢</td><td>抗老、痘肌</td><td>孕期禁用，不和酸同用，防晒必做</td></tr>
+        <tr><td><b>水杨酸BHA</b></td><td>脂溶性，钻进毛孔清堵塞</td><td>油皮、痘肌、黑头</td><td>阿司匹林过敏禁用，孕期高浓度禁</td></tr>
+        <tr><td><b>果酸AHA</b></td><td>水溶性，表皮去角质提亮</td><td>暗沉、角质堆积</td><td>不和A醇同用，防晒必做</td></tr>
+        <tr><td><b>积雪草/CICA</b></td><td>消炎+修复+轻微促胶原</td><td>敏感、痘后、术后</td><td>几乎无禁忌</td></tr>
+        <tr><td><b>胜肽</b></td><td>给皮肤发信号，精准促胶原</td><td>抗老、敏感肌也可用</td><td>几乎无禁忌，与大多成分相容</td></tr>
+        <tr><td><b>虾青素</b></td><td>超强抗氧化，维C的6000倍</td><td>抗老、抗氧化需求</td><td>几乎无禁忌</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function st(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+function tc(id){
+  var c=document.getElementById(id);
+  var b=c.querySelector('.cb');
+  var a=c.querySelector('.arr');
+  if(!b)return;
+  if(b.style.display==='none'||!b.style.display){
+    b.style.display='block';
+    if(a)a.style.transform='rotate(180deg)';
+  }else{
+    b.style.display='none';
+    if(a)a.style.transform='';
+  }
+}
+document.querySelectorAll('.cb').forEach(b=>{b.style.display='none'});
+document.querySelectorAll('.tab').forEach(tab=>{
+  var f=tab.querySelector('.cb');
+  if(f){f.style.display='block';var a=f.parentElement.querySelector('.arr');if(a)a.style.transform='rotate(180deg)';}
+});
+</script>

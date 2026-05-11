@@ -1,0 +1,953 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --r:#8B3A5A;--rl:#C97B9E;--rp:#F7EEF3;--rd:#5C2040;
+  --g:#C9A86C;--gp:#FEFBF4;--gl:#E8D5B0;
+  --gr:#2D6A4F;--grp:#EFF7F2;--grl:#6AAE8B;
+  --bl:#1A5C8B;--blp:#EDF4FB;
+  --pu:#5A3A8B;--pup:#F0EDF9;
+  --ink:#2D1A24;--ink2:#5A3D4A;--ink3:#9C7A87;
+  --cr:#FAF8F5;--wh:#FFFFFF;--bd:rgba(139,58,90,0.13);
+}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--cr);color:var(--ink);line-height:1.7;font-size:14px}
+.w{max-width:920px;margin:0 auto;padding-bottom:60px}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#2A0F20,#5C2040 45%,#8B3A5A 80%,#7A3060);padding:32px 26px 28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;right:-20px;width:200px;height:200px;border-radius:50%;background:rgba(201,168,108,0.1)}
+.hero::after{content:'';position:absolute;bottom:-30px;left:40%;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.04)}
+.htag{display:inline-block;background:rgba(201,168,108,0.18);color:var(--gl);font-size:11px;letter-spacing:2px;padding:3px 12px;border-radius:20px;border:1px solid rgba(201,168,108,0.3);margin-bottom:10px}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:22px;color:#fff;margin-bottom:6px;line-height:1.4}
+.hero p{font-size:12px;color:rgba(255,255,255,0.68);max-width:500px}
+.hrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.hchip{font-size:11px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.82);border:1px solid rgba(255,255,255,0.18);padding:4px 12px;border-radius:20px}
+
+/* Nav */
+.nav{display:flex;overflow-x:auto;background:var(--wh);border-bottom:1px solid var(--bd);padding:0 12px;position:sticky;top:0;z-index:100;scrollbar-width:none;gap:0}
+.nav::-webkit-scrollbar{display:none}
+.nb{flex-shrink:0;font-size:11px;padding:12px 12px 10px;border:none;background:none;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap;font-family:'Noto Sans SC',sans-serif;transition:all .2s;font-weight:400}
+.nb.on{color:var(--r);border-bottom-color:var(--r);font-weight:500}
+
+/* Tab */
+.tab{display:none;padding:20px 16px 0}
+.tab.on{display:block}
+.stitle{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--rd);margin-bottom:4px}
+.ssub{font-size:12px;color:var(--ink3);padding-bottom:13px;margin-bottom:18px;border-bottom:1px solid var(--bd)}
+
+/* Card */
+.card{background:var(--wh);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.ch{padding:12px 16px;display:flex;align-items:center;gap:9px;cursor:pointer}
+.ch:hover{background:var(--rp)}
+.cn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:#fff}
+.cn.r{background:var(--r)}.cn.g{background:var(--g);color:var(--ink)}.cn.gr{background:var(--gr)}.cn.bl{background:var(--bl)}.cn.pu{background:var(--pu)}
+.ct{font-size:13px;font-weight:500;color:var(--ink);flex:1}
+.ctag{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid var(--bd);white-space:nowrap}
+.ctag.r{background:var(--rp);color:var(--r);border-color:rgba(139,58,90,0.2)}
+.ctag.g{background:var(--gp);color:#8B6820;border-color:rgba(201,168,108,0.3)}
+.ctag.gr{background:var(--grp);color:var(--gr);border-color:rgba(45,106,79,0.2)}
+.ctag.bl{background:var(--blp);color:var(--bl);border-color:rgba(26,92,139,0.2)}
+.ctag.pu{background:var(--pup);color:var(--pu);border-color:rgba(90,58,139,0.2)}
+.arr{font-size:10px;color:var(--ink3);transition:transform .2s;margin-left:4px}
+.cb{display:none;padding:0 16px 16px;border-top:1px solid var(--bd)}
+
+/* Drill card – daily exercise */
+.drill{border:1px solid var(--bd);border-radius:10px;margin:10px 0;overflow:hidden}
+.dh{display:flex;align-items:center;gap:8px;padding:9px 13px;background:var(--rp)}
+.dnum{background:var(--r);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.dtitle{font-size:12px;font-weight:500;color:var(--rd);flex:1}
+.dtime{font-size:10px;color:var(--ink3);background:rgba(255,255,255,0.6);padding:2px 7px;border-radius:10px}
+.db{padding:11px 13px;background:var(--wh)}
+.db p{font-size:12px;color:var(--ink2);margin-bottom:6px;line-height:1.7}
+.db .say{font-size:13px;color:var(--ink);font-style:italic;background:#F9F6F8;border-radius:8px;padding:9px 12px;border-left:3px solid var(--rl);margin:6px 0;line-height:1.8}
+.db .say b{color:var(--rd);font-style:normal}
+.db .note{font-size:11px;color:var(--ink3);margin-top:5px;line-height:1.6}
+.db .note b{color:var(--r)}
+
+/* Tips */
+.tip{background:var(--rp);border-left:3px solid var(--rl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.tip b{color:var(--rd)}
+.gtip{background:var(--gp);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.gtip b{color:#8B6820}
+.grtip{background:var(--grp);border-left:3px solid var(--grl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.grtip b{color:var(--gr)}
+.bltip{background:var(--blp);border-left:3px solid var(--bl);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+.putip{background:var(--pup);border-left:3px solid var(--pu);border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12px;color:var(--ink2)}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin:9px 0}
+.tbl th{background:var(--rp);color:var(--rd);font-weight:500;padding:8px 11px;text-align:left;border-bottom:1.5px solid var(--bd)}
+.tbl td{padding:8px 11px;border-bottom:1px solid var(--bd);color:var(--ink2);vertical-align:top;line-height:1.7}
+.tbl tr:last-child td{border-bottom:none}
+.tbl.g th{background:var(--gp);color:#8B6820}
+.tbl.gr th{background:var(--grp);color:var(--gr)}
+.tbl.bl th{background:var(--blp);color:var(--bl)}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:9px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin:9px 0}
+.mc{border-radius:10px;padding:11px 13px;border:1px solid var(--bd)}
+.mc.r{background:var(--rp)}.mc.g{background:var(--gp);border-color:rgba(201,168,108,0.22)}
+.mc.gr{background:var(--grp);border-color:rgba(45,106,79,0.15)}
+.mc.bl{background:var(--blp);border-color:rgba(26,92,139,0.15)}
+.mc.pu{background:var(--pup);border-color:rgba(90,58,139,0.15)}
+.mc h4{font-size:12px;font-weight:500;margin-bottom:5px}
+.mc.r h4{color:var(--rd)}.mc.g h4{color:#7A5A10}.mc.gr h4{color:var(--gr)}.mc.bl h4{color:var(--bl)}.mc.pu h4{color:var(--pu)}
+.mc p,.mc ul{font-size:12px;color:var(--ink2);line-height:1.7}
+.mc ul{padding-left:15px}
+
+/* Flow */
+.flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:9px 0}
+.fi{font-size:11px;padding:5px 11px;border-radius:20px;color:#fff}
+.fi.r{background:var(--r)}.fi.g{background:var(--g);color:var(--ink)}.fi.gr{background:var(--gr)}.fi.bl{background:var(--bl)}.fi.pu{background:var(--pu)}
+.fa{color:var(--rl);font-size:11px}
+
+/* Memory card */
+.memcard{background:linear-gradient(135deg,var(--rd),var(--r));border-radius:12px;padding:16px 18px;margin:9px 0;color:#fff}
+.memcard h4{font-size:13px;font-weight:500;margin-bottom:10px;opacity:0.9}
+.memword{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:5px 12px;font-size:13px;font-weight:700;margin:3px;letter-spacing:2px}
+.memword .sub{font-size:10px;display:block;font-weight:400;opacity:0.8;letter-spacing:0}
+
+/* Story box */
+.story{background:var(--wh);border:1px solid var(--bd);border-radius:10px;margin:9px 0;overflow:hidden}
+.story-head{background:var(--rd);color:#fff;padding:8px 13px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.story-body{padding:11px 13px}
+.chat-row{display:flex;gap:8px;margin-bottom:10px;align-items:flex-start}
+.chat-row.right{flex-direction:row-reverse}
+.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.av-c{background:var(--r);color:#fff}
+.av-k{background:var(--gr);color:#fff}
+.av-g{background:var(--g);color:var(--ink)}
+.bubble{font-size:12px;line-height:1.7;padding:9px 12px;border-radius:10px;max-width:85%}
+.bubble.c{background:var(--rp);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bubble.k{background:var(--grp);color:var(--ink2);border-radius:10px 2px 10px 10px}
+.bubble.g{background:var(--gp);color:var(--ink2);border-radius:2px 10px 10px 10px}
+.bubble b{color:var(--rd);font-weight:500}
+.chat-note{font-size:10px;color:var(--ink3);text-align:center;padding:4px;font-style:italic}
+
+/* Mistake pair */
+.mp{border:1px solid var(--bd);border-radius:10px;margin:8px 0;overflow:hidden}
+.mp-bad{background:#FDF0F0;padding:9px 13px;border-bottom:1px solid var(--bd)}
+.mp-good{background:var(--grp);padding:9px 13px}
+.mp-label{font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:4px}
+.mp-bad .mp-label{color:#8B2020}
+.mp-good .mp-label{color:var(--gr)}
+.mp-text{font-size:12px;color:var(--ink2);line-height:1.7;font-style:italic}
+
+/* Weekly plan */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:9px 0}
+.wday{border-radius:8px;padding:9px 6px;text-align:center;border:1px solid var(--bd)}
+.wday.r{background:var(--rp);border-color:rgba(139,58,90,0.25)}
+.wday.g{background:var(--gp);border-color:rgba(201,168,108,0.25)}
+.wday.gr{background:var(--grp);border-color:rgba(45,106,79,0.2)}
+.wday.bl{background:var(--blp);border-color:rgba(26,92,139,0.2)}
+.wdl{font-size:10px;font-weight:500;margin-bottom:5px}
+.wday.r .wdl{color:var(--r)}.wday.g .wdl{color:#8B6820}.wday.gr .wdl{color:var(--gr)}.wday.bl .wdl{color:var(--bl)}
+.wdc{font-size:10px;color:var(--ink2);line-height:1.5}
+
+/* Score */
+.score-box{background:var(--rd);border-radius:12px;padding:14px 16px;margin:9px 0;color:#fff}
+.score-title{font-size:12px;opacity:0.8;margin-bottom:10px}
+.score-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.score-lbl{font-size:11px;opacity:0.85;width:100px;flex-shrink:0}
+.score-bar{flex:1;background:rgba(255,255,255,0.15);border-radius:6px;height:5px}
+.score-fill{height:5px;border-radius:6px;background:var(--gl)}
+.score-num{font-size:11px;color:var(--gl);width:28px;text-align:right}
+
+/* Checklist */
+.ck-item{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--bd)}
+.ck-item:last-child{border-bottom:none}
+.ck-box{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--rl);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--r)}
+.ck-text{font-size:12px;color:var(--ink2);line-height:1.6}
+
+/* Game */
+.game-card{border:1.5px solid var(--bd);border-radius:12px;margin:9px 0;overflow:hidden}
+.game-head{background:linear-gradient(90deg,var(--pu),#7A5ABB);padding:10px 14px;color:#fff;font-size:12px;font-weight:500;display:flex;align-items:center;gap:8px}
+.game-body{padding:12px 14px;background:var(--wh)}
+
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--rp);color:var(--rd);border:1px solid var(--bd)}
+.tag.g{background:var(--gp);color:#8B6820}.tag.gr{background:var(--grp);color:var(--gr)}.tag.bl{background:var(--blp);color:var(--bl)}
+
+h4{font-size:13px;font-weight:500;color:var(--ink);margin:12px 0 7px}
+p{font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:5px}
+ul,ol{padding-left:16px;font-size:12px;color:var(--ink2);line-height:1.9}
+.sep{height:1px;background:var(--bd);margin:12px 0}
+@media(max-width:620px){.g2,.g3{grid-template-columns:1fr}.week{grid-template-columns:repeat(4,1fr)}}
+</style>
+
+<div class="w">
+<div class="hero">
+  <div class="htag">深度实战版 · 不只是框架</div>
+  <h1>顾问问诊技能——全套实战训练内容</h1>
+  <p>每日打卡练习 · 记忆技巧 · 完整对话脚本 · 错误对比 · 闯关游戏 · 带教方法</p>
+  <div class="hrow">
+    <div class="hchip">📅 每日10分钟打卡</div>
+    <div class="hchip">🧠 记忆法</div>
+    <div class="hchip">💬 完整对话</div>
+    <div class="hchip">❌→✅ 错误对比</div>
+    <div class="hchip">🎮 闯关游戏</div>
+    <div class="hchip">👥 带教方法</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nb on" onclick="st('t0',this)">📅 每日打卡</button>
+  <button class="nb" onclick="st('t1',this)">🧠 记忆法</button>
+  <button class="nb" onclick="st('t2',this)">💬 完整对话脚本</button>
+  <button class="nb" onclick="st('t3',this)">❌→✅ 错误对比</button>
+  <button class="nb" onclick="st('t4',this)">🎮 闯关游戏</button>
+  <button class="nb" onclick="st('t5',this)">📞 追问话术库</button>
+  <button class="nb" onclick="st('t6',this)">👥 带教方法</button>
+  <button class="nb" onclick="st('t7',this)">📋 自检清单</button>
+</div>
+
+<!-- ===== 每日打卡 ===== -->
+<div class="tab on" id="t0">
+  <div class="stitle">每日10分钟打卡训练计划</div>
+  <div class="ssub">技能靠重复建立，不靠一次培训。每天10分钟，4周形成肌肉记忆</div>
+
+  <div class="week">
+    <div class="wday r"><div class="wdl">周一</div><div class="wdc">开场三句<br>大声说出</div></div>
+    <div class="wday g"><div class="wdl">周二</div><div class="wdc">追问话术<br>抽卡练习</div></div>
+    <div class="wday r"><div class="wdl">周三</div><div class="wdc">过渡语<br>五句背诵</div></div>
+    <div class="wday g"><div class="wdl">周四</div><div class="wdc">错误回放<br>自我纠错</div></div>
+    <div class="wday gr"><div class="wdl">周五</div><div class="wdc">两人对练<br>计时问诊</div></div>
+    <div class="wday bl"><div class="wdl">周六</div><div class="wdc">真实接客<br>录音复盘</div></div>
+    <div class="wday bl"><div class="wdl">周日</div><div class="wdc">写接客日志<br>总结3条</div></div>
+  </div>
+
+  <div class="card" id="d0">
+    <div class="ch" onclick="tc('d0')"><div class="cn r">一</div><div class="ct">周一训练——开场三句，大声说出来</div><div class="ctag r">每天5分钟</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tip"><b>为什么要大声说：</b>默读只是认识文字，大声说才会暴露语气问题——说出来之后你会发现，同样的话，读起来顺但说出来别扭，这就是需要练习的地方</div>
+      <h4>第一周训练内容（背这6句，每句说3遍）</h4>
+      <div class="drill">
+        <div class="dh"><div class="dnum">句1</div><div class="dtitle">Q1标准开场</div><div class="dtime">说3遍</div></div>
+        <div class="db">
+          <div class="say">"今天来，最让您不舒服或最在意的皮肤问题是什么？随便说，没有标准答案。"</div>
+          <div class="note">✦ 练习重点：<b>"随便说，没有标准答案"</b>这句是关键，说这句的时候要微笑，语气轻松，不是走流程</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">句2</div><div class="dtitle">Q2时间线追问</div><div class="dtime">说3遍</div></div>
+        <div class="db">
+          <div class="say">"这个情况大概是从什么时候开始明显的？是突然出现，还是慢慢越来越明显？"</div>
+          <div class="note">✦ 练习重点：两个选项之间停顿一下，给顾客选择的空间，不要连着说变成一句话</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">句3</div><div class="dtitle">Q7饮食敏感问题</div><div class="dtime">说5遍（最难）</div></div>
+        <div class="db">
+          <div class="say">"平时饮食上——喜欢吃辣吗？甜食呢？<b>顺便问一下</b>，最近排便情况还好吗？是比较规律，还是有时候便秘？"</div>
+          <div class="note">✦ 练习重点：<b>"顺便问一下"</b>这四个字要说得轻描淡写，像聊天时随口带出来的。说完后保持微笑不要回避眼神，这是让顾客觉得"这很正常"的关键</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">句4</div><div class="dtitle">Q12期望锁定</div><div class="dtime">说3遍</div></div>
+        <div class="db">
+          <div class="say">"说了这么多——如果让您选一个最希望改善的地方，三个月后照镜子，最希望看到什么变化？"</div>
+          <div class="note">✦ 练习重点：<b>"说了这么多"</b>这几个字要有感谢顾客分享的语气，让顾客感受到她说的都被听进去了</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">句5</div><div class="dtitle">问诊结束过渡语</div><div class="dtime">说3遍</div></div>
+        <div class="db">
+          <div class="say">"好，我基本了解了。您今天告诉我的这些非常有价值——等会儿检测图出来，我会重点针对您说的几个问题给您分析，我们来看看皮肤里面到底发生了什么。"</div>
+          <div class="note">✦ 练习重点：语速要稍微慢一点，像在给顾客一个"总结陈词"，让她感受到问诊是有价值的，不是走过场</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">句6</div><div class="dtitle">沉默型顾客激活句</div><div class="dtime">说3遍</div></div>
+        <div class="db">
+          <div class="say">"比如——您有没有感觉，某些时候皮肤特别容易出状况？比如换季的时候、熬夜之后、或者生理期前后？"</div>
+          <div class="note">✦ 练习重点：用"比如"开头给顾客三个选项，降低她回答的难度；语气是在帮她回忆，不是质问她</div>
+        </div>
+      </div>
+      <div class="gtip"><b>第二周进阶：</b>把以上6句连成一段流畅的话说出来，中间加自己的过渡语衔接，限时2分钟内说完，录音听回放找"背书感"</div>
+    </div>
+  </div>
+
+  <div class="card" id="d1">
+    <div class="ch" onclick="tc('d1')"><div class="cn g">二</div><div class="ct">周二训练——追问话术抽卡练习</div><div class="ctag g">抽卡游戏</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="gtip"><b>练习方式：</b>把以下12张卡片截图打印，折叠后放入一个盒子，每天随机抽3张，对着镜子说出追问话术，不看卡片背面答案</div>
+      <div class="tbl g">
+        <table class="tbl g">
+          <tr><th>卡片正面（顾客说的话）</th><th>卡片背面（顾问追问）</th></tr>
+          <tr><td>"我最近皮肤好干。"</td><td>"是一直干还是最近才明显？洗完脸多久会觉得紧绷？早晚都用保湿产品吗？"</td></tr>
+          <tr><td>"我脸上老是长痘。"</td><td>"是下巴、额头、两颊哪里多一些？是一直都有还是某段时间特别多？生理期前后会变严重吗？"</td></tr>
+          <tr><td>"我有色斑，越来越多。"</td><td>"大概从什么时候开始的？是慢慢长出来还是突然多了？有没有做过激光或美白类的处理？"</td></tr>
+          <tr><td>"皮肤感觉很粗糙。"</td><td>"是摸起来粗糙，还是看起来也不光滑？有没有去过角质的习惯？多久去一次？"</td></tr>
+          <tr><td>"我毛孔很大。"</td><td>"主要是鼻子这里，还是整个脸都有？出油多吗？有没有用过收缩毛孔的产品，效果怎么样？"</td></tr>
+          <tr><td>"皮肤有点敏感，经常发红。"</td><td>"是一直都容易发红还是某些情况下？比如换季、使用新产品、或者吃了什么之后？"</td></tr>
+          <tr><td>"脸色暗黄，没有光泽。"</td><td>"平时睡眠怎么样？水喝得多吗？有没有感觉最近代谢不太好，比如容易疲劳？"</td></tr>
+          <tr><td>"眼角有细纹了。"</td><td>"是最近才注意到，还是有一段时间了？有没有特别注意过眼霜或者眼周护理？"</td></tr>
+          <tr><td>"感觉护肤品吸收不好。"</td><td>"是涂上去不进去那种，还是涂进去了但感觉没什么效果？用的是什么顺序？有没有用过精华类的？"</td></tr>
+          <tr><td>"我皮肤很油，尤其T区。"</td><td>"一天下来大概几点会开始明显出油？用什么洁面产品？有没有控油类的护肤步骤？"</td></tr>
+          <tr><td>"脸上有好多痘印，消不掉。"</td><td>"是红色的还是暗色的痘印？这些痘大概多久前长的？现在还在长新痘吗？"</td></tr>
+          <tr><td>"皮肤最近状态很差。"</td><td>"差是哪方面——出油、干燥、还是出痘？最近生活上有什么变化吗？比如换了环境、压力变大、或者睡眠不太好？"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="d2">
+    <div class="ch" onclick="tc('d2')"><div class="cn r">三</div><div class="ct">周三训练——过渡语5句背诵</div><div class="ctag r">连贯感训练</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tip"><b>训练方法：</b>每句先理解使用场景，再背诵，最后造个即兴句子——不是死背原句，是背住结构之后自己造句</div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">过渡1</div><div class="dtitle">共情承接型</div></div>
+        <div class="db">
+          <div class="say">"嗯，<b>[复述顾客的关键词]</b>——这个信息很重要，我等会儿分析的时候会重点说。"</div>
+          <div class="note">场景：顾客说完任何一个主诉之后 ｜ 练习：填入5个不同的顾客关键词造5个句子</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">过渡2</div><div class="dtitle">解释铺垫型</div></div>
+        <div class="db">
+          <div class="say">"我再问您一个，这个问题听起来和皮肤好像没什么直接关系——但其实影响挺大的。"</div>
+          <div class="note">场景：Q7饮食/Q9压力/Q6遗传 等需要铺垫的问题之前</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">过渡3</div><div class="dtitle">关联引导型</div></div>
+        <div class="db">
+          <div class="say">"您刚说的<b>[细节]</b>，和您的<b>[皮肤问题]</b>其实是有关联的——等会儿我们检测图里可以看到。"</div>
+          <div class="note">场景：问诊中发现生活信息和皮肤症状有关联时，立刻说这句，让顾客建立"原来有关系"的认知</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">过渡4</div><div class="dtitle">选择辅助型</div></div>
+        <div class="db">
+          <div class="say">"您觉得更像是<b>[A情况]</b>，还是<b>[B情况]</b>？"</div>
+          <div class="note">场景：顾客不知道如何回答、或者回答"不知道""还好"时 ｜ 把开放问题变成二选一，降低顾客回答压力</div>
+        </div>
+      </div>
+      <div class="drill">
+        <div class="dh"><div class="dnum">过渡5</div><div class="dtitle">总结收束型</div></div>
+        <div class="db">
+          <div class="say">"好，我基本了解了——您主要是<b>[总结主诉]</b>，我们等会儿重点看<b>[对应方向]</b>，来，我们去做检测。"</div>
+          <div class="note">场景：12问诊结束，过渡到检测分析环节 ｜ 这句话要说得有力度，让顾客感受到问诊有了结果</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="d3">
+    <div class="ch" onclick="tc('d3')"><div class="cn gr">日志</div><div class="ct">周日——接客日志模板（每次接客必填）</div><div class="ctag gr">复盘工具</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="grtip"><b>为什么要写日志：</b>技能提升90%来自"复盘"而不是"再做一遍"。不写日志的人，同样的错误会犯50次；写日志的人，错误会迭代进化</div>
+      <div class="tbl gr">
+        <table class="tbl gr">
+          <tr><th>日志栏目</th><th>填写内容</th><th>示例</th></tr>
+          <tr><td>顾客类型</td><td>话多/沉默/防御/配合</td><td>话多型，容易跑题</td></tr>
+          <tr><td>破冰方式</td><td>用了哪种破冰，效果如何</td><td>赞美发型，顾客明显放松了</td></tr>
+          <tr><td>问诊重点问题</td><td>今天问了哪几个，顺序是否合理</td><td>Q1Q2Q4Q7Q8Q12，顺序ok</td></tr>
+          <tr><td>追问是否到位</td><td>哪个问题追问了，哪个没有</td><td>Q4护肤习惯问太快，没追问洁面方式</td></tr>
+          <tr><td>过渡语使用</td><td>用了哪种过渡语，是否自然</td><td>关联引导型说了2次，感觉还有点背书</td></tr>
+          <tr><td>今天做得好的1件事</td><td>具体说明</td><td>Q7便秘问题说得很自然，顾客没尴尬</td></tr>
+          <tr><td>今天需要改的1件事</td><td>具体说明+下次怎么改</td><td>问诊时间太长（16分钟），下次Q5Q6可以合并问</td></tr>
+          <tr><td>成交结果</td><td>成交/未成交，关键原因</td><td>成交，因为Q12锁定了顾客最在意的抗衰方向</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 记忆法 ===== -->
+<div class="tab" id="t1">
+  <div class="stitle">快速记忆法——让12个问题永远不忘</div>
+  <div class="ssub">用故事、口诀、联想记忆代替死背——背进脑子，接客时才能自然用出来</div>
+
+  <div class="card" id="m0">
+    <div class="ch" onclick="tc('m0')"><div class="cn r">诀</div><div class="ct">12问口诀记忆法——"一个人的一天"</div><div class="ctag r">最快记忆</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tip"><b>记忆原理：</b>把12个问题编成一个人的日常故事，顺着时间线走，自然就记住了顺序和内容</div>
+      <div class="memcard">
+        <h4>📖 口诀故事：一个顾客的"皮肤一生"</h4>
+        <div style="font-size:13px;line-height:2;color:rgba(255,255,255,0.9)">
+          <b style="color:var(--gl)">【Q1 主诉】</b> 她最烦恼什么？先听她说<br>
+          <b style="color:var(--gl)">【Q2 时间】</b> 这个问题，什么时候开始的？<br>
+          <b style="color:var(--gl)">【Q3 触发】</b> 那之前，生活有没有发生什么？<br>
+          <b style="color:var(--gl)">【Q4 习惯】</b> 她每天怎么护肤？用什么？<br>
+          <b style="color:var(--gl)">【Q5 规律】</b> 问题是一直有，还是周期性来？<br>
+          <b style="color:var(--gl)">【Q6 基因】</b> 妈妈/家里人皮肤怎么样？<br>
+          <b style="color:var(--gl)">【Q7 饮食】</b> 她吃什么？排不排得出来？<br>
+          <b style="color:var(--gl)">【Q8 睡眠】</b> 她几点睡？睡得好吗？<br>
+          <b style="color:var(--gl)">【Q9 压力】</b> 最近压力大不大？烦心事多吗？<br>
+          <b style="color:var(--gl)">【Q10 防晒】</b> 出门涂防晒了吗？开车有没有？<br>
+          <b style="color:var(--gl)">【Q11 医美】</b> 做过什么医美？过敏什么？<br>
+          <b style="color:var(--gl)">【Q12 期望】</b> 她最希望改善什么？三个月后想看到什么？
+        </div>
+      </div>
+      <div class="gtip"><b>记忆口令（精简版，可贴在镜子上）：</b><br>主诉→时间→触发→习惯→规律→基因→饮食→睡眠→压力→防晒→医美→期望</div>
+    </div>
+  </div>
+
+  <div class="card" id="m1">
+    <div class="ch" onclick="tc('m1')"><div class="cn g">身</div><div class="ct">身体联想记忆法——每个问题对应身体部位</div><div class="ctag g">视觉记忆</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="gtip"><b>方法：</b>闭眼想象一个人站在你面前，从头到脚依次关联12个问题，接客时脑子里"扫一遍这个人"，自然就能想起来问什么</div>
+      <div class="tbl g">
+        <table class="tbl g">
+          <tr><th>身体部位</th><th>对应问题</th><th>联想方式</th></tr>
+          <tr><td>👁 眼睛（看到第一眼）</td><td>Q1 主诉</td><td>第一眼看到她，她最烦恼什么？</td></tr>
+          <tr><td>🕐 手腕（手表/时间）</td><td>Q2 时间线</td><td>手腕上有表，时间——问题存在多久？</td></tr>
+          <tr><td>⚡ 大脑（什么事触发）</td><td>Q3 触发事件</td><td>脑子里想"是什么事情导致的？"</td></tr>
+          <tr><td>✋ 双手（每天做的事）</td><td>Q4 护肤习惯</td><td>双手每天涂什么？护肤步骤？</td></tr>
+          <tr><td>🔄 肚子（周期性/循环）</td><td>Q5 反复频次</td><td>肚子想到"周期性"——问题有规律吗？</td></tr>
+          <tr><td>👨‍👩‍👧 心脏（家人）</td><td>Q6 基因遗传</td><td>心想到家人——妈妈皮肤怎么样？</td></tr>
+          <tr><td>🍜 胃（吃什么）</td><td>Q7 饮食+便秘</td><td>胃→吃了什么→消化怎么样？</td></tr>
+          <tr><td>🌙 眼皮（睡眠）</td><td>Q8 睡眠作息</td><td>眼皮下垂联想睡眠——几点睡？睡好了吗？</td></tr>
+          <tr><td>💢 太阳穴（头疼/压力）</td><td>Q9 工作压力</td><td>太阳穴→压力→最近工作压力大吗？</td></tr>
+          <tr><td>☀️ 额头（阳光）</td><td>Q10 防晒</td><td>额头正对太阳→防晒有没有做？</td></tr>
+          <tr><td>💉 手臂（注射/手术）</td><td>Q11 医美/过敏史</td><td>手臂→针→做过什么医美？</td></tr>
+          <tr><td>🎯 心口（最想要）</td><td>Q12 期望锁定</td><td>心口——她最希望的是什么？</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="m2">
+    <div class="ch" onclick="tc('m2')"><div class="cn bl">组</div><div class="ct">分组记忆法——4个组，每组3个问题</div><div class="ctag bl">结构记忆</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc r"><h4>组A · 开场定向（Q1-Q3）</h4><p>主诉 → 时间线 → 触发事件</p><p style="color:var(--r)">记忆词：<b>"什么问题？多久了？什么时候开始的？"</b></p></div>
+        <div class="mc g"><h4>组B · 习惯挖掘（Q4-Q6）</h4><p>护肤习惯 → 反复频次 → 基因遗传</p><p style="color:#8B6820">记忆词：<b>"她每天怎么弄？规律吗？妈妈呢？"</b></p></div>
+        <div class="mc bl"><h4>组C · 内因追查（Q7-Q10）</h4><p>饮食 → 睡眠 → 压力 → 防晒</p><p style="color:var(--bl)">记忆词：<b>"吃睡压晒"（四字口令）</b></p></div>
+        <div class="mc gr"><h4>组D · 收尾锁定（Q11-Q12）</h4><p>医美+过敏史 → 期望目标</p><p style="color:var(--gr)">记忆词：<b>"有没有做过什么？最希望改善什么？"</b></p></div>
+      </div>
+      <div class="bltip"><b>重点记忆：组C的四字口令"吃睡压晒"</b>——这4个问题是最容易忘记的，也是最多信息量的。早上起来默念三遍"吃睡压晒"，接客前想一下这4个问题有没有都问到</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 完整对话脚本 ===== -->
+<div class="tab" id="t2">
+  <div class="stitle">完整对话脚本——真实接客全程还原</div>
+  <div class="ssub">从进门到检测结束，完整15分钟对话，3种典型顾客各一套</div>
+
+  <div class="card" id="s0">
+    <div class="ch" onclick="tc('s0')"><div class="cn r">案A</div><div class="ct">完整脚本A——35岁色斑顾客，第一次来，话比较少</div><div class="ctag r">新客·沉默型</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="bltip"><b>人物背景：</b>陈女士，35岁，有孩子，颧骨明显色斑，从未专门做过皮肤管理，对护肤了解不深，话少但配合</div>
+
+      <div class="story">
+        <div class="story-head">🚪 进门破冰阶段</div>
+        <div class="story-body">
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"您好！欢迎！来，这边坐。<b>哎，您今天这件外套颜色很好看，这种砖红色特别显白，是新买的吗？</b>"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"哦，谢谢，之前买的，就随便穿来了。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"随便穿都这么好看！<b>您是第一次来我们这边吧？</b>之前有没有在其他地方做过皮肤管理？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"对，第一次。没有专门做过，就自己在家用护肤品。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"那很好，这样我们对您皮肤的了解就是全新的，可以完整地给您评估一下。<b>您今天来，最主要是哪方面想了解一下，还是觉得哪里皮肤让您最不舒服？</b>"</div>
+          </div>
+          <div class="chat-note">✦ 破冰→过渡→Q1，自然衔接，约1.5分钟</div>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-head">🔍 问诊主体阶段（Q1→Q12）</div>
+        <div class="story-body">
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"就是脸上的斑，颧骨这里，越来越多。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"嗯，颧骨色斑——<b>这个我记下来了，等会儿检测图重点看这里。</b>您说越来越多——大概是从什么时候开始明显的？是突然一下子多了，还是慢慢长出来的？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"慢慢的，感觉生完孩子之后比较明显。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>生完孩子之后——</b>这个很关键！产后激素变化对色斑影响非常大，很多人就是从这个阶段开始的。孩子现在多大了？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"六岁了。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"那大概六年了——那当时产后有专门做过什么护理，还是一直就没有专门处理过？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"没有，就自己买了美白产品，没什么效果。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"产品没效果，通常是方向不对，等会儿我们看图分析。<b>我再问一下，您现在在家大概怎么护肤？早晚各做哪些步骤？</b>"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"就洗脸、爽肤水、乳液，晚上加一个精华。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"用的精华是美白类的吗？洗脸用什么洁面？<b>热水还是温水？</b>"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"美白精华，洗脸……热水吧，冷了不舒服。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>这个我等会儿跟您说，热水其实对色斑会有一定影响。</b>好，另外问一下，您平时防晒有没有做？出门的时候有涂防晒吗？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"有时候有，有时候忘了。开车的时候没有涂。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>开车这个很多人忽略——车玻璃其实挡不了UVA，就是导致色斑的那种紫外线，这个也是色斑加重的原因之一。</b>那平时饮食上，喜欢吃甜食或者辣的吗？顺便问一下，最近排便情况还好？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"甜食喜欢，排便还好，比较规律。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"好，睡眠怎么样？孩子上学了，是不是晚上可以早一点睡了？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"嗯，大概11点多睡，睡眠还可以。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>最后问一个最重要的——如果让您选一个，三个月后照镜子，您最希望看到什么变化？</b>"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">陈</div>
+            <div class="bubble k">"斑能淡一点，肤色均匀一些就好。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"好，<b>斑淡、肤色均匀——</b>我记住了，这就是我们今天的目标方向。您今天告诉我的信息非常有价值，我等会儿重点针对色素代谢和防晒这两个方向给您分析。来，我们先去做检测，大概三分钟。"</div>
+          </div>
+          <div class="chat-note">✦ 完整问诊约9分钟，Q1-Q4-Q10-Q7-Q8-Q12，根据顾客情况精选问题</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s1">
+    <div class="ch" onclick="tc('s1')"><div class="cn pu">案B</div><div class="ct">完整脚本B——28岁痘痘顾客，话很多，容易跑题</div><div class="ctag pu">新客·话多型</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="bltip"><b>人物背景：</b>小李，28岁，职场，下巴和两颊反复长痘两年，喜欢聊天，说着说着会跑题，但配合度高。关键训练点：如何把话多型顾客的信息整合，同时控制时间</div>
+
+      <div class="story">
+        <div class="story-head">💬 话多型顾客——核心对话片段</div>
+        <div class="story-body">
+          <div class="chat-row right">
+            <div class="avatar av-k">李</div>
+            <div class="bubble k">"就是痘痘，下巴这里一直长，长好了又长，已经两年了。对了，我最近换了一个新工作，压力好大，上个月还去了趟北京出差，北方皮肤特别干……（开始跑题）"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"哦！北方确实干，去了皮肤会不舒服。<b>您刚说的换了新工作、压力大——这个和您的痘痘其实是有关联的，</b>我等会儿重点说这里。我先问一下，这个下巴长痘，两年来一直都在，是每个月都会有，还是某段时间特别多？"</div>
+          </div>
+          <div class="chat-note">✦ 技巧：先共情（"北方确实干"），然后用关联引导句把跑题内容变成有用信息，再收回问题主线</div>
+          <div class="chat-row right">
+            <div class="avatar av-k">李</div>
+            <div class="bubble k">"差不多每个月都有，生理期前特别多。对了，我以前用过xx品牌的产品，也没什么效果，我同事推荐我来试试……（又跑题）"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>生理期前特别多——这个非常重要，说明和内分泌有关。</b>用过什么产品我们等会儿分析。我先问完几个关键问题。饮食上——喜欢吃辣或者甜的吗？"</div>
+          </div>
+          <div class="chat-note">✦ 技巧：从顾客说的信息里抓关键词（"生理期前"），马上分析价值，让顾客感受到"她说的都有意义"，同时用"我先问完"把节奏收回来</div>
+          <div class="chat-row right">
+            <div class="avatar av-k">李</div>
+            <div class="bubble k">"辣！超喜欢！我朋友说我吃辣太多所以才长痘，但我觉得不一定……"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>您朋友说得有道理——辣确实会加速炎症反应，让痘痘更容易发。</b>不过不是唯一原因，等会儿我们图上看。顺便问一下，排便规律吗？"</div>
+          </div>
+          <div class="chat-note">✦ 技巧：不否定顾客的话（"您朋友说得有道理"），然后用专业信息补充，增加权威感；便秘用"顺便问"自然带出</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s2">
+    <div class="ch" onclick="tc('s2')"><div class="cn gr">案C</div><div class="ct">完整脚本C——45岁抗衰老客，做过医美，警惕心强</div><div class="ctag gr">老客·防御型</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="bltip"><b>人物背景：</b>王女士，45岁，来了3次，做过激光和填充，对皮肤管理有一定了解，但每次问到医美史或费用会变得警惕。需要建立专业权威感，让她觉得你是真的在帮她</div>
+      <div class="story">
+        <div class="story-head">🛡️ 防御型老客——如何化解警惕的核心片段</div>
+        <div class="story-body">
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"王姐，上次您说最近在意眼角的细纹，这次来想重点看这里吗？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">王</div>
+            <div class="bubble k">"对，不过我之前做了激光，感觉没什么用，你们这个有区别吗？"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"您问得很好——<b>激光和我们做的方向其实是不一样的，激光主要是刺激，我们是配合修复和促进吸收。</b>您做激光是什么类型的？做了几次？"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">王</div>
+            <div class="bubble k">"你问这个干嘛，是要让我买什么吗？"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"<b>不是，王姐，我问是因为有些项目和之前的激光是有相互影响的——</b>如果知道您做过什么、多久了，我才能保证今天给您安排的方案对您最安全，不会和之前的有冲突。当然您不想说也没关系。"</div>
+          </div>
+          <div class="chat-row right">
+            <div class="avatar av-k">王</div>
+            <div class="bubble k">"哦，那就是皮秒，去年做的，做了两次。"</div>
+          </div>
+          <div class="chat-row">
+            <div class="avatar av-c">顾</div>
+            <div class="bubble c">"好，皮秒去年做的——<b>这个对我们今天方案设计很重要，皮秒之后皮肤修复通道还在重建，我们要配合做修复类的，而不是直接上能量仪器，</b>不然可能反效果。我们等会儿看图的时候重点看修复情况。"</div>
+          </div>
+          <div class="chat-note">✦ 关键：被质疑时不道歉、不退让，而是用专业解释说明"为什么问这个对你有好处"，同时立刻把信息转化为对顾客有价值的分析，让她感受到你问是真的为了她</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 错误对比 ===== -->
+<div class="tab" id="t3">
+  <div class="stitle">错误 vs 正确——逐句对比，改一处提升一档</div>
+  <div class="ssub">不是讲原则，是真实展示"说了这句"和"该说这句"的差距在哪里</div>
+
+  <div class="card" id="e0">
+    <div class="ch" onclick="tc('e0')"><div class="cn r">错1</div><div class="ct">追问时机错误——顾客还没说完，你插话了</div><div class="ctag r">高频错误</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="mp">
+        <div class="mp-bad"><div class="mp-label">❌ 错误版</div><div class="mp-text">顾客："我皮肤最近很干，而且有时候会——"<br>顾问（插话）："好好好，那您现在用的什么护肤品？"</div></div>
+        <div class="mp-good"><div class="mp-label">✅ 正确版</div><div class="mp-text">顾客："我皮肤最近很干，而且有时候会——"<br>顾问（等顾客说完，停顿1秒）："嗯，您说有时候会……？"（用顾客自己的话引导她继续说）</div></div>
+      </div>
+      <div class="tip"><b>改正要点：</b>顾客说到一半停下来，是在整理思路，不是说完了。等她说完，停1秒，如果她不说了，用"您说……？"重复她的最后几个字，引导她继续</div>
+    </div>
+  </div>
+
+  <div class="card" id="e1">
+    <div class="ch" onclick="tc('e1')"><div class="cn r">错2</div><div class="ct">过渡语缺失——问完一个问题立刻问下一个</div><div class="ctag r">最常见</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="mp">
+        <div class="mp-bad"><div class="mp-label">❌ 错误版（像填表）</div><div class="mp-text">顾问："您皮肤问题多久了？"<br>顾客："两年了。"<br>顾问："好。那您家里人有没有类似的问题？"<br>顾客："……有。"<br>顾问："好。那您平时吃辣吗？"</div></div>
+        <div class="mp-good"><div class="mp-label">✅ 正确版（像聊天）</div><div class="mp-text">顾问："您皮肤问题多久了？"<br>顾客："两年了。"<br>顾问："<b>两年……那这两年一定试过不少方法了吧？</b>效果怎么样？"<br>（追问后）顾问："嗯，明白了。<b>我问一个可能有点意外的问题——</b>您妈妈或者家里人，皮肤有没有类似的情况？"</div></div>
+      </div>
+      <div class="tip"><b>改正要点：</b>每次顾客回答完，先用3-5个字回应她（"两年……""嗯，明白了"），再提下一个问题。这3-5个字是让顾客感受到"你在听"的关键</div>
+    </div>
+  </div>
+
+  <div class="card" id="e2">
+    <div class="ch" onclick="tc('e2')"><div class="cn r">错3</div><div class="ct">Q7便秘问法突兀——顾客明显尴尬</div><div class="ctag r">必改</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="mp">
+        <div class="mp-bad"><div class="mp-label">❌ 错误版（突然问）</div><div class="mp-text">顾问："您平时睡眠怎么样？"<br>顾客："还好，11点睡。"<br>顾问："好。那您……便秘吗？"<br>顾客：（沉默，表情尴尬）"……有时候吧。"</div></div>
+        <div class="mp-good"><div class="mp-label">✅ 正确版（自然带出）</div><div class="mp-text">顾问："平时饮食上，喜欢吃辣吗？甜食呢？"<br>顾客："辣的比较喜欢，甜食也吃。"<br>顾问："嗯，辛辣对皮肤炎症的影响还挺大的。<b>顺便问一下，</b>最近排便情况还好吗？是比较规律，还是有时候便秘？"<br>（说完自然地保持眼神接触，微笑等待，不回避）</div></div>
+      </div>
+      <div class="tip"><b>三个关键动作：①</b> 放在饮食后面问 <b>②</b> 用"顺便"引出 <b>③</b> 说完后微笑保持眼神接触——这三个动作做到了，顾客就不会觉得突兀</div>
+    </div>
+  </div>
+
+  <div class="card" id="e3">
+    <div class="ch" onclick="tc('e3')"><div class="cn r">错4</div><div class="ct">沉默型顾客——顾问慌了，问题越来越短</div><div class="ctag r">应对失当</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="mp">
+        <div class="mp-bad"><div class="mp-label">❌ 错误版（顾问慌了，问题变简短）</div><div class="mp-text">顾问："皮肤有什么问题？"<br>顾客："痘痘。"<br>顾问："多久了？"<br>顾客："挺久的。"<br>顾问："护肤品用什么？"<br>顾客："普通的。"<br>（两人陷入沉默）</div></div>
+        <div class="mp-good"><div class="mp-label">✅ 正确版（先说观察，再给选项）</div><div class="mp-text">顾问："皮肤最让您困扰的是什么？"<br>顾客："痘痘。"<br>顾问："主要是哪里——<b>下巴这一块多一些，还是两颊？</b>"<br>顾客："下巴。"<br>顾问："<b>下巴长痘通常和内分泌有关。</b>是一直都有，还是某段时间特别多？比如生理期前后，有没有特别明显？"<br>顾客："有，生理期前会多。"<br>顾问："嗯，这个很重要——<b>说明和激素波动有关联。</b>最近睡眠怎么样，规律吗？"</div></div>
+      </div>
+      <div class="grtip"><b>应对沉默型三步法：①</b> 给二选一（让顾客选，不是开放式） <b>②</b> 说完顾客的答案有什么意义（让她感受到说出来有价值） <b>③</b> 自然带出下一个问题</div>
+    </div>
+  </div>
+
+  <div class="card" id="e4">
+    <div class="ch" onclick="tc('e4')"><div class="cn r">错5</div><div class="ct">Q12期望锁定——忘了问，或问了没用到</div><div class="ctag r">成交影响大</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="mp">
+        <div class="mp-bad"><div class="mp-label">❌ 错误版（问了没用）</div><div class="mp-text">顾问（问诊后）："您最希望改善的是什么？"<br>顾客："斑淡一点。"<br>顾问："好。"（然后再没有提到这个）<br>（报价时）顾问："这个方案可以修复屏障、补水、美白……"<br>顾客："……跟我想要的好像不太一样……"</div></div>
+        <div class="mp-good"><div class="mp-label">✅ 正确版（锁定并全程引用）</div><div class="mp-text">顾问（问诊后）："您最希望改善的是什么？"<br>顾客："斑淡一点，肤色均匀。"<br>顾问："<b>好，斑淡、肤色均匀——我记住了，这是我们今天的核心目标。</b>"<br>（分析时）"……您看UV图这里，和您说的斑是直接相关的……"<br>（报价时）"<b>这个方案就是专门针对您说的——斑淡、肤色均匀——来设计的，</b>分三个阶段……"</div></div>
+      </div>
+      <div class="tip"><b>Q12的用法：</b>问诊时锁定→分析时呼应→报价时引用→这三次引用，会让顾客感受到"整个方案是为我量身设计的"，成交率大幅提升</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 闯关游戏 ===== -->
+<div class="tab" id="t4">
+  <div class="stitle">闯关训练游戏——让练习变得有趣</div>
+  <div class="ssub">把枯燥的背诵变成闯关挑战，增加训练的参与感和完成欲</div>
+
+  <div class="game-card">
+    <div class="game-head">🎮 第一关：30秒闪电问诊</div>
+    <div class="game-body">
+      <p><b>规则：</b>考官说出一个皮肤问题，学员在30秒内说出针对这个问题最关键的3个追问，不能重复，不能超时</p>
+      <div class="tbl">
+        <table class="tbl">
+          <tr><th>考官出题</th><th>标准答案（3个追问）</th><th>限时</th></tr>
+          <tr><td>"顾客说：我皮肤最近好干"</td><td>①多久了？②用什么护肤品？③洗脸水温热还是温？</td><td>30秒</td></tr>
+          <tr><td>"顾客说：我反复长痘"</td><td>①哪里多？②生理期前后有没有规律？③喜欢吃辣或甜吗？</td><td>30秒</td></tr>
+          <tr><td>"顾客说：我感觉皮肤老得很快"</td><td>①最在意哪里的变化？②家里长辈皮肤怎么样？③防晒习惯怎么样？</td><td>30秒</td></tr>
+          <tr><td>"顾客说：皮肤暗沉，没有光泽"</td><td>①睡眠几点睡？②便秘吗？③防晒习惯？</td><td>30秒</td></tr>
+        </table>
+      </div>
+      <div class="putip"><b>加分规则：</b>30秒内说出，语气自然不背书感+1分；有过渡语衔接3个问题+1分；答案和皮肤分析有逻辑关联+1分 | <b>满分6分</b></div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <div class="game-head">🎮 第二关：角色翻转——学员当顾客</div>
+    <div class="game-body">
+      <p><b>规则：</b>让学员扮演一个刁钻顾客（防御型或沉默型），老员工扮演顾问——学员从"顾客视角"感受问诊体验，事后说出"感受最好的3个时刻"和"最不舒服的1个时刻"</p>
+      <div class="g2">
+        <div class="mc pu">
+          <h4>为什么要翻转？</h4>
+          <ul>
+            <li>从顾客角度感受，远比被讲100遍有效</li>
+            <li>发现别人做得好的地方，自然想学</li>
+            <li>"最不舒服的1个时刻"就是团队最需要改进的盲点</li>
+            <li>增加代入感，下次接客会自然想到"如果我是顾客……"</li>
+          </ul>
+        </div>
+        <div class="mc pu">
+          <h4>翻转后必须做的3件事</h4>
+          <ul>
+            <li>学员大声说出"最好的3个时刻"——让做顾问的人感受到正向反馈</li>
+            <li>学员说出"最不舒服的1刻"——具体描述，不是"感觉不自然"</li>
+            <li>全程录视频，事后复盘顾问的面部表情和眼神接触</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <div class="game-head">🎮 第三关：接龙问诊——团队游戏</div>
+    <div class="game-body">
+      <p><b>规则（3-5人一组）：</b>一人扮演顾客，其余人轮流问一个问题——下一个人接上一个人的话，不能重复已经问过的问题，不能有超过3秒的停顿，否则出局</p>
+      <div class="g3">
+        <div class="mc pu"><h4>训练重点</h4><p>快速判断"下一个该问什么"，培养问诊的灵活性和对话意识，不再机械照顺序</p></div>
+        <div class="mc pu"><h4>进阶版规则</h4><p>顾客可以"故意跑题"，接龙的人需要先回应顾客的跑题内容，再收回问诊主线</p></div>
+        <div class="mc pu"><h4>评分标准</h4><p>接的话题有承接感+1分；没有超时停顿+1分；成功收回跑题+2分；12个问题全部被问到+3分</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-card">
+    <div class="game-head">🎮 第四关：只用过渡语——禁止问问题</div>
+    <div class="game-body">
+      <p><b>规则：</b>考官随机说一句"顾客的回答"，学员只能用过渡语回应，不能直接问下一个问题——必须先有回应，才能引出追问</p>
+      <div class="tbl">
+        <table class="tbl">
+          <tr><th>顾客说</th><th>❌ 禁止这样（直接问）</th><th>✅ 用过渡语（先回应再引）</th></tr>
+          <tr><td>"我皮肤干了好几年了。"</td><td>"那您用的什么护肤品？"</td><td>"好几年了……那这几年一定试过不少方法了。什么情况下觉得最干——是洗完脸之后，还是一整天都是？"</td></tr>
+          <tr><td>"我压力确实很大，最近在换工作。"</td><td>"那您睡眠怎么样？"</td><td>"换工作这段时间是最难熬的——我自己也经历过，整个人都绷着。压力一大，皮肤真的最容易出问题。那这段时间睡眠有没有受影响？"</td></tr>
+          <tr><td>"做过激光，去年做的，两次。"</td><td>"有没有过敏的情况？"</td><td>"激光两次——那当时效果怎么样？做完之后皮肤有没有变敏感，还是恢复得还好？"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 追问话术库 ===== -->
+<div class="tab" id="t5">
+  <div class="stitle">追问话术库——遇到任何回答都知道怎么接</div>
+  <div class="ssub">按顾客回答的5种类型分类，每种类型对应具体的追问策略</div>
+
+  <div class="card" id="f0">
+    <div class="ch" onclick="tc('f0')"><div class="cn bl">型1</div><div class="ct">顾客回答"还好/差不多/就那样"——激活话术</div><div class="ctag bl">沉默激活</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="bltip"><b>这类回答最危险：</b>"还好"是顾客不想说或不知道怎么说，不是真的没有问题。要用选项帮她说出来</div>
+      <div class="drill"><div class="dh"><div class="dnum">话术1</div><div class="dtitle">给选项</div></div><div class="db"><div class="say">"比如——换季的时候会不会特别明显？还是一年四季都差不多？"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术2</div><div class="dtitle">先说观察</div></div><div class="db"><div class="say">"我看您今天皮肤，感觉T区还是有一点出油的——平时是这样，还是今天特别一些？"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术3</div><div class="dtitle">降低要求</div></div><div class="db"><div class="say">"不用很精确，大概说一下——比如洗完脸之后，大概多久开始感觉紧绷？半小时？还是马上就紧？"</div></div></div>
+    </div>
+  </div>
+
+  <div class="card" id="f1">
+    <div class="ch" onclick="tc('f1')"><div class="cn bl">型2</div><div class="ct">顾客说了一大堆——整合话术</div><div class="ctag bl">话多整合</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="drill"><div class="dh"><div class="dnum">话术1</div><div class="dtitle">总结关键词</div></div><div class="db"><div class="say">"好，我整理一下——您说的主要是<b>[A]</b>、<b>[B]</b>、<b>[C]</b>这三个，对吗？那我们等会儿重点看这几个方向。"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术2</div><div class="dtitle">抓隐藏信息</div></div><div class="db"><div class="say">"您刚才说到<b>[顾客顺口带过的细节]</b>——这个我注意到了，这个和您的皮肤问题其实有关系，我问一下……"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术3</div><div class="dtitle">温和收回节奏</div></div><div class="db"><div class="say">"听您说了这么多，信息量很丰富！我先问完两个关键问题，然后我们去检测——检测完我会综合您说的这些一起分析给您听。"</div></div></div>
+    </div>
+  </div>
+
+  <div class="card" id="f2">
+    <div class="ch" onclick="tc('f2')"><div class="cn bl">型3</div><div class="ct">顾客质疑"你问这个干嘛"——化解话术</div><div class="ctag bl">防御化解</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="drill"><div class="dh"><div class="dnum">话术1</div><div class="dtitle">解释目的</div></div><div class="db"><div class="say">"我问这个是因为——<b>[这个信息对皮肤判断的意义]</b>。知道了这个，我给您设计的方案才能真正对症，而不是每个人都一样。"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术2</div><div class="dtitle">让她选择权</div></div><div class="db"><div class="say">"当然，您觉得不方便说的话也完全没关系，不影响今天的服务——只是知道了会让分析更准确。"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术3</div><div class="dtitle">用"帮她省钱"角度</div></div><div class="db"><div class="say">"说实话，我问这么多是想帮您少走弯路——很多人花了好多钱，方向搞错了，效果一直不好。多了解一点，才能给您推荐真正合适的，不是贵的，是对的。"</div></div></div>
+    </div>
+  </div>
+
+  <div class="card" id="f3">
+    <div class="ch" onclick="tc('f3')"><div class="cn bl">型4</div><div class="ct">顾客说"不知道/忘了/说不清楚"——辅助话术</div><div class="ctag bl">记忆辅助</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="drill"><div class="dh"><div class="dnum">话术1</div><div class="dtitle">提供时间参照</div></div><div class="db"><div class="say">"不用很精确——大概是今年开始的，还是更早？比如去年、前年这样大概估一下就好。"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术2</div><div class="dtitle">用场景引导</div></div><div class="db"><div class="say">"您想想，比如上次有什么重要场合——婚礼、聚会、出差——那时候皮肤状态怎么样？是那之后开始变的，还是一直都这样？"</div></div></div>
+      <div class="drill"><div class="dh"><div class="dnum">话术3</div><div class="dtitle">接受并跳过</div></div><div class="db"><div class="say">"没关系，这个不记得很正常，我们等会儿检测图会帮我们看更客观的情况，比回忆更准。"</div></div></div>
+    </div>
+  </div>
+
+  <div class="card" id="f4">
+    <div class="ch" onclick="tc('f4')"><div class="cn bl">型5</div><div class="ct">顾客说了让人措手不及的话——冷静回应话术</div><div class="ctag bl">危机应对</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tbl bl">
+        <table class="tbl bl">
+          <tr><th>顾客说</th><th>正确回应话术</th></tr>
+          <tr><td>"我上次在你们这里做的，没有效果。"</td><td>"您说出来很好，我想认真了解一下——是哪个地方让您觉得效果没达到预期？是看不到变化，还是维持的时间不够长？"（不要道歉，要了解具体情况）</td></tr>
+          <tr><td>"你们这里比别家贵多了。"</td><td>"价格确实是一个重要考量——您是和哪类产品或服务比较的？我给您说说我们在这个价位上有什么不一样的地方。"（不要降价，要解释价值）</td></tr>
+          <tr><td>"我朋友做了激光，效果比你们好多了。"</td><td>"激光和我们做的方向不太一样——我帮您分析一下，您的情况更适合哪个方向，或者两个可以怎么配合。"（不要否定竞品，要讲差异）</td></tr>
+          <tr><td>"我最近刚离婚，心情不太好……"（敏感话题）</td><td>停顿2秒，轻声说："听起来这段时间挺不容易的。"然后停顿，等顾客自己决定是否继续说，不追问，不马上转话题</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 带教方法 ===== -->
+<div class="tab" id="t6">
+  <div class="stitle">带教方法——老员工如何教新员工</div>
+  <div class="ssub">好的带教不是"让他看我怎么做"，而是"让他自己经历，我帮他总结"</div>
+
+  <div class="card" id="p0">
+    <div class="ch" onclick="tc('p0')"><div class="cn gr">带教</div><div class="ct">一周带教计划——从观摩到独立的5个步骤</div><div class="ctag gr">带教框架</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="tbl gr">
+        <table class="tbl gr">
+          <tr><th>阶段</th><th>带教方式</th><th>新人任务</th><th>带教后讨论</th></tr>
+          <tr><td><b>第1天</b><br>完整观摩</td><td>新人在旁边观摩老员工完整接待一位顾客，全程不插话</td><td>边看边在纸上记：①哪句话顾客最有反应？②哪里节奏特别流畅？③哪里你觉得可以更好？</td><td>新人说完自己记录的3件事，老员工解释"为什么那么说"</td></tr>
+          <tr><td><b>第2天</b><br>局部参与</td><td>老员工做破冰和Q1-Q6，新人接着做Q7-Q12</td><td>新人负责后半段6个问题，事先准备好每个问题的话术</td><td>老员工点评：Q7便秘引出是否自然？Q12有没有锁定到位？</td></tr>
+          <tr><td><b>第3天</b><br>换位指导</td><td>新人做完整问诊，老员工扮演顾客（用沉默型或话多型）</td><td>新人全程问诊，录音</td><td>回放录音：找出3个说得好的时刻+1个需要改的地方（不超过1个，以免打击积极性）</td></tr>
+          <tr><td><b>第4-5天</b><br>陪同接真客</td><td>新人独立接客，老员工在旁边不说话（只观察）</td><td>新人全程接待，做完之后主动找老员工复盘</td><td>老员工只问3个问题：①你自己觉得哪里最顺？②哪里最别扭？③如果重来，你会改哪一句？</td></tr>
+          <tr><td><b>第6-7天</b><br>独立接客</td><td>新人独立接客，老员工不在现场，但事后必须复盘</td><td>填写接客日志，带去给老员工看</td><td>老员工针对日志提1-2条具体建议，重点表扬进步的地方</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="p1">
+    <div class="ch" onclick="tc('p1')"><div class="cn gr">反馈</div><div class="ct">带教反馈3原则——怎么说新人才肯听</div><div class="ctag gr">带教技巧</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="g3">
+        <div class="mc gr">
+          <h4>原则1：先说好的</h4>
+          <p>每次反馈先找1-2件做得好的，具体说（不是"还不错"，而是"你Q7那个便秘问法，带出来特别自然，我在旁边都觉得没有违和感"）</p>
+          <p>——新人听到具体的表扬，才知道要保持什么，也更愿意接受后面的建议</p>
+        </div>
+        <div class="mc gr">
+          <h4>原则2：改一件事</h4>
+          <p>每次只指出1个需要改的地方，不要把所有问题都说出来——说多了新人只记住"我做得很差"，没有具体的改进方向</p>
+          <p>——选这次表现中影响最大的那1个点，说出来，并给出具体怎么改</p>
+        </div>
+        <div class="mc gr">
+          <h4>原则3：问"你怎么想"</h4>
+          <p>不要直接告诉新人"你应该这么说"，而是先问"你觉得那里可以怎么改？"</p>
+          <p>——让新人自己说出改法，记忆更深；就算她说的不够好，也先肯定思路，再补充更好的方式</p>
+        </div>
+      </div>
+      <div class="grtip"><b>带教禁忌：</b>不要在顾客面前指出新人的错误，哪怕是暗示性的——这会让新人产生强烈的挫败感，也让顾客对服务失去信心。所有指导都在私下完成</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 自检清单 ===== -->
+<div class="tab" id="t7">
+  <div class="stitle">接客前中后——三张自检清单</div>
+  <div class="ssub">每次接客前5分钟、接客中、接客后各用一张，形成专业顾问的操作习惯</div>
+
+  <div class="card" id="cl0">
+    <div class="ch" onclick="tc('cl0')"><div class="cn g">前</div><div class="ct">接客前5分钟——准备清单</div><div class="ctag g">接客前</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ck-item"><div class="ck-box">✓</div><div class="ck-text">已经看过顾客档案（老客：上次聊了什么/做了什么/效果如何；新客：提前了解来访原因）</div></div>
+      <div class="ck-item"><div class="ck-box">✓</div><div class="ck-text">已经想好今天破冰用什么方式（赞美/上次话题/礼物），不要进门了才想</div></div>
+      <div class="ck-item"><div class="ck-box">✓</div><div class="ck-text">在心里回顾"吃睡压晒"四字口令，今天一定要问到这4个维度</div></div>
+      <div class="ck-item"><div class="ck-box">✓</div><div class="ck-text">准备好问诊记录本/手机备注，关键信息要记录，不靠记忆</div></div>
+      <div class="ck-item"><div class="ck-box">✓</div><div class="ck-text">调整好自己的状态——微笑、放松、准备好"今天认真听这个人说话"的心态</div></div>
+      <div class="ck-item"><div class="ck-box">✓</div><div class="ck-text">（老客）准备一个"上次提到的点"，进门第一句话就说出来，让顾客感受到被记住</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="cl1">
+    <div class="ch" onclick="tc('cl1')"><div class="cn r">中</div><div class="ct">接客中——实时提醒（可放在桌上快速扫一眼）</div><div class="ctag r">接客中</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">每题后先回应（3-5个字），再提下一个问题——不割裂</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">顾客在说话，我没有插话——让她说完</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">眼神接触：看着顾客，不是一直低头记录</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">Q7便秘：放在饮食后面，用"顺便"带出，说完微笑保持眼神</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">Q12期望锁定：还没问——问诊快结束时一定要问！</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">发现关联信息时，马上说出"这个和您皮肤……是有关联的"</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">时间控制：8-12分钟，如果超了，Q5Q6可以合并问</div></div>
+      <div class="ck-item"><div class="ck-box"></div><div class="ck-text">问诊结束：用"总结收束型"过渡语，让顾客感受到问诊有了结果</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="cl2">
+    <div class="ch" onclick="tc('cl2')"><div class="cn gr">后</div><div class="ct">接客后10分钟——复盘清单（当天必填）</div><div class="ctag gr">接客后</div><div class="arr">▼</div></div>
+    <div class="cb">
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">今天破冰是哪种方式？顾客的开放程度打几分（1-5分）？</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">问诊节奏：流畅/偶尔割裂/经常割裂？哪个环节割裂了？</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">追问是否到位？哪个问题只问了表面，没追问？</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">Q7便秘：说了吗？说得自然吗？顾客有没有尴尬反应？</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">Q12期望：说了吗？后来有没有在分析和报价时引用？</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">顾客类型：今天是话多/沉默/防御/配合？应对方式对了吗？</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">今天我做得最好的1件事（具体说）：___________________</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">今天下次要改的1件事（具体说+怎么改）：___________________</div></div>
+      <div class="ck-item"><div class="ck-box">□</div><div class="ck-text">成交了吗？关键转折点是哪里？（成交：是什么让顾客决定的；未成交：核心顾虑是什么）</div></div>
+      <div class="grtip" style="margin-top:10px"><b>坚持21天：</b>每天填这张表，第一周会很难（不知道写什么），第二周开始会发现自己的规律，第三周会主动在接客中调整——这是最快成长的方法，没有之一</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function st(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+function tc(id){
+  var c=document.getElementById(id);
+  var b=c.querySelector('.cb');
+  var a=c.querySelector('.arr');
+  if(!b)return;
+  if(b.style.display==='none'||b.style.display===''){
+    b.style.display='block';
+    if(a)a.style.transform='rotate(180deg)';
+  }else{
+    b.style.display='none';
+    if(a)a.style.transform='';
+  }
+}
+document.querySelectorAll('.cb').forEach(b=>{b.style.display='none'});
+document.querySelectorAll('.tab').forEach(tab=>{
+  var f=tab.querySelector('.cb');
+  if(f){f.style.display='block';var a=f.parentElement.querySelector('.arr');if(a)a.style.transform='rotate(180deg)';}
+});
+</script>

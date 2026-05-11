@@ -1,0 +1,608 @@
+
+<h2 class="sr-only">价格异议处理与15大顾客场景文化分享话术体系</h2>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#8B3A5A;--rose-light:#C97B9E;--rose-pale:#F7EEF3;--rose-deep:#5C2040;
+  --gold:#C9A86C;--cream:#FBF8F4;--ink:#2D1A24;
+  --ink2:#5A3D4A;--ink3:#9C7A87;--white:#FFFFFF;
+  --gr:#2D6A4F;--grp:#EFF7F2;--grl:#6AAE8B;
+  --bl:#2D5A8B;--blp:#EFF4FB;
+  --bd:rgba(139,58,90,0.15);
+}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+.w{padding:0 0 60px;max-width:900px;margin:0 auto}
+.hero{background:linear-gradient(135deg,var(--rose-deep) 0%,var(--rose) 60%,var(--rose-light) 100%);border-radius:12px;padding:28px 26px;margin-bottom:1.25rem;display:flex;gap:1rem;align-items:flex-start;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-25px;right:-25px;width:160px;height:160px;border-radius:50%;background:rgba(201,168,108,0.12);pointer-events:none}
+.hero-ico{font-size:26px;flex-shrink:0;padding-top:2px}
+.hero-t{font-size:15px;font-weight:500;margin-bottom:4px;color:#fff}
+.hero-s{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.6}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1rem}
+.tb{font-family:'Noto Sans SC',sans-serif;font-size:12px;padding:6px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.tb.on{background:var(--rose-pale);color:var(--rose);border-color:var(--rose-light);font-weight:500}
+.pane{display:none}.pane.on{display:block}
+.slbl{font-size:10px;font-weight:500;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin:1.5rem 0 .75rem}
+.card{background:var(--white);border:1px solid var(--bd);border-radius:12px;margin-bottom:.75rem;overflow:hidden}
+.ch{padding:.875rem 1.25rem;display:flex;align-items:center;gap:.75rem;cursor:pointer}
+.ch:hover{background:var(--rose-pale)}
+.cnum{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0}
+.cnum.r{background:var(--rose-pale);color:var(--rose)}
+.cnum.g{background:var(--grp);color:var(--gr)}
+.cnum.b{background:var(--blp);color:var(--bl)}
+.cnum.w{background:#FEFBF4;color:#8B6820}
+.ctit{font-size:13px;font-weight:500;color:var(--ink);flex:1}
+.ctag{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid;white-space:nowrap}
+.ctag.r{background:var(--rose-pale);color:var(--rose);border-color:rgba(139,58,90,0.25)}
+.ctag.g{background:var(--grp);color:var(--gr);border-color:rgba(45,106,79,0.25)}
+.ctag.b{background:var(--blp);color:var(--bl);border-color:rgba(45,90,139,0.2)}
+.ctag.w{background:#FEFBF4;color:#8B6820;border-color:rgba(201,168,108,0.35)}
+.carr{font-size:10px;color:var(--ink3);transition:transform .2s}
+.cb{display:none;padding:0 1.25rem 1.25rem;border-top:1px solid var(--bd)}
+.tip{border-left:2px solid;border-radius:0 8px 8px 0;padding:.625rem .875rem;margin:.75rem 0;font-size:12px;line-height:1.65}
+.tip.r{background:var(--rose-pale);border-color:var(--rose-light);color:var(--ink2)}
+.tip.r b{color:var(--rose-deep)}
+.tip.g{background:var(--grp);border-color:var(--grl);color:var(--ink2)}
+.tip.g b{color:var(--gr)}
+.tip.b{background:var(--blp);border-color:#7AA8D8;color:var(--ink2)}
+.tip.w{background:#FEFBF4;border-color:var(--gold);color:var(--ink2)}
+.tip.w b{color:#8B6820}
+.sb{background:#F8F8FA;border-radius:10px;padding:.875rem 1rem;margin:.625rem 0;border:1px solid rgba(0,0,0,0.07)}
+.sb-meta{font-size:10px;color:var(--ink3);margin-bottom:.375rem;font-weight:500;letter-spacing:.04em}
+.sb-scene{font-size:11px;color:var(--ink2);background:var(--white);border:1px solid var(--bd);border-radius:8px;padding:.5rem .75rem;margin-bottom:.5rem;line-height:1.6}
+.sb-scene b{color:#8B6820;font-weight:500}
+.sb-txt{font-size:13px;color:var(--ink);line-height:1.85;font-style:italic}
+.sb-txt b{font-style:normal;color:var(--rose-deep);font-weight:500}
+.sb-note{font-size:11px;color:var(--ink3);margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--bd);line-height:1.6}
+.sb-culture{font-size:11px;color:var(--gr);background:var(--grp);border-radius:8px;padding:.375rem .75rem;margin-top:.5rem;display:inline-block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0}
+.mc{border-radius:10px;padding:.875rem 1rem;border:1px solid var(--bd)}
+.mc.r{background:var(--rose-pale);border-color:rgba(139,58,90,0.2)}
+.mc.g{background:var(--grp);border-color:rgba(45,106,79,0.2)}
+.mc.b{background:var(--blp);border-color:rgba(45,90,139,0.15)}
+.mc.w{background:#FEFBF4;border-color:rgba(201,168,108,0.25)}
+.mc h4{font-size:12px;font-weight:500;margin-bottom:.375rem}
+.mc.r h4{color:var(--rose-deep)}.mc.g h4{color:var(--gr)}.mc.b h4{color:var(--bl)}.mc.w h4{color:#7A5A10}
+.mc p,.mc ul{font-size:12px;color:var(--ink2);line-height:1.7}
+.mc ul{padding-left:14px}
+.scene-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0}
+.scene-btn{background:var(--white);border:1px solid var(--bd);border-radius:8px;padding:.875rem;cursor:pointer;text-align:left;transition:all .15s}
+.scene-btn:hover{background:var(--rose-pale);border-color:var(--rose-light)}
+.scene-btn.active{border-color:var(--rose);background:var(--rose-pale)}
+.scene-num{font-size:10px;color:var(--ink3);margin-bottom:4px;font-weight:500}
+.scene-btn.active .scene-num{color:var(--rose)}
+.scene-title{font-size:12px;font-weight:500;color:var(--ink);line-height:1.5}
+.scene-btn.active .scene-title{color:var(--rose)}
+.scene-tag{font-size:10px;color:var(--ink3);margin-top:4px}
+.scene-detail{background:var(--white);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;margin-top:.75rem;display:none}
+.scene-detail.show{display:block}
+.price-steps{display:flex;gap:8px;align-items:stretch;margin:.75rem 0;flex-wrap:wrap}
+.ps{flex:1;min-width:130px;background:#F8F8FA;border-radius:8px;padding:.75rem;border:1px solid var(--bd)}
+.ps-n{font-size:10px;font-weight:500;color:var(--ink3);margin-bottom:4px}
+.ps-title{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.ps-desc{font-size:11px;color:var(--ink2);line-height:1.6}
+.ps.r .ps-title{color:var(--rose)}.ps.g .ps-title{color:var(--gr)}.ps.b .ps-title{color:var(--bl)}.ps.w .ps-title{color:#8B6820}
+.arr-sep{font-size:14px;color:var(--ink3);display:flex;align-items:center;flex-shrink:0}
+p{font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:6px}
+ul{padding-left:15px;font-size:12px;color:var(--ink2);line-height:1.9}
+@media(max-width:500px){.g2,.scene-grid{grid-template-columns:1fr}.price-steps{flex-direction:column}}
+</style>
+
+<div class="w">
+<div class="hero">
+  <div class="hero-ico">💬</div>
+  <div>
+    <div class="hero-t">价格异议破解 + 15大场景文化分享话术</div>
+    <div class="hero-s">每一个顾客场景都是分享文化的机会——不是宣传，是在对的时间说对的话，让顾客感受到"这家和别家真的不一样"</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tb on" onclick="sp('p0',this)">💰 价格比外面贵？</button>
+  <button class="tb" onclick="sp('p1',this)">📍 场景1-5</button>
+  <button class="tb" onclick="sp('p2',this)">📍 场景6-10</button>
+  <button class="tb" onclick="sp('p3',this)">📍 场景11-15</button>
+  <button class="tb" onclick="sp('p4',this)">🗂 场景速查</button>
+</div>
+
+<!-- ====== 价格 ====== -->
+<div class="pane on" id="p0">
+
+  <div class="card" id="q0">
+    <div class="ch" onclick="tc('q0')"><div class="cnum r">核</div><div class="ctit">价格贵的背后——顾客说贵其实在说什么</div><div class="ctag r">先理解</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="tip r">顾客说"比外面贵"不是真的在问价格——她在问"这个钱花得值不值"。所以应对价格异议，不是讲成本，不是降价，而是<b>让她相信这里的价格背后有对应的价值</b></div>
+      <div class="g2">
+        <div class="mc r"><h4>她说贵，实际上是在想</h4><ul><li>"效果是不是真的更好？"</li><li>"贵的理由是什么？"</li><li>"万一没效果，不是亏大了？"</li><li>"别家便宜，是不是一样的东西？"</li></ul></div>
+        <div class="mc b"><h4>所以你需要回答的不是"我们不贵"</h4><ul><li>我们贵在哪——具体说得出来</li><li>贵带来的是什么不一样的结果</li><li>便宜的那些有什么她不知道的成本</li><li>做完之后她自己来判断值不值</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="q1">
+    <div class="ch" onclick="tc('q1')"><div class="cnum r">法</div><div class="ctit">应对价格异议的5步黄金话术——完整版</div><div class="ctag r">必背</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="price-steps">
+        <div class="ps r"><div class="ps-n">第一步</div><div class="ps-title">承认而不辩解</div><div class="ps-desc">先接受顾客说的，不要立刻反驳</div></div>
+        <div class="arr-sep">→</div>
+        <div class="ps b"><div class="ps-n">第二步</div><div class="ps-title">问清楚在和谁比</div><div class="ps-desc">比较才有意义，不同维度的比较没法讨论</div></div>
+        <div class="arr-sep">→</div>
+        <div class="ps w"><div class="ps-n">第三步</div><div class="ps-title">拆解贵在哪里</div><div class="ps-desc">具体说出三个价值差异点</div></div>
+        <div class="arr-sep">→</div>
+        <div class="ps g"><div class="ps-n">第四步</div><div class="ps-title">周期均摊视角</div><div class="ps-desc">把价格换算成每次/每天</div></div>
+        <div class="arr-sep">→</div>
+        <div class="ps r"><div class="ps-n">第五步</div><div class="ps-title">让她自己做判断</div><div class="ps-desc">今天感受完让她说值不值</div></div>
+      </div>
+
+      <div class="sb">
+        <div class="sb-meta">完整话术示范</div>
+        <div class="sb-scene"><b>顾客说：</b>"你们这个价格比外面贵好多啊，同样一个补水项目，别家一百多，你们要三四百。"</div>
+        <div class="sb-txt">
+          "您说的是实话——我们确实比一些地方贵，我不会跟您说我们不贵。<br><br>
+          我想先问一下，<b>您说的别家，是什么类型的地方</b>？是商场里的护肤品牌做体验，还是小区附近的美容院，还是连锁机构？<br><br>
+          ——（顾客回答后）——<br><br>
+          明白了。我们贵的地方有三个：<b>第一是检测体系</b>——我们每次用专业仪器检测，你看到的这些图数据是真实的，不是随便说说；<b>第二是顾问的资质和培训</b>——我们内部有一套很严格的培训体系，不是进来就上岗，你今天感受到的分析深度，就是这个培训的结果；<b>第三是我们的服务标准</b>——做完有任何不舒服，24小时内必须给到你回应，不是做完拿了钱就不管了。<br><br>
+          另外换一个角度算一下：这个方案如果做6次，每次均摊下来是多少——您今天自己做个计算，看看这个每次的价格，和您期待的效果比，<b>值不值这个数</b>。<br><br>
+          我的建议是，今天先感受，做完我们再说。今天之后如果您觉得和您之前做过的感受一样，那说明我们没做好；如果不一样，您自己会有判断。"
+        </div>
+        <div class="sb-note">✦ 承认了贵，但立刻把"贵"变成了有具体内容的东西 ｜ 周期均摊降低单次感知 ｜ 用"今天体验后自己判断"代替强迫成交</div>
+        <div class="sb-culture">传递文化：透明、负责、不强迫——这才是值这个价格的真正原因</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="q2">
+    <div class="ch" onclick="tc('q2')"><div class="cnum b">拆</div><div class="ctit">把"贵"拆解成顾客能感受的3个维度</div><div class="ctag b">价值拆解</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc b"><h4>维度①：你在这里买的不只是项目</h4><p>顾客在外面花100元做的是一次护理，在这里花300元同时得到：检测数据 + 专业分析 + 个性化方案 + 执行 + 跟踪。<b>"等于是花了一次护理的钱，同时做了一次皮肤诊断。"</b></p></div>
+        <div class="mc b"><h4>维度②：便宜的隐性成本</h4><p>便宜的地方做了没效果，再换地方——试了三四家，花了更多钱和时间。<b>"真正便宜的，是第一次就做对了，不是第一次价格最低。"</b></p></div>
+        <div class="mc w"><h4>维度③：贵在"不会乱推你"</h4><p>便宜的地方靠量来赚钱，所以要推很多。我们贵，所以不需要靠多推来维持利润——<b>"你今天来，我只会推你真正需要的，不会因为贵就往多了说。"</b></p></div>
+        <div class="mc g"><h4>维度④：结果的保障</h4><p>便宜的地方做了没效果，一般不了了之。我们做了没有预期效果，我们会负责——<b>"你花这个钱买的不只是一次服务，是一个结果的承诺。"</b></p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="q3">
+    <div class="ch" onclick="tc('q3')"><div class="cnum g">算</div><div class="ctit">周期均摊话术——让大数字变小</div><div class="ctag g">数学说服</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-meta">话术示范——把总价换算成每天的投入</div>
+        <div class="sb-txt">
+          "我们把这个算一下——这个方案一共是3800元，周期是3个月。<br><br>
+          3个月是90天，每天是多少？——<b>42块钱</b>。<br><br>
+          您每天在外面吃一顿午饭，一杯奶茶，大概也是这个数字。<b>但那个钱花完了什么都不剩，这42块钱花了3个月后，皮肤是留下来的。</b><br><br>
+          我不是说奶茶不该喝——我是说您自己衡量一下，这42块钱花在皮肤上，您觉得值不值。"
+        </div>
+        <div class="sb-note">✦ 一定要真实算出来，让顾客亲眼看到数字 ｜ 用她熟悉的消费场景来对比（奶茶/午饭），不用宏大叙事</div>
+      </div>
+
+      <div class="sb">
+        <div class="sb-meta">话术示范——和护肤品花费做对比</div>
+        <div class="sb-txt">
+          "您现在每个月在护肤品上花多少钱？水乳精华加起来算一下……<br><br>
+          ——（等顾客说）——<br><br>
+          好，您说大概六七百一个月。那一年就是七八千。<b>您用了这些产品，皮肤的状态满意吗？</b><br><br>
+          我们这个方案，3个月3800，比您一年护肤品还少。<b>但我们能帮您把那些护肤品真正发挥出来——如果皮肤吸收通道不通，产品再贵也进不去，那钱才是浪费的。</b>"
+        </div>
+        <div class="sb-note">✦ 不是否定顾客买护肤品，而是说"让你的护肤品发挥出来"——顾客感受不到被否定，反而觉得你在帮她</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="q4">
+    <div class="ch" onclick="tc('q4')"><div class="cnum w">禁</div><div class="ctit">应对价格时绝对不能说的话</div><div class="ctag w">禁忌</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="g2">
+        <div class="mc r"><h4>❌ "便宜没好货"</h4><p>直接否定顾客的比价判断，让她感觉被羞辱——顾客会立刻关闭</p></div>
+        <div class="mc r"><h4>❌ "我们用的都是进口产品"</h4><p>产品来源不是顾客真正关心的，而且说不清楚的话听起来像借口</p></div>
+        <div class="mc r"><h4>❌ "我们这里的顾问都是专业培训的"</h4><p>太泛泛了，每家都这么说——没有具体内容的话没有说服力</p></div>
+        <div class="mc r"><h4>❌ 主动提出打折或降价</h4><p>还没到最后就降价，顾客会觉得原来价格是虚的，反而更不信任</p></div>
+      </div>
+      <div class="tip g">正确的应对节奏：<b>承认→拆解→均摊→让她自己判断</b>——全程不降价，但让顾客感受到价格有根据</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 场景1-5 ====== -->
+<div class="pane" id="p1">
+<div class="slbl">场景1-5 · 进店初期与问诊阶段</div>
+
+  <div class="card" id="s1">
+    <div class="ch" onclick="tc('s1')"><div class="cnum b">场景1</div><div class="ctit">顾客进门后在等待，打量环境，有点不自在</div><div class="ctag b">破冰期</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客坐下来，眼神在打量周围，有点拘谨，还没开口说什么</div>
+        <div class="sb-txt">
+          "您别紧张，今天来就是让我帮您看看皮肤，<b>没有任何压力，也不是说一定要在这里做什么</b>——我们这边的习惯是，先帮每一位顾客做一次完整的皮肤检测，给你一个客观的数据，让你带着真实的信息离开，不管后续怎么选择，至少这次你是有收获的。<br><br>很多顾客第一次来都说，哪怕那天什么都没做，光是那次检测分析就觉得很值。"
+        </div>
+        <div class="sb-note">✦ 主动降低顾客的"被推销"预期 ｜ 用"带着信息离开"而不是"来了就要买"定调</div>
+        <div class="sb-culture">传递文化：无压力服务，以顾客收获为标准</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s2">
+    <div class="ch" onclick="tc('s2')"><div class="cnum b">场景2</div><div class="ctit">顾客说"我就是看看，随便了解一下"</div><div class="ctag b">防御模式</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客表现出"我没有消费意愿"的姿态，先给自己设了防线</div>
+        <div class="sb-txt">
+          "太好了，'随便看看'正好——<b>不带目的地来，反而能听到最真实的皮肤状态</b>，不会因为想买什么而影响判断。<br><br>
+          我们这边有一个原则，就是不管顾客今天有没有想做什么，检测分析都是一样认真的。因为我们觉得，你带着真实的皮肤认知离开，比你今天花了钱但不清楚自己的皮肤状况，对你更有价值。<br><br>
+          您先坐，我们开始检测——<b>不用有任何心理负担，做完你自己看数据，我来解释</b>，后面的事后面再说。"
+        </div>
+        <div class="sb-note">✦ 接受她的"随便看看"，不对抗 ｜ 把"随便看看"变成优势 ｜ 再次强调"带走信息"而非成交</div>
+        <div class="sb-culture">传递文化：顾客知情权第一，不以成交为唯一目标</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s3">
+    <div class="ch" onclick="tc('s3')"><div class="cnum r">场景3</div><div class="ctit">顾客说"我在别的地方做了，感觉没什么效果"</div><div class="ctag r">对比触发</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客主动提到过去的失败体验，带着一点失望或者不信任</div>
+        <div class="sb-txt">
+          "这个我听到挺多的——很多顾客来之前都有类似的经历。<b>我不评价那些地方，但我想跟您说我们是怎么做的，您自己来判断是不是不一样。</b><br><br>
+          我们在做方案之前，一定要先做检测，看数据——<b>不是凭感觉推项目</b>。因为同样是"皮肤干"，成因可能是缺水、缺油、屏障受损、或者吸收通道堵塞，这四种情况的解决方向完全不同，搞错了，做了也没用。<br><br>
+          您之前做的地方，有没有先帮您检测，看过数据再给方案？"
+        </div>
+        <div class="sb-note">✦ 不说别家的坏话 ｜ 用流程对比代替言语评判 ｜ 最后用问题引导顾客自己发现差距</div>
+        <div class="sb-culture">传递文化：以数据为基础，不靠感觉和经验主义</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s4">
+    <div class="ch" onclick="tc('s4')"><div class="cnum r">场景4</div><div class="ctit">问诊时顾客问"你们的产品是什么牌子的"</div><div class="ctag r">专业性验证</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客想通过了解产品来判断这里靠不靠谱</div>
+        <div class="sb-txt">
+          "我告诉您用什么牌子——但我想先说一个我们内部的观点：<b>产品是服务的一部分，不是全部</b>。<br><br>
+          我们选产品有一个标准，就是成分表要干净、针对性要强。但更重要的是，<b>同一款产品，用在对的皮肤上和用在错的皮肤上，效果是完全不一样的</b>。我们贵不贵，不是贵在产品，是贵在帮你判断什么产品、什么顺序、什么浓度，用在你这个具体的皮肤问题上。<br><br>
+          等会儿做完，我把我们今天用的产品成分都告诉您，您可以查，我们不怕查。"
+        </div>
+        <div class="sb-note">✦ 正面回答，但把重点从"什么牌子"转向"怎么用" ｜ "不怕查"是透明度的表达</div>
+        <div class="sb-culture">传递文化：成分透明，专业体现在判断力而非产品本身</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s5">
+    <div class="ch" onclick="tc('s5')"><div class="cnum w">场景5</div><div class="ctit">顾客问"你们的顾问都是什么资质"</div><div class="ctag w">专业质疑</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客在质疑顾问的专业能力，想知道能不能相信你说的</div>
+        <div class="sb-txt">
+          "这个问题问得很好——<b>我觉得一个专业顾问，你不能光看她有没有证书，要看她能不能帮你把问题说清楚</b>。<br><br>
+          我们内部有一个标准：顾问给顾客的分析，必须能让顾客听完之后说'哦，原来是这样'——如果顾客听完还是一脸懵，说明顾问没做好。<br><br>
+          我自己在这行做了X年，我们团队有定期的专业培训，而且我们有一个内部规定：<b>不确定的东西不说，说了的东西要负责</b>。今天的分析结束之后，您来评判我说的有没有道理，这才是最真实的资质验证。"
+        </div>
+        <div class="sb-note">✦ 把资质的判断权交给顾客 ｜ 说出团队标准而不是列证书 ｜ "说了的东西要负责"是强承诺</div>
+        <div class="sb-culture">传递文化：以结果和清晰度来验证专业，不靠证书背书</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 场景6-10 ====== -->
+<div class="pane" id="p2">
+<div class="slbl">场景6-10 · 分析成交与项目操作阶段</div>
+
+  <div class="card" id="s6">
+    <div class="ch" onclick="tc('s6')"><div class="cnum g">场景6</div><div class="ctit">分析完，顾客说"你说的挺有道理的"（但还没成交意愿）</div><div class="ctag g">认可后推进</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客认可了你的分析，但没有主动表示想做——停在了"有道理"</div>
+        <div class="sb-txt">
+          "'有道理'对我来说是很重要的反馈——说明我们的分析是贴合你的情况的，不是套话。<br><br>
+          我想说的是：<b>皮肤的问题听懂了只是第一步，听懂了但不处理，它还是会继续发展</b>。我今天在UV图上看到你这里有一些皮下色素沉积，现在还没浮出来，但如果继续这样下去，6-12个月会开始明显。<br><br>
+          <b>我们有一个原则，就是从来不用吓顾客来促成交——我说这个，是让你知道时间线，你自己来决定什么时候行动</b>。今天做和三个月后做，结果会不一样，但最终选择是你的。"
+        </div>
+        <div class="sb-note">✦ 把"有道理"转化为行动的紧迫感 ｜ 主动说"不吓顾客"，反而让顾客相信你说的是真的</div>
+        <div class="sb-culture">传递文化：以顾客利益为出发点，不用恐吓来销售</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s7">
+    <div class="ch" onclick="tc('s7')"><div class="cnum g">场景7</div><div class="ctit">顾客问"你们做了有没有什么副作用或风险"</div><div class="ctag g">安全感建立</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客在做决定前评估风险——这是她认真考虑的信号</div>
+        <div class="sb-txt">
+          "这个问题问得很好，说明你在认真考虑。<b>我不会跟你说完全没有任何反应——因为只要是有效的东西，皮肤都有一个适应过程</b>。<br><br>
+          但我们有一个内部要求：<b>做之前，我们必须告诉顾客可能的反应是什么；做完之后，任何不适24小时内必须响应</b>。不是说不会有反应，是有了我们马上处理，不让你一个人扛。<br><br>
+          根据你今天的皮肤状态，我来具体说说今天这个方案可能有什么、不会有什么——这样你带着完整的信息来做决定。"
+        </div>
+        <div class="sb-note">✦ 诚实承认有可能的反应，反而增加信任 ｜ 24小时响应承诺是文化落地的具体表现</div>
+        <div class="sb-culture">传递文化：诚实告知风险，负责任的售后是服务的一部分</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s8">
+    <div class="ch" onclick="tc('s8')"><div class="cnum g">场景8</div><div class="ctit">顾客在等项目做的过程中和你闲聊，问"你们这里生意好吗"</div><div class="ctag g">项目进行中</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>项目进行中，顾客放松了，开始聊天——是最自然的文化分享时机</div>
+        <div class="sb-txt">
+          "还好——我们没有特别追求门庭若市，更在意的是来了的顾客有没有真的看到效果。<br><br>
+          我们有一个内部指标不是看每个月进来多少新顾客，而是看<b>老顾客的回来率</b>——因为那才是真实的成绩单。如果顾客做了一次就不回来，说明我们没做好，哪怕那次成交了也没意义。<br><br>
+          <b>您这次来，是第一次吗？我们会认真对待这次——不是因为希望您再来，是因为这次就应该做好</b>，至于回不回来，做完了您自己决定。"
+        </div>
+        <div class="sb-note">✦ 用老客回来率来表达价值观 ｜ 主动说"不是希望你再来"，反向建立信任</div>
+        <div class="sb-culture">传递文化：长期留存率是真正的指标，不是短期成交数量</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s9">
+    <div class="ch" onclick="tc('s9')"><div class="cnum r">场景9</div><div class="ctit">顾客问"你们用的仪器是什么，有没有认证"</div><div class="ctag r">仪器质疑</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客对仪器存在疑虑——对操作过程的安全性有顾虑</div>
+        <div class="sb-txt">
+          "这个问题可以告诉您——[具体仪器名]，有[认证名称]。<br><br>
+          但我想多说一句：<b>仪器本身安全，不代表用法安全</b>。同一台仪器，能量设置不对、操作部位不对、顾客皮肤状态没有提前评估就用，都可能出问题。<br><br>
+          我们有一个操作前的必经流程：<b>看检测数据、确认今天的皮肤状态、然后才确定能量和操作方式</b>——不是每个人一样的设置。我们不让美容师自己决定能量，必须经过今天做顾问分析这一步。<br><br>
+          这也是为什么我们不直接让你进去躺下来做，要先跟你聊这么久。"
+        </div>
+        <div class="sb-note">✦ 把仪器安全从"设备本身"延伸到"操作流程" ｜ 解释为什么先有顾问这一步——让顾客理解整个体系</div>
+        <div class="sb-culture">传递文化：操作严谨，顾客安全高于效率</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s10">
+    <div class="ch" onclick="tc('s10')"><div class="cnum r">场景10</div><div class="ctit">顾客在做项目时说"我朋友做了感觉没什么变化"</div><div class="ctag r">闲聊中质疑</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客通过朋友经历来表达自己对效果的疑虑</div>
+        <div class="sb-txt">
+          "您朋友做的是在哪里，做的什么项目？<br><br>
+          ——（顾客说完后）——<br><br>
+          嗯，我明白了。<b>同样是皮肤护理，效果差别很大，最关键的两个原因：一是方向对不对，二是坚持了没有。</b><br><br>
+          方向对——做一两次就能看到一些变化；方向不对，做再多次都是在原地转。您朋友当时有没有先做检测、看她具体的皮肤问题是什么？<br><br>
+          我们今天做的这个方案，是根据您今天检测数据定的——<b>不是每个人来了都做一样的，您的方案是专门针对您这几个问题设计的</b>。做完了我们对比一下今天前后的数据，您自己看变化。"
+        </div>
+        <div class="sb-note">✦ 从朋友的案例转向顾客自己的情况 ｜ 强调个性化方案的重要性</div>
+        <div class="sb-culture">传递文化：个性化而非标准化，方向比努力更重要</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 场景11-15 ====== -->
+<div class="pane" id="p3">
+<div class="slbl">场景11-15 · 成交送客与老客维护阶段</div>
+
+  <div class="card" id="s11">
+    <div class="ch" onclick="tc('s11')"><div class="cnum w">场景11</div><div class="ctit">顾客做完效果好，说"没想到这么明显，你们是用了什么秘方"</div><div class="ctag w">效果后加深</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客对效果非常满意——是建立深度认同的黄金时刻</div>
+        <div class="sb-txt">
+          "没有秘方——<b>其实就是做了正确的事</b>。<br><br>
+          您今天的变化，80%来自我们一开始做的判断——检测数据看清楚了，知道今天重点是处理哪个层面的问题，然后按顺序做。<b>不是产品有多神奇，是用对了地方</b>。<br><br>
+          这也是为什么我们每次都坚持先检测先分析——不是因为我们喜欢程序，是因为这一步做对了，后面的效果才有保障。<br><br>
+          <b>您现在感受到的这个变化，是皮肤在对的干预下做出的反应——说明您的皮肤本身状态是好的，有很大的改善空间</b>，我们后面的方案可以做得更深入。"
+        </div>
+        <div class="sb-note">✦ 把效果归因到"正确的方法"而不是神奇产品 ｜ 趁效果好的时候打开顾客对后续方案的开放度</div>
+        <div class="sb-culture">传递文化：方法论是核心竞争力，不是产品神话</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s12">
+    <div class="ch" onclick="tc('s12')"><div class="cnum w">场景12</div><div class="ctit">顾客问"你们这里有没有打折或者优惠"（成交前）</div><div class="ctag w">价格谈判</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客想要优惠——既是成交信号，也是价格重新谈判的开始</div>
+        <div class="sb-txt">
+          "我来说一下我们在这件事上的逻辑——<b>我们不做日常打折，是有原因的</b>。<br><br>
+          如果我们随时打折，等于在说我们原价是虚的——那之前告诉你的价值，你也就不相信了。<br><br>
+          我们现在有的是<b>新顾客的专属加赠</b>：今天成交，我们在方案里加一次[具体项目/产品]，价值是XXX元，今天有，下次来不一定有——这个是给到您的真实价值，不是降价，是多给。<br><br>
+          如果你特别在意价格，我可以帮你看看方案里有没有可以调整的地方——<b>不是降价，是根据你现在最重要的问题重新设计，先解决最核心的，其他的后面加上去</b>。"
+        </div>
+        <div class="sb-note">✦ 解释不打折的逻辑——顾客听了会觉得这是原则而不是傲慢 ｜ 把"加赠"和"拆解方案"作为两个替代方案</div>
+        <div class="sb-culture">传递文化：价格诚信，原价是真实的，不靠折扣来吸引</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s13">
+    <div class="ch" onclick="tc('s13')"><div class="cnum g">场景13</div><div class="ctit">老客带朋友来，说"我帮你们带新顾客来了"</div><div class="ctag g">转介绍时机</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>老客带来了转介绍——是最高价值的顾客行为，需要高质量的情感回应</div>
+        <div class="sb-txt">
+          "您知道您带她来，对我们意味着什么吗——<b>比任何广告都重要</b>。<br><br>
+          真的，我们内部有一个很清楚的认知：老顾客愿意把朋友带过来，是因为她把自己的口碑押在了我们身上。这不是小事。<br><br>
+          所以<b>我对您朋友今天的要求是：比对您还认真</b>。因为如果她今天体验不好，不只是她自己的问题，也是对您的信任的辜负。<br><br>
+          您今天一起来，等会儿做完了，我想听听您说说——看看您朋友的感受，和您当时第一次来的感受，是不是一样的。"
+        </div>
+        <div class="sb-note">✦ 高度认可老客的行为 ｜ "对她比对您还认真"——承诺高标准 ｜ 邀请老客来做见证</div>
+        <div class="sb-culture">传递文化：口碑是品牌最重要的资产，转介绍是最高的信任表达</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s14">
+    <div class="ch" onclick="tc('s14')"><div class="cnum g">场景14</div><div class="ctit">老客来复诊，说"最近皮肤没上次好了，好像退步了"</div><div class="ctag g">老客管理</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>老客感觉效果有波动——这是信任危机的初期信号，需要立刻正面处理</div>
+        <div class="sb-txt">
+          "感谢您直接告诉我，而不是就不来了——<b>这种反馈对我们来说是最重要的，比表扬更重要</b>。<br><br>
+          我们先来看一下今天的检测数据，和上次对比——是真的有变化，还是皮肤正常的阶段性波动。<b>皮肤是有周期的，不是每次来都一定比上次好，这个我需要先说清楚</b>。<br><br>
+          但如果数据确实显示有退步，我想知道这段时间发生了什么——睡眠、饮食、压力、家居护理有没有变化？<br><br>
+          <b>不管是什么原因，我们一起找，找到了我们一起调整</b>——这是我们对您应该做的。您不是来这里'看效果好不好'的，您是来和我们一起管理皮肤的。"
+        </div>
+        <div class="sb-note">✦ 感谢顾客提出而不是离开 ｜ 用科学解释正常波动 ｜ 建立"一起管理"的伙伴关系，而非服务提供关系</div>
+        <div class="sb-culture">传递文化：开放面对问题，顾客是合作伙伴不是评判者</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="s15">
+    <div class="ch" onclick="tc('s15')"><div class="cnum r">场景15</div><div class="ctit">送客时顾客说"下次不一定什么时候来"（隐性流失信号）</div><div class="ctag r">留住关键</div><div class="carr">▼</div></div>
+    <div class="cb">
+      <div class="sb">
+        <div class="sb-scene"><b>情境：</b>顾客送别时给出模糊的下次，可能是礼貌的流失预兆</div>
+        <div class="sb-txt">
+          "没关系，不用有压力——<b>您来不是因为要来，是因为觉得值得来</b>，这个感受只有您自己知道。<br><br>
+          我想在您走之前做一件事：<b>把今天我们聊的，您的皮肤状态、主要问题、回家的注意点，整理成一个文字发给您</b>——不管您下次什么时候来，或者去哪里做，这些信息对您都有用。<br><br>
+          如果您后面有任何皮肤的问题，可以直接来问我，不是必须来做项目才能问。<b>我们提供的，不只是来了才有的服务</b>。<br><br>
+          （整理完发给顾客后）有什么问题，随时来找我。"
+        </div>
+        <div class="sb-note">✦ 不催下次来，反而说"不是非要来" ｜ 送出专业建议文稿——有跟进理由，同时展示价值 ｜ 建立"随时可以来问"的开放通道</div>
+        <div class="sb-culture">传递文化：服务不止于到店，长期关系超越单次消费</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 速查 ====== -->
+<div class="pane" id="p4">
+<div class="slbl">15个场景速查——找到你当下需要的</div>
+
+  <div class="scene-grid" id="sgrid">
+    <div class="scene-btn" onclick="showScene('sc_p','顾客说"比外面贵"','价格比较场景','承认贵→拆解价值→周期均摊→让她自己判断。核心话术："我们贵在三个地方……换一个角度算一下……今天感受完您自己判断"','价格诚信，原价是真实的')">
+      <div class="scene-num">💰 价格异议</div><div class="scene-title">比外面贵</div><div class="scene-tag">最高频异议</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_1','顾客打量环境，有点不自在','破冰期 — 进门等待时','主动说"没有任何压力""不是一定要做什么"，把来这里定调为"带走信息"而非"花钱消费"','无压力服务，以顾客收获为标准')">
+      <div class="scene-num">场景1</div><div class="scene-title">进门不自在</div><div class="scene-tag">破冰期</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_2','顾客说"就是随便看看"','防御模式 — 先设防线','接受并把它变成优势："不带目的地来反而听到最真实的状态"，强调检测分析是给她的收获','顾客知情权第一')">
+      <div class="scene-num">场景2</div><div class="scene-title">随便看看</div><div class="scene-tag">防御模式</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_3','顾客说别家做了没效果','对比触发 — 失望经历','不说别家坏话，说我们的流程差异："不是凭感觉推项目"，用问题引导顾客自己发现区别','数据驱动，不靠经验主义')">
+      <div class="scene-num">场景3</div><div class="scene-title">别家没效果</div><div class="scene-tag">对比触发</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_4','顾客问产品是什么牌子','专业验证 — 想判断靠不靠谱','告诉她牌子，但把重点转向"产品要用对了才有效"，说"我们不怕查"体现透明度','成分透明，专业在判断力')">
+      <div class="scene-num">场景4</div><div class="scene-title">什么牌子</div><div class="scene-tag">专业验证</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_5','顾客问顾问的资质','专业质疑 — 能不能相信','把资质验证权交给顾客："今天的分析结束后您来评判"，说"说了的东西要负责"','以结果验证专业，不靠证书')">
+      <div class="scene-num">场景5</div><div class="scene-title">顾问资质</div><div class="scene-tag">专业质疑</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_6','顾客说"挺有道理的"但不成交','认可后推进 — 停在了解层','把"有道理"转化为行动紧迫感，主动说"我们不用吓顾客来促成交"，让顾客感受到真诚','以顾客利益为出发点')">
+      <div class="scene-num">场景6</div><div class="scene-title">有道理但不动</div><div class="scene-tag">认可后推进</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_7','顾客问有没有副作用或风险','安全感建立 — 做决定前','诚实承认可能有适应反应，说出24小时响应承诺，让顾客感受到"有了问题你们不会不管"','诚实告知，负责任的售后')">
+      <div class="scene-num">场景7</div><div class="scene-title">副作用风险</div><div class="scene-tag">安全感建立</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_8','顾客问"你们生意好吗"','项目进行中 — 放松闲聊','说内部指标是"老客回来率"，主动说"不是希望你再来，是这次就该做好"','留存率是真正标准')">
+      <div class="scene-num">场景8</div><div class="scene-title">生意好吗</div><div class="scene-tag">项目进行中</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_9','顾客问仪器认证','仪器质疑 — 安全顾虑','告知仪器信息，但延伸到"仪器安全不等于用法安全"，解释为什么先有顾问分析这一步','操作严谨，顾客安全高于效率')">
+      <div class="scene-num">场景9</div><div class="scene-title">仪器认证</div><div class="scene-tag">仪器质疑</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_10','顾客说朋友做了没变化','闲聊中质疑 — 朋友经历','从朋友案例转向顾客自身，强调个性化：她的方案是专门针对她的数据和问题设计的','个性化，方向比努力重要')">
+      <div class="scene-num">场景10</div><div class="scene-title">朋友没效果</div><div class="scene-tag">闲聊中质疑</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_11','做完效果好，顾客说"没想到这么明显"','效果后加深 — 黄金时刻','把效果归因到"做了正确的事"，说清检测分析是核心，用这个时机打开对后续方案的开放度','方法论是核心竞争力')">
+      <div class="scene-num">场景11</div><div class="scene-title">效果超预期</div><div class="scene-tag">效果后黄金期</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_12','顾客问有没有打折优惠','价格谈判 — 成交前','解释不打折的逻辑（打折=原价是虚的），给"加赠"和"方案拆解"两个替代方案','价格诚信，原价是真实的')">
+      <div class="scene-num">场景12</div><div class="scene-title">要打折优惠</div><div class="scene-tag">成交谈判</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_13','老客带朋友来说帮你们带新客了','转介绍 — 最高价值行为','高度认可并承诺"对她比对您还认真"，邀请老客来做见证，建立共同荣誉感','口碑是最重要的资产')">
+      <div class="scene-num">场景13</div><div class="scene-title">老客带新客</div><div class="scene-tag">转介绍</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_14','老客说皮肤没上次好了','老客管理 — 信任危机初期','感谢她说出来，对比数据说清楚，建立"我们一起管理皮肤"的伙伴关系','开放面对问题，伙伴关系')">
+      <div class="scene-num">场景14</div><div class="scene-title">老客说退步了</div><div class="scene-tag">信任危机</div>
+    </div>
+    <div class="scene-btn" onclick="showScene('sc_15','送客时说"下次不知道什么时候来"','留住关键 — 隐性流失','不催来，发专业建议文稿，说"不是来了才能问我"——建立开放通道而非消费关系','服务不止于到店')">
+      <div class="scene-num">场景15</div><div class="scene-title">不知道何时再来</div><div class="scene-tag">流失预兆</div>
+    </div>
+  </div>
+
+  <div class="scene-detail" id="scene-detail">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem">
+      <div id="sd-num" style="font-size:10px;color:#9C7A87;font-weight:500"></div>
+      <button onclick="clearScene()" style="font-size:11px;padding:3px 10px;border:1px solid rgba(139,58,90,0.15);border-radius:8px;background:#FBF8F4;color:#5A3D4A;cursor:pointer">收起</button>
+    </div>
+    <div id="sd-title" style="font-size:14px;font-weight:500;color:#2D1A24;margin-bottom:.5rem"></div>
+    <div id="sd-tag" style="font-size:11px;color:#5A3D4A;margin-bottom:.875rem;padding-bottom:.875rem;border-bottom:1px solid rgba(139,58,90,0.15)"></div>
+    <div style="font-size:11px;font-weight:500;color:#9C7A87;margin-bottom:.375rem">核心应对思路</div>
+    <div id="sd-desc" style="font-size:13px;color:#5A3D4A;line-height:1.75;margin-bottom:.875rem"></div>
+    <div id="sd-culture" style="font-size:11px;color:#2D6A4F;background:#EFF7F2;border-radius:8px;padding:.375rem .75rem;display:inline-block;margin-bottom:.875rem"></div>
+    <button onclick="goToScript()" style="width:100%;padding:.625rem;border:1px solid rgba(139,58,90,0.25);border-radius:8px;background:#F7EEF3;color:#8B3A5A;cursor:pointer;font-size:12px;font-weight:500">查看完整话术脚本 ↗</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+var curScene=null;
+var sceneMap={
+  'sc_p':'p0','sc_1':'p1','sc_2':'p1','sc_3':'p1','sc_4':'p1','sc_5':'p1',
+  'sc_6':'p2','sc_7':'p2','sc_8':'p2','sc_9':'p2','sc_10':'p2',
+  'sc_11':'p3','sc_12':'p3','sc_13':'p3','sc_14':'p3','sc_15':'p3'
+};
+function sp(id,btn){
+  document.querySelectorAll('.pane').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+function tc(id){
+  var c=document.getElementById(id);
+  var b=c.querySelector('.cb');
+  var a=c.querySelector('.carr');
+  if(!b)return;
+  var open=b.style.display==='block';
+  b.style.display=open?'none':'block';
+  if(a)a.style.transform=open?'':'rotate(180deg)';
+}
+function showScene(id,title,tag,desc,culture){
+  document.querySelectorAll('.scene-btn').forEach(b=>b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  curScene=id;
+  document.getElementById('sd-num').textContent=id==='sc_p'?'💰 价格异议':'场景 '+id.replace('sc_','');
+  document.getElementById('sd-title').textContent=title;
+  document.getElementById('sd-tag').textContent=tag;
+  document.getElementById('sd-desc').textContent=desc;
+  document.getElementById('sd-culture').textContent='传递文化：'+culture;
+  var det=document.getElementById('scene-detail');
+  det.classList.add('show');
+  setTimeout(()=>det.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+function clearScene(){
+  document.querySelectorAll('.scene-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('scene-detail').classList.remove('show');
+  curScene=null;
+}
+function goToScript(){
+  if(!curScene)return;
+  var tab=sceneMap[curScene];
+  var tabs={'p0':'p0','p1':'p1','p2':'p2','p3':'p3'};
+  var btns=document.querySelectorAll('.tb');
+  var tabIdx={'p0':0,'p1':1,'p2':2,'p3':3};
+  document.querySelectorAll('.pane').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(tab).classList.add('on');
+  btns[tabIdx[tab]].classList.add('on');
+  setTimeout(()=>{
+    var cardId=curScene==='sc_p'?'q1':'s'+curScene.replace('sc_','');
+    var el=document.getElementById(cardId);
+    if(el){
+      var cb=el.querySelector('.cb');
+      var a=el.querySelector('.carr');
+      if(cb){cb.style.display='block';if(a)a.style.transform='rotate(180deg)';}
+      setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),100);
+    }
+  },100);
+}
+document.querySelectorAll('.cb').forEach(b=>b.style.display='none');
+document.querySelectorAll('.card').forEach(c=>{
+  var b=c.querySelector('.cb');
+  var a=c.querySelector('.carr');
+  if(b){b.style.display='block';if(a)a.style.transform='rotate(180deg)';}
+});
+document.querySelectorAll('.pane:not(.on) .cb').forEach(b=>b.style.display='none');
+document.querySelectorAll('.pane:not(.on) .carr').forEach(a=>a.style.transform='');
+</script>

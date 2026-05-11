@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美容顾问培训中心</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#8B3A5A;--rose-light:#C97B9E;--rose-pale:#F7EEF3;--rose-deep:#5C2040;
+  --gold:#C9A86C;--gold-light:#E8D5B0;--cream:#FBF8F4;--ink:#2D1A24;
+  --ink2:#5A3D4A;--ink3:#9C7A87;--white:#FFFFFF;
+  --sidebar-w:260px;
+}
+html,body{height:100%;overflow:hidden;font-family:'Noto Sans SC',sans-serif;}
+
+/* ═══ 登录页 ═══ */
+#loginPage{
+  display:flex;position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,var(--rose-deep) 0%,#3A1028 60%,#1a0a12 100%);
+  align-items:center;justify-content:center;flex-direction:column;padding:24px;
+}
+#loginPage::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,108,0.12) 0%,transparent 70%);pointer-events:none;}
+#loginPage::after{content:'';position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(139,58,90,0.2) 0%,transparent 70%);pointer-events:none;}
+.login-logo{text-align:center;margin-bottom:32px;position:relative;}
+.login-logo .badge{display:inline-block;font-size:10px;letter-spacing:2px;color:var(--gold-light);background:rgba(201,168,108,0.18);border:1px solid rgba(201,168,108,0.35);padding:4px 14px;border-radius:20px;margin-bottom:14px;}
+.login-logo h1{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:600;color:#fff;line-height:1.4;margin-bottom:6px;}
+.login-logo p{font-size:13px;color:rgba(255,255,255,0.5);}
+.login-card{background:rgba(255,255,255,0.07);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:28px 26px;width:min(340px,100%);position:relative;}
+.login-card h2{font-size:15px;font-weight:500;color:rgba(255,255,255,0.9);margin-bottom:20px;text-align:center;}
+.login-field{position:relative;margin-bottom:14px;}
+.login-field input{width:100%;padding:13px 14px 13px 42px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.9);color:#333;font-size:14px;font-family:'Noto Sans SC',sans-serif;outline:none;transition:border .2s,box-shadow .2s;}
+.login-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,108,0.2);}
+.login-field .field-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:0.45;pointer-events:none;}
+#loginError{display:none;color:#ffd6d6;font-size:12px;background:rgba(200,50,50,0.2);border:1px solid rgba(255,100,100,0.3);border-radius:8px;padding:9px 12px;margin-bottom:12px;line-height:1.5;}
+.login-btn{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold) 0%,#a8863d 100%);color:#fff;font-size:15px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;transition:opacity .2s,transform .1s;letter-spacing:1px;}
+.login-btn:hover{opacity:0.9;}.login-btn:active{transform:scale(0.98);}.login-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.login-footer{margin-top:24px;font-size:11px;color:rgba(255,255,255,0.25);text-align:center;line-height:1.6;}
+
+/* ═══ 主界面 ═══ */
+#appPage{display:none;height:100vh;}
+
+/* 侧边栏 */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:linear-gradient(180deg,var(--rose-deep) 0%,#3A1028 100%);display:flex;flex-direction:column;z-index:200;box-shadow:4px 0 20px rgba(92,32,64,0.25);}
+.sidebar-logo{padding:22px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.sidebar-logo .site-badge{font-size:10px;letter-spacing:1.5px;color:var(--gold-light);background:rgba(201,168,108,0.18);border:1px solid rgba(201,168,108,0.35);padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px;}
+.sidebar-logo h2{font-family:'Noto Serif SC',serif;font-size:17px;color:#fff;line-height:1.5;font-weight:600;}
+.sidebar-logo p{font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;}
+
+/* ─── 学习面板卡片 ─── */
+.panel-card{margin:10px 10px 6px;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,108,0.22);border-radius:12px;padding:11px 13px;}
+.panel-hd{font-size:9px;letter-spacing:1.5px;color:rgba(201,168,108,0.65);margin-bottom:9px;text-transform:uppercase;}
+.checkin-dots{display:flex;gap:3px;margin-bottom:8px;justify-content:center;}
+.checkin-dot{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,0.25);cursor:default;}
+.checkin-dot.filled{background:rgba(201,168,108,0.28);border-color:var(--gold);color:var(--gold);}
+.checkin-dot.today{border-color:var(--rose-light);}
+.checkin-dot.filled.today{background:var(--gold);color:var(--rose-deep);border-color:var(--gold-light);}
+.panel-stats-row{display:flex;gap:0;margin-bottom:9px;}
+.panel-stat{flex:1;display:flex;flex-direction:column;align-items:center;}
+.panel-stat-val{font-size:17px;font-weight:700;color:var(--gold-light);font-family:'Noto Serif SC',serif;line-height:1;}
+.panel-stat-lbl{font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;}
+.panel-divider{width:1px;background:rgba(255,255,255,0.1);margin:0 4px;}
+.panel-prog-row{margin-bottom:9px;}
+.panel-prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;}
+.panel-prog-bar{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.panel-prog-fill{height:100%;background:linear-gradient(90deg,var(--rose-light),var(--gold));border-radius:2px;transition:width .4s ease;}
+.checkin-btn{width:100%;padding:7px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold) 0%,#a8863d 100%);color:#fff;font-size:11px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;transition:opacity .2s;letter-spacing:.5px;}
+.checkin-btn:hover{opacity:.88;}.checkin-btn:disabled{opacity:1;cursor:default;}
+.checkin-btn.signed{background:rgba(255,255,255,0.09);color:rgba(255,255,255,0.45);}
+
+/* 侧边栏导航 */
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.15) transparent;}
+.sidebar-nav::-webkit-scrollbar{width:4px;}
+.sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px;}
+.nav-section{padding:8px 16px 4px;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);}
+.nav-item{display:flex;align-items:flex-start;gap:11px;padding:10px 16px 10px 20px;cursor:pointer;transition:background .2s;border-left:3px solid transparent;text-decoration:none;}
+.nav-item:hover{background:rgba(255,255,255,0.07);}
+.nav-item.active{background:rgba(201,168,108,0.15);border-left-color:var(--gold);}
+.nav-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:background .2s,color .2s;}
+.nav-item.active .nav-num{background:var(--gold);color:var(--ink);}
+.nav-item.completed .nav-num{background:var(--gold);color:var(--ink);}
+.nav-item.locked{opacity:.55;cursor:not-allowed;}
+.nav-item.locked .nav-num{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3);font-size:13px;}
+.nav-label .nav-title{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.5;}
+.nav-label .nav-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;line-height:1.4;}
+.nav-item.active .nav-label .nav-title{color:#fff;font-weight:500;}
+.quiz-dots{display:flex;gap:3px;margin-top:4px;}
+.quiz-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.18);}
+.quiz-dot.passed{background:var(--gold);border-color:var(--gold);}
+
+/* 侧边栏底部 */
+.sidebar-footer{padding:14px 20px;border-top:1px solid rgba(255,255,255,0.08);}
+.user-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.user-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--gold),#a8863d);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.user-name{font-size:13px;color:rgba(255,255,255,0.85);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.logout-btn{font-size:11px;color:rgba(255,255,255,0.45);background:none;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:4px 10px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.logout-btn:hover{color:#fff;border-color:rgba(255,255,255,0.4);}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.2);line-height:1.6;}
+
+/* 主内容区 */
+.main{margin-left:var(--sidebar-w);height:100vh;display:flex;flex-direction:column;background:var(--cream);}
+.main-topbar{height:44px;background:var(--white);border-bottom:1px solid rgba(139,58,90,0.1);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0;}
+.topbar-crumb{font-size:12px;color:var(--ink3);}
+.topbar-title{font-size:13px;font-weight:500;color:var(--rose-deep);}
+.topbar-dot{color:rgba(139,58,90,0.25);}
+.content-frame{flex:1;border:none;width:100%;display:block;}
+
+/* ─── 闯关浮动按钮 ─── */
+#quizBtnWrap{position:fixed;bottom:28px;right:28px;z-index:100;display:none;}
+#quizBtn{padding:11px 20px;background:linear-gradient(135deg,var(--rose) 0%,var(--rose-deep) 100%);color:#fff;border:none;border-radius:30px;font-size:13px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;box-shadow:0 4px 18px rgba(92,32,64,0.4);transition:transform .15s,box-shadow .15s;white-space:nowrap;}
+#quizBtn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(92,32,64,0.5);}
+#quizBtn.all-passed{background:linear-gradient(135deg,#4a7c59 0%,#2d5c3a 100%);box-shadow:0 4px 18px rgba(45,92,58,0.35);}
+
+/* ─── Toast ─── */
+#toastMsg{position:fixed;top:56px;left:50%;transform:translateX(-50%);background:rgba(45,26,36,0.93);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;z-index:3000;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center;}
+#toastMsg.show{opacity:1;}
+
+/* ─── Quiz 模态框 ─── */
+#quizModal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.65);align-items:center;justify-content:center;padding:16px;}
+#quizModal.open{display:flex;}
+.quiz-box{background:var(--cream);border-radius:18px;width:min(600px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.4);display:flex;flex-direction:column;}
+.quiz-hd{padding:18px 22px 14px;border-bottom:1px solid rgba(139,58,90,0.1);display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:var(--cream);z-index:1;border-radius:18px 18px 0 0;}
+.quiz-hd-title{font-size:15px;font-weight:600;color:var(--rose-deep);font-family:'Noto Serif SC',serif;}
+.quiz-hd-sub{font-size:11px;color:var(--ink3);margin-top:2px;}
+.quiz-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink3);padding:2px 6px;line-height:1;border-radius:6px;}
+.quiz-close:hover{background:rgba(139,58,90,0.08);}
+.quiz-body{padding:20px 22px;flex:1;}
+.quiz-ft{padding:14px 22px 18px;border-top:1px solid rgba(139,58,90,0.08);display:flex;justify-content:space-between;align-items:center;position:sticky;bottom:0;background:var(--cream);border-radius:0 0 18px 18px;}
+.quiz-ft-txt{font-size:12px;color:var(--ink3);}
+.quiz-ft-btns{display:flex;gap:8px;}
+
+/* 题目 */
+.q-num{font-size:11px;color:var(--ink3);margin-bottom:5px;letter-spacing:.5px;}
+.q-text{font-size:14px;color:var(--ink);line-height:1.75;margin-bottom:16px;font-weight:500;}
+.q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid rgba(139,58,90,0.13);border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-family:'Noto Sans SC',sans-serif;color:var(--ink);text-align:left;transition:border-color .15s,background .15s;width:100%;}
+.q-opt:hover{border-color:var(--rose-light);background:var(--rose-pale);}
+.q-opt.selected{border-color:var(--gold);background:rgba(201,168,108,0.08);}
+.q-opt-k{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(139,58,90,0.08);color:var(--rose);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.q-opt.selected .q-opt-k{background:var(--gold);color:#fff;}
+.q-textarea{width:100%;min-height:110px;padding:12px 14px;border:1.5px solid rgba(139,58,90,0.13);border-radius:10px;font-size:13px;font-family:'Noto Sans SC',sans-serif;color:var(--ink);resize:vertical;outline:none;transition:border-color .15s;background:#fff;}
+.q-textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,108,0.14);}
+.q-textarea-hint{font-size:11px;color:var(--ink3);margin-bottom:8px;}
+
+/* 按钮 */
+.btn-prev{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;border:none;background:rgba(139,58,90,0.09);color:var(--rose);transition:opacity .15s;}
+.btn-next{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;border:none;background:linear-gradient(135deg,var(--gold),#a8863d);color:#fff;transition:opacity .15s;}
+.btn-submit{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;border:none;background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;transition:opacity .15s;}
+.btn-prev:hover,.btn-next:hover,.btn-submit:hover{opacity:.85;}
+.btn-prev:disabled,.btn-next:disabled,.btn-submit:disabled{opacity:.35;cursor:not-allowed;}
+
+/* 成绩页 */
+.result-wrap{text-align:center;padding:8px 0 6px;}
+.result-circle{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.result-circle.pass{background:rgba(201,168,108,0.1);border:3px solid var(--gold);}
+.result-circle.fail{background:rgba(200,50,50,0.07);border:3px solid #e88;}
+.result-score-n{font-size:30px;font-weight:700;color:var(--rose-deep);font-family:'Noto Serif SC',serif;line-height:1;}
+.result-score-u{font-size:11px;color:var(--ink3);margin-top:2px;}
+.result-verdict{font-size:16px;font-weight:600;margin-bottom:5px;}
+.result-verdict.pass{color:#4a7c59;}.result-verdict.fail{color:#b84040;}
+.result-sub{font-size:13px;color:var(--ink3);margin-bottom:16px;}
+.result-unlock{font-size:12px;color:#4a7c59;background:rgba(74,124,89,0.07);border:1px solid rgba(74,124,89,0.2);border-radius:8px;padding:9px 14px;margin-bottom:14px;}
+.result-details{text-align:left;display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.rd-item{padding:11px 13px;border-radius:10px;border:1px solid;font-size:12px;line-height:1.7;}
+.rd-item.ok{background:rgba(74,124,89,0.05);border-color:rgba(74,124,89,0.18);}
+.rd-item.bad{background:rgba(184,64,64,0.05);border-color:rgba(184,64,64,0.14);}
+.rd-row{display:flex;gap:8px;margin-bottom:3px;align-items:center;}
+.rd-badge{font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;flex-shrink:0;}
+.rd-badge.ok{background:rgba(74,124,89,0.14);color:#4a7c59;}
+.rd-badge.bad{background:rgba(184,64,64,0.11);color:#b84040;}
+.rd-expl{color:var(--ink3);font-size:11.5px;margin-top:3px;}
+.result-actions{display:flex;gap:8px;justify-content:center;}
+.btn-retry{padding:9px 18px;border:1.5px solid var(--rose);background:transparent;color:var(--rose);border-radius:8px;font-size:13px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;transition:background .15s;}
+.btn-retry:hover{background:var(--rose-pale);}
+.btn-done{padding:9px 18px;border:none;background:linear-gradient(135deg,var(--gold),#a8863d);color:#fff;border-radius:8px;font-size:13px;font-weight:600;font-family:'Noto Sans SC',sans-serif;cursor:pointer;transition:opacity .15s;}
+.btn-done:hover{opacity:.88;}
+
+/* 移动端 */
+.menu-toggle{display:none;position:fixed;top:10px;left:10px;z-index:300;width:38px;height:38px;border-radius:8px;background:var(--rose-deep);border:none;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;box-shadow:0 2px 10px rgba(92,32,64,0.3);}
+.menu-toggle span{display:block;width:18px;height:2px;background:#fff;border-radius:1px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:150;}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s ease;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .menu-toggle{display:flex;}
+  .overlay.open{display:block;}
+  #quizBtnWrap{bottom:20px;right:16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 登录页 ═══ -->
+<div id="loginPage">
+  <div class="login-logo">
+    <div class="badge">TEACH CENTER</div>
+    <h1>美容顾问培训中心</h1>
+    <p>aibeautyfulwomen.com · 内部培训平台</p>
+  </div>
+  <div class="login-card">
+    <h2>请登录以继续</h2>
+    <div id="loginError"></div>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="login-field">
+        <span class="field-icon">👤</span>
+        <input id="loginUsername" type="text" placeholder="账号" autocomplete="username" required>
+      </div>
+      <div class="login-field">
+        <span class="field-icon">🔒</span>
+        <input id="loginPassword" type="password" placeholder="密码" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">登 录</button>
+    </form>
+  </div>
+  <div class="login-footer">© 2026 aibeautyfulwomen.com<br>内部培训资料，请勿外传</div>
+</div>
+
+<!-- ═══ 主应用 ═══ -->
+<button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<div id="appPage">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="site-badge">TEACH CENTER</div>
+      <h2>美容顾问<br>培训中心</h2>
+      <p>aibeautyfulwomen.com</p>
+    </div>
+
+    <!-- 学习面板 -->
+    <div class="panel-card">
+      <div class="panel-hd">学习面板</div>
+      <div id="checkinDots" class="checkin-dots">
+        <!-- 7 dots rendered by JS -->
+        <div class="checkin-dot today" style="opacity:.4">—</div>
+      </div>
+      <div class="panel-stats-row">
+        <div class="panel-stat">
+          <span class="panel-stat-val" id="panelStreak">—</span>
+          <span class="panel-stat-lbl">🔥 连续签到(天)</span>
+        </div>
+        <div class="panel-divider"></div>
+        <div class="panel-stat">
+          <span class="panel-stat-val" id="panelStudyMin">—</span>
+          <span class="panel-stat-lbl">⏱ 今日(分钟)</span>
+        </div>
+      </div>
+      <div class="panel-prog-row">
+        <div class="panel-prog-lbl">
+          <span>整体进度</span>
+          <span id="panelProgressTxt">—/9章</span>
+        </div>
+        <div class="panel-prog-bar">
+          <div class="panel-prog-fill" id="panelProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+      <button class="checkin-btn" id="checkinBtn" onclick="handleCheckin()">📅 立即签到</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">培训课件</div>
+
+      <a class="nav-item active"
+         data-key="beauty_consultant_training_courseware"
+         data-file="beauty_consultant_training_courseware.html"
+         data-title="全流程销售培训课件">
+        <div class="nav-num">1</div>
+        <div class="nav-label">
+          <div class="nav-title">全流程销售培训课件</div>
+          <div class="nav-sub">皮肤顾问入门必读</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="beauty_consultant_advanced_training"
+         data-file="beauty_consultant_advanced_training.html"
+         data-title="核心技能详解手册">
+        <div class="nav-num">2</div>
+        <div class="nav-label">
+          <div class="nav-title">核心技能详解手册</div>
+          <div class="nav-sub">顾问进阶实战技能</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="ingredient_knowledge_base"
+         data-file="ingredient_knowledge_base.html"
+         data-title="成分知识库">
+        <div class="nav-num">3</div>
+        <div class="nav-label">
+          <div class="nav-title">成分知识库</div>
+          <div class="nav-sub">顾客问得出，你答得上</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="intensive_training_full_content"
+         data-file="intensive_training_full_content.html"
+         data-title="问诊技能全套训练">
+        <div class="nav-num">4</div>
+        <div class="nav-label">
+          <div class="nav-title">问诊技能全套训练</div>
+          <div class="nav-sub">全流程实战训练内容</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <div class="nav-section" style="margin-top:6px;">专项问诊</div>
+
+      <a class="nav-item"
+         data-key="12_wenzhen_learning_assessment"
+         data-file="12_wenzhen_learning_assessment.html"
+         data-title="12问诊学习与考核">
+        <div class="nav-num">5</div>
+        <div class="nav-label">
+          <div class="nav-title">12问诊学习与考核</div>
+          <div class="nav-sub">过渡语完整体系</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="12_questions_full_professional_script"
+         data-file="12_questions_full_professional_script.html"
+         data-title="12问诊专业话术">
+        <div class="nav-num">6</div>
+        <div class="nav-label">
+          <div class="nav-title">12问诊专业话术</div>
+          <div class="nav-sub">干皮·色沉·纹路深度问诊</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="4skin_specialist_consultation"
+         data-file="4skin_specialist_consultation.html"
+         data-title="四大肤质专项发问">
+        <div class="nav-num">7</div>
+        <div class="nav-label">
+          <div class="nav-title">四大肤质专项发问</div>
+          <div class="nav-sub">油皮·敏感·衰老·暗沉</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="brand_culture_sharing_system"
+         data-file="brand_culture_sharing_system.html"
+         data-title="企业文化分享体系">
+        <div class="nav-num">8</div>
+        <div class="nav-label">
+          <div class="nav-title">企业文化分享体系</div>
+          <div class="nav-sub">新老顾客差异化策略</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+
+      <a class="nav-item"
+         data-key="price_objection_and_culture_scenarios"
+         data-file="price_objection_and_culture_scenarios.html"
+         data-title="价格异议与15大场景话术">
+        <div class="nav-num">9</div>
+        <div class="nav-label">
+          <div class="nav-title">价格异议与15大场景话术</div>
+          <div class="nav-sub">价格5步法 + 15场景脚本</div>
+          <div class="quiz-dots"><div class="quiz-dot"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+        </div>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-row">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div class="user-name" id="userName">—</div>
+        <button class="logout-btn" onclick="handleLogout()">退出</button>
+      </div>
+      <div class="footer-copy">© 2026 aibeautyfulwomen.com<br>内部培训资料，请勿外传</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-topbar">
+      <span class="topbar-crumb">培训中心</span>
+      <span class="topbar-dot">›</span>
+      <span class="topbar-title" id="topbarTitle">全流程销售培训课件</span>
+    </div>
+    <iframe class="content-frame" id="contentFrame"
+      src="beauty_consultant_training_courseware.html" title="培训内容"></iframe>
+  </main>
+</div>
+
+<!-- ═══ 闯关浮动按钮 ═══ -->
+<div id="quizBtnWrap">
+  <button id="quizBtn">📝 答题闯关 (1/3)</button>
+</div>
+
+<!-- ═══ 答题模态框 ═══ -->
+<div id="quizModal">
+  <div class="quiz-box">
+    <div class="quiz-hd">
+      <div>
+        <div class="quiz-hd-title" id="quizHdTitle">答题闯关</div>
+        <div class="quiz-hd-sub" id="quizHdSub"></div>
+      </div>
+      <button class="quiz-close" onclick="closeQuizModal()">✕</button>
+    </div>
+    <div class="quiz-body" id="quizBody"></div>
+    <div class="quiz-ft" id="quizFt"></div>
+  </div>
+</div>
+
+<!-- ═══ Toast ═══ -->
+<div id="toastMsg"></div>
+
+<script>
+// ── 常量 ──────────────────────────────────────────────────────────────────────
+const API = '';
+const TOKEN_KEY = 'teach_token';
+const USER_KEY  = 'teach_user';
+
+const CHAPTER_ORDER = [
+  'beauty_consultant_training_courseware',
+  'beauty_consultant_advanced_training',
+  'ingredient_knowledge_base',
+  'intensive_training_full_content',
+  '12_wenzhen_learning_assessment',
+  '12_questions_full_professional_script',
+  '4skin_specialist_consultation',
+  'brand_culture_sharing_system',
+  'price_objection_and_culture_scenarios',
+];
+const CHAPTER_TITLES = {
+  'beauty_consultant_training_courseware':  '全流程销售培训课件',
+  'beauty_consultant_advanced_training':    '核心技能详解手册',
+  'ingredient_knowledge_base':              '成分知识库',
+  'intensive_training_full_content':        '问诊技能全套训练',
+  '4skin_specialist_consultation':          '四大肤质专项发问',
+  '12_questions_full_professional_script':  '12问诊专业话术',
+  '12_wenzhen_learning_assessment':         '12问诊学习与考核',
+  'brand_culture_sharing_system':           '企业文化分享体系',
+  'price_objection_and_culture_scenarios':  '价格异议与15大场景话术',
+};
+
+// ── 状态 ──────────────────────────────────────────────────────────────────────
+let userStats       = null;
+let currentChKey    = null;
+let heartbeatTimer  = null;
+let quizState       = makeEmptyQuiz();
+
+function makeEmptyQuiz() {
+  return { chapter: null, quizIndex: null, questions: [], answers: [], currentQ: 0 };
+}
+
+// ── 初始化 ────────────────────────────────────────────────────────────────────
+(async function init() {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) { showLogin(); return; }
+  try {
+    const res = await fetch(`${API}/teach/auth/verify`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      showApp(data.username || localStorage.getItem(USER_KEY) || '—');
+    } else {
+      localStorage.removeItem(TOKEN_KEY);
+      showLogin();
+    }
+  } catch { showLogin(); }
+})();
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+function authHdr() {
+  return { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' };
+}
+
+// ── 页面切换 ──────────────────────────────────────────────────────────────────
+function showLogin() {
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('appPage').style.display   = 'none';
+  document.getElementById('quizBtnWrap').style.display = 'none';
+}
+
+function showApp(username) {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('appPage').style.display   = 'block';
+  document.getElementById('userAvatar').textContent  = username ? username[0].toUpperCase() : '?';
+  document.getElementById('userName').textContent    = username;
+
+  // 默认第一章
+  currentChKey = 'beauty_consultant_training_courseware';
+  startHeartbeat(currentChKey);
+  loadStats();
+}
+
+// ── 登录 / 退出 ───────────────────────────────────────────────────────────────
+async function handleLogin(e) {
+  e.preventDefault();
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errEl    = document.getElementById('loginError');
+  const btn      = document.getElementById('loginBtn');
+  errEl.style.display = 'none';
+  btn.disabled = true; btn.textContent = '登录中…';
+  try {
+    const res  = await fetch(`${API}/teach/login`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      localStorage.setItem(TOKEN_KEY, data.token);
+      localStorage.setItem(USER_KEY,  data.username);
+      showApp(data.username);
+    } else {
+      errEl.textContent   = data.error || '登录失败，请重试';
+      errEl.style.display = 'block';
+    }
+  } catch {
+    errEl.textContent   = '网络错误，请检查连接后重试';
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = '登 录';
+  }
+}
+
+function handleLogout() {
+  stopHeartbeat();
+  userStats = null; currentChKey = null;
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
+  showLogin();
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+}
+
+// ── Stats / 面板 ──────────────────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    const res = await fetch(`${API}/teach/me/stats`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    });
+    if (!res.ok) return;
+    userStats = await res.json();
+    updatePanel(userStats);
+    updateNavItems(userStats.progress.chapters);
+    updateQuizBtn(currentChKey);
+  } catch {}
+}
+
+function updatePanel(s) {
+  const { checkin, study, progress } = s;
+  document.getElementById('panelStreak').textContent     = checkin.streak;
+  document.getElementById('panelStudyMin').textContent   = Math.round(study.today_seconds / 60);
+  document.getElementById('panelProgressTxt').textContent = `${progress.completed_count}/${progress.total_count}章`;
+  document.getElementById('panelProgressFill').style.width =
+    `${(progress.completed_count / progress.total_count) * 100}%`;
+
+  const btn = document.getElementById('checkinBtn');
+  if (checkin.today_signed) {
+    btn.textContent = '今日已签 ✓'; btn.classList.add('signed'); btn.disabled = true;
+  } else {
+    btn.textContent = '📅 立即签到'; btn.classList.remove('signed'); btn.disabled = false;
+  }
+  renderCheckinDots(checkin.last_30_days || []);
+}
+
+function renderCheckinDots(signedDates) {
+  const wrap   = document.getElementById('checkinDots');
+  const signed = new Set(signedDates);
+  const today  = new Date();
+  wrap.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const d  = new Date(today);
+    d.setDate(d.getDate() - i);
+    const ds = d.toISOString().slice(0, 10);
+    const isSigned  = signed.has(ds);
+    const isToday   = i === 0;
+    const dot = document.createElement('div');
+    dot.className = 'checkin-dot' + (isSigned ? ' filled' : '') + (isToday ? ' today' : '');
+    dot.textContent = d.getDate();
+    dot.title = ds + (isSigned ? ' ✓' : '');
+    wrap.appendChild(dot);
+  }
+}
+
+// ── Nav 章节状态 ───────────────────────────────────────────────────────────────
+function updateNavItems(chapters) {
+  const map = {};
+  chapters.forEach(c => map[c.key] = c);
+
+  document.querySelectorAll('.nav-item[data-key]').forEach(item => {
+    const ch = map[item.dataset.key];
+    if (!ch) return;
+    item.classList.remove('completed', 'locked');
+    const numEl  = item.querySelector('.nav-num');
+    const dotsEl = item.querySelectorAll('.quiz-dot');
+    const idx    = CHAPTER_ORDER.indexOf(item.dataset.key) + 1;
+
+    if (ch.completed) {
+      item.classList.add('completed');
+      numEl.textContent = '✓';
+    } else if (!ch.unlocked) {
+      item.classList.add('locked');
+      numEl.textContent = '🔒';
+    } else {
+      numEl.textContent = idx;
+    }
+
+    const scores = [ch.quiz1_score, ch.quiz2_score, ch.quiz3_score];
+    dotsEl.forEach((dot, i) => {
+      if (scores[i] !== null && scores[i] >= 60) dot.classList.add('passed');
+      else dot.classList.remove('passed');
+    });
+  });
+}
+
+// ── 导航切换 ──────────────────────────────────────────────────────────────────
+const navItems = document.querySelectorAll('.nav-item[data-key]');
+const frame    = document.getElementById('contentFrame');
+const titleEl  = document.getElementById('topbarTitle');
+const sidebar  = document.getElementById('sidebar');
+const overlay  = document.getElementById('overlay');
+
+navItems.forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    if (item.classList.contains('locked')) {
+      showToast('请先完成前一章节的三套题，解锁该章节');
+      return;
+    }
+    navItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    frame.src = item.dataset.file;
+    titleEl.textContent = item.dataset.title;
+    currentChKey = item.dataset.key;
+    startHeartbeat(currentChKey);
+    updateQuizBtn(currentChKey);
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+  });
+});
+
+document.getElementById('menuToggle').addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+});
+
+// ── 心跳 ──────────────────────────────────────────────────────────────────────
+function startHeartbeat(chKey) {
+  stopHeartbeat();
+  if (!document.hidden) sendHeartbeat(chKey);
+  heartbeatTimer = setInterval(() => {
+    if (!document.hidden) sendHeartbeat(chKey);
+  }, 30000);
+}
+
+function stopHeartbeat() {
+  if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+}
+
+async function sendHeartbeat(chKey) {
+  try {
+    const res = await fetch(`${API}/teach/heartbeat`, {
+      method: 'POST', headers: authHdr(),
+      body: JSON.stringify({ chapter: chKey })
+    });
+    if (res.ok && userStats) {
+      const data = await res.json();
+      if (!data.throttled) {
+        userStats.study.today_seconds = data.today_seconds;
+        document.getElementById('panelStudyMin').textContent =
+          Math.round(data.today_seconds / 60);
+      }
+    }
+  } catch {}
+}
+
+document.addEventListener('visibilitychange', () => {
+  // startHeartbeat already skips when document.hidden; nothing extra needed
+});
+
+// ── 签到 ──────────────────────────────────────────────────────────────────────
+async function handleCheckin() {
+  const btn = document.getElementById('checkinBtn');
+  btn.disabled = true;
+  try {
+    const res  = await fetch(`${API}/teach/checkin`, {
+      method: 'POST', headers: authHdr()
+    });
+    const data = await res.json();
+    if (data.ok) {
+      showToast(`签到成功！连续签到 ${data.streak} 天 🎉`);
+      loadStats();
+    } else {
+      showToast('签到失败，请重试');
+      btn.disabled = false;
+    }
+  } catch {
+    showToast('网络错误');
+    btn.disabled = false;
+  }
+}
+
+// ── 闯关按钮 ──────────────────────────────────────────────────────────────────
+function updateQuizBtn(chKey) {
+  const wrap = document.getElementById('quizBtnWrap');
+  const btn  = document.getElementById('quizBtn');
+  if (!userStats || !chKey) { wrap.style.display = 'none'; return; }
+  const ch = userStats.progress.chapters.find(c => c.key === chKey);
+  if (!ch || !ch.unlocked) { wrap.style.display = 'none'; return; }
+
+  wrap.style.display = 'block';
+  let next = 1;
+  if (ch.quiz1_score !== null && ch.quiz1_score >= 60) next = 2;
+  if (ch.quiz2_score !== null && ch.quiz2_score >= 60) next = 3;
+  if (ch.quiz3_score !== null && ch.quiz3_score >= 60) next = null;
+
+  if (next === null) {
+    btn.textContent = '✓ 本章已全部通过';
+    btn.className   = 'all-passed';
+    btn.onclick     = () => showToast('该章三套题均已通过！');
+  } else {
+    btn.textContent = `📝 答题闯关 (${next}/3)`;
+    btn.className   = '';
+    btn.onclick     = () => openQuizModal(chKey, next);
+  }
+}
+
+// ── Quiz 模态框 ───────────────────────────────────────────────────────────────
+async function openQuizModal(chapter, quizIndex) {
+  const modal = document.getElementById('quizModal');
+  const body  = document.getElementById('quizBody');
+  const ft    = document.getElementById('quizFt');
+  modal.classList.add('open');
+  document.getElementById('quizHdTitle').textContent = `答题闯关`;
+  document.getElementById('quizHdSub').textContent   = '';
+  body.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--ink3)">加载题目中…</div>';
+  ft.innerHTML   = '';
+
+  try {
+    const res = await fetch(`${API}/teach/quiz/${chapter}/${quizIndex}`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      body.innerHTML = `<div style="text-align:center;padding:40px 0;color:#b84040">${err.error || '加载失败，请重试'}</div>`;
+      return;
+    }
+    const data = await res.json();
+    quizState = {
+      chapter,
+      quizIndex,
+      questions: data.questions,
+      answers:   new Array(data.questions.length).fill(null),
+      currentQ:  0,
+    };
+    document.getElementById('quizHdTitle').textContent =
+      `${data.title} · 第 ${quizIndex}/3 套`;
+    document.getElementById('quizHdSub').textContent =
+      `共 ${data.total} 题 · 60 分及格`;
+    renderQ();
+  } catch {
+    body.innerHTML = '<div style="text-align:center;padding:40px 0;color:#b84040">网络错误，请重试</div>';
+  }
+}
+
+function renderQ() {
+  const { questions, answers, currentQ } = quizState;
+  const q      = questions[currentQ];
+  const isLast = currentQ === questions.length - 1;
+  const body   = document.getElementById('quizBody');
+  const ft     = document.getElementById('quizFt');
+
+  // ── 题目区 ──
+  let html = `<div class="q-num">第 ${currentQ + 1} 题 / 共 ${questions.length} 题</div>
+              <div class="q-text">${q.question}</div>`;
+
+  if (q.type === 'single_choice') {
+    html += '<div class="q-opts">';
+    Object.entries(q.options).forEach(([k, v]) => {
+      const sel = answers[currentQ] === k ? ' selected' : '';
+      html += `<button class="q-opt${sel}" onclick="selectOpt('${k}')">
+                 <span class="q-opt-k">${k}</span><span>${v}</span>
+               </button>`;
+    });
+    html += '</div>';
+  } else {
+    html += `<div class="q-textarea-hint">请用文字描述你的应对方案（尽量包含关键要素）</div>
+             <textarea class="q-textarea" id="qTextarea" placeholder="请输入您的回答…"></textarea>`;
+  }
+  body.innerHTML = html;
+
+  if (q.type === 'scenario') {
+    const ta = document.getElementById('qTextarea');
+    if (answers[currentQ]) ta.value = answers[currentQ];
+    ta.addEventListener('input', () => {
+      quizState.answers[quizState.currentQ] = ta.value.trim() || null;
+      const sb = document.getElementById('submitBtn');
+      if (sb) sb.disabled = !ta.value.trim();
+    });
+    ta.focus();
+  }
+
+  // ── 底栏 ──
+  const answered = answers[currentQ] !== null;
+  ft.innerHTML = `
+    <span class="quiz-ft-txt">${currentQ + 1} / ${questions.length}</span>
+    <div class="quiz-ft-btns">
+      ${currentQ > 0 ? `<button class="btn-prev" onclick="qPrev()">上一题</button>` : ''}
+      ${isLast
+        ? `<button class="btn-submit" id="submitBtn" onclick="submitQuiz()" ${answered ? '' : 'disabled'}>提交答卷</button>`
+        : `<button class="btn-next" onclick="qNext()" ${answered ? '' : 'disabled'}>下一题</button>`
+      }
+    </div>`;
+}
+
+function selectOpt(key) {
+  quizState.answers[quizState.currentQ] = key;
+  renderQ();
+}
+
+function qNext() {
+  if (quizState.answers[quizState.currentQ] === null) return;
+  if (quizState.currentQ < quizState.questions.length - 1) {
+    quizState.currentQ++;
+    renderQ();
+  }
+}
+
+function qPrev() {
+  if (quizState.currentQ > 0) { quizState.currentQ--; renderQ(); }
+}
+
+async function submitQuiz() {
+  const { chapter, quizIndex, questions, answers } = quizState;
+  const allDone = answers.every((a, i) =>
+    questions[i].type === 'scenario' ? (a && a.trim()) : a !== null
+  );
+  if (!allDone) { showToast('请完成所有题目后再提交'); return; }
+
+  const body = document.getElementById('quizBody');
+  const ft   = document.getElementById('quizFt');
+  body.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--ink3)">提交中…</div>';
+  ft.innerHTML   = '';
+
+  try {
+    const res = await fetch(`${API}/teach/quiz/submit`, {
+      method: 'POST', headers: authHdr(),
+      body: JSON.stringify({ chapter, quiz_index: quizIndex, answers })
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      body.innerHTML = `<div style="text-align:center;padding:40px 0;color:#b84040">${data.error || '提交失败'}</div>`;
+      return;
+    }
+    renderResult(data);
+    await loadStats();  // 刷新进度
+  } catch {
+    body.innerHTML = '<div style="text-align:center;padding:40px 0;color:#b84040">网络错误，请重试</div>';
+  }
+}
+
+function renderResult(data) {
+  const { score, passed, details, chapter_completed, next_unlocked } = data;
+  const body = document.getElementById('quizBody');
+  document.getElementById('quizFt').innerHTML = '';
+
+  let detailsHtml = '';
+  details.forEach((d, i) => {
+    const ok = d.correct;
+    const badge = `<span class="rd-badge ${ok ? 'ok' : 'bad'}">${ok ? '✓ 正确' : '✗ 错误'}</span>`;
+    if (d.type === 'single_choice') {
+      detailsHtml += `
+        <div class="rd-item ${ok ? 'ok' : 'bad'}">
+          <div class="rd-row">${badge}<span>第 ${i+1} 题 · ${d.points} 分</span></div>
+          ${!ok ? `<div>你的答案：<strong>${d.user}</strong>　正确答案：<strong>${d.answer}</strong></div>` : ''}
+          ${d.explanation ? `<div class="rd-expl">${d.explanation}</div>` : ''}
+        </div>`;
+    } else {
+      detailsHtml += `
+        <div class="rd-item ${ok ? 'ok' : 'bad'}">
+          <div class="rd-row">${badge}<span>情境题 · ${d.points}/${d.max_points} 分</span></div>
+          ${d.keywords_hit && d.keywords_hit.length
+            ? `<div>命中关键词：<strong>${d.keywords_hit.join('、')}</strong></div>` : ''}
+          ${d.reference_answer ? `<div class="rd-expl">参考思路：${d.reference_answer}</div>` : ''}
+        </div>`;
+    }
+  });
+
+  let unlockHtml = '';
+  if (chapter_completed && next_unlocked) {
+    unlockHtml = `<div class="result-unlock">🎉 本章三套题全部通过！已解锁：「${CHAPTER_TITLES[next_unlocked] || next_unlocked}」</div>`;
+  } else if (chapter_completed) {
+    unlockHtml = `<div class="result-unlock">🎉 恭喜！本章三套题全部通过！</div>`;
+  }
+
+  body.innerHTML = `
+    <div class="result-wrap">
+      <div class="result-circle ${passed ? 'pass' : 'fail'}">
+        <span class="result-score-n">${score}</span>
+        <span class="result-score-u">分</span>
+      </div>
+      <div class="result-verdict ${passed ? 'pass' : 'fail'}">${passed ? '通过！' : '未通过'}</div>
+      <div class="result-sub">${passed ? '太棒了，继续保持！' : '需要 60 分才能通过，请复习后重新作答'}</div>
+      ${unlockHtml}
+      <div class="result-details">${detailsHtml}</div>
+      <div class="result-actions">
+        ${!passed ? `<button class="btn-retry" onclick="retryQuiz()">重新答题</button>` : ''}
+        <button class="btn-done" onclick="closeQuizModal()">关闭</button>
+      </div>
+    </div>`;
+}
+
+function retryQuiz() {
+  openQuizModal(quizState.chapter, quizState.quizIndex);
+}
+
+function closeQuizModal() {
+  document.getElementById('quizModal').classList.remove('open');
+  quizState = makeEmptyQuiz();
+  updateQuizBtn(currentChKey);
+}
+
+// ── Toast ──────────────────────────────────────────────────────────────────────
+let _toastTimer = null;
+function showToast(msg, ms = 2600) {
+  const el = document.getElementById('toastMsg');
+  el.textContent = msg;
+  el.classList.add('show');
+  if (_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), ms);
+}
+</script>
+</body>
+</html>
