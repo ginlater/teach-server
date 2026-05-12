@@ -26,7 +26,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--cream);color:var(--i
 .card{background:var(--white);border:1px solid var(--bd);border-radius:12px;margin-bottom:.75rem;overflow:hidden}
 .ch{padding:.875rem 1.25rem;display:flex;align-items:center;gap:.75rem;cursor:pointer}
 .ch:hover{background:var(--rose-pale)}
-.cnum{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0}
+.cnum{min-width:26px;height:22px;border-radius:11px;padding:0 8px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;white-space:nowrap;line-height:1}
 .cnum.r{background:var(--rose-pale);color:var(--rose)}
 .cnum.g{background:var(--grp);color:var(--gr)}
 .cnum.b{background:var(--blp);color:var(--bl)}
@@ -470,52 +470,52 @@ ul{padding-left:15px;font-size:12px;color:var(--ink2);line-height:1.9}
 <div class="slbl">15个场景速查——找到你当下需要的</div>
 
   <div class="scene-grid" id="sgrid">
-    <div class="scene-btn" onclick="showScene('sc_p','顾客说"比外面贵"','价格比较场景','承认贵→拆解价值→周期均摊→让她自己判断。核心话术："我们贵在三个地方……换一个角度算一下……今天感受完您自己判断"','价格诚信，原价是真实的')">
+    <div class="scene-btn" onclick="showScene('sc_p','顾客说&quot;比外面贵&quot;','价格比较场景','承认贵→拆解价值→周期均摊→让她自己判断。核心话术：&quot;我们贵在三个地方……换一个角度算一下……今天感受完您自己判断&quot;','价格诚信，原价是真实的')">
       <div class="scene-num">💰 价格异议</div><div class="scene-title">比外面贵</div><div class="scene-tag">最高频异议</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_1','顾客打量环境，有点不自在','破冰期 — 进门等待时','主动说"没有任何压力""不是一定要做什么"，把来这里定调为"带走信息"而非"花钱消费"','无压力服务，以顾客收获为标准')">
+    <div class="scene-btn" onclick="showScene('sc_1','顾客打量环境，有点不自在','破冰期 — 进门等待时','主动说&quot;没有任何压力&quot;&quot;不是一定要做什么&quot;，把来这里定调为&quot;带走信息&quot;而非&quot;花钱消费&quot;','无压力服务，以顾客收获为标准')">
       <div class="scene-num">场景1</div><div class="scene-title">进门不自在</div><div class="scene-tag">破冰期</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_2','顾客说"就是随便看看"','防御模式 — 先设防线','接受并把它变成优势："不带目的地来反而听到最真实的状态"，强调检测分析是给她的收获','顾客知情权第一')">
+    <div class="scene-btn" onclick="showScene('sc_2','顾客说&quot;就是随便看看&quot;','防御模式 — 先设防线','接受并把它变成优势：&quot;不带目的地来反而听到最真实的状态&quot;，强调检测分析是给她的收获','顾客知情权第一')">
       <div class="scene-num">场景2</div><div class="scene-title">随便看看</div><div class="scene-tag">防御模式</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_3','顾客说别家做了没效果','对比触发 — 失望经历','不说别家坏话，说我们的流程差异："不是凭感觉推项目"，用问题引导顾客自己发现区别','数据驱动，不靠经验主义')">
+    <div class="scene-btn" onclick="showScene('sc_3','顾客说别家做了没效果','对比触发 — 失望经历','不说别家坏话，说我们的流程差异：&quot;不是凭感觉推项目&quot;，用问题引导顾客自己发现区别','数据驱动，不靠经验主义')">
       <div class="scene-num">场景3</div><div class="scene-title">别家没效果</div><div class="scene-tag">对比触发</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_4','顾客问产品是什么牌子','专业验证 — 想判断靠不靠谱','告诉她牌子，但把重点转向"产品要用对了才有效"，说"我们不怕查"体现透明度','成分透明，专业在判断力')">
+    <div class="scene-btn" onclick="showScene('sc_4','顾客问产品是什么牌子','专业验证 — 想判断靠不靠谱','告诉她牌子，但把重点转向&quot;产品要用对了才有效&quot;，说&quot;我们不怕查&quot;体现透明度','成分透明，专业在判断力')">
       <div class="scene-num">场景4</div><div class="scene-title">什么牌子</div><div class="scene-tag">专业验证</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_5','顾客问顾问的资质','专业质疑 — 能不能相信','把资质验证权交给顾客："今天的分析结束后您来评判"，说"说了的东西要负责"','以结果验证专业，不靠证书')">
+    <div class="scene-btn" onclick="showScene('sc_5','顾客问顾问的资质','专业质疑 — 能不能相信','把资质验证权交给顾客：&quot;今天的分析结束后您来评判&quot;，说&quot;说了的东西要负责&quot;','以结果验证专业，不靠证书')">
       <div class="scene-num">场景5</div><div class="scene-title">顾问资质</div><div class="scene-tag">专业质疑</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_6','顾客说"挺有道理的"但不成交','认可后推进 — 停在了解层','把"有道理"转化为行动紧迫感，主动说"我们不用吓顾客来促成交"，让顾客感受到真诚','以顾客利益为出发点')">
+    <div class="scene-btn" onclick="showScene('sc_6','顾客说&quot;挺有道理的&quot;但不成交','认可后推进 — 停在了解层','把&quot;有道理&quot;转化为行动紧迫感，主动说&quot;我们不用吓顾客来促成交&quot;，让顾客感受到真诚','以顾客利益为出发点')">
       <div class="scene-num">场景6</div><div class="scene-title">有道理但不动</div><div class="scene-tag">认可后推进</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_7','顾客问有没有副作用或风险','安全感建立 — 做决定前','诚实承认可能有适应反应，说出24小时响应承诺，让顾客感受到"有了问题你们不会不管"','诚实告知，负责任的售后')">
+    <div class="scene-btn" onclick="showScene('sc_7','顾客问有没有副作用或风险','安全感建立 — 做决定前','诚实承认可能有适应反应，说出24小时响应承诺，让顾客感受到&quot;有了问题你们不会不管&quot;','诚实告知，负责任的售后')">
       <div class="scene-num">场景7</div><div class="scene-title">副作用风险</div><div class="scene-tag">安全感建立</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_8','顾客问"你们生意好吗"','项目进行中 — 放松闲聊','说内部指标是"老客回来率"，主动说"不是希望你再来，是这次就该做好"','留存率是真正标准')">
+    <div class="scene-btn" onclick="showScene('sc_8','顾客问&quot;你们生意好吗&quot;','项目进行中 — 放松闲聊','说内部指标是&quot;老客回来率&quot;，主动说&quot;不是希望你再来，是这次就该做好&quot;','留存率是真正标准')">
       <div class="scene-num">场景8</div><div class="scene-title">生意好吗</div><div class="scene-tag">项目进行中</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_9','顾客问仪器认证','仪器质疑 — 安全顾虑','告知仪器信息，但延伸到"仪器安全不等于用法安全"，解释为什么先有顾问分析这一步','操作严谨，顾客安全高于效率')">
+    <div class="scene-btn" onclick="showScene('sc_9','顾客问仪器认证','仪器质疑 — 安全顾虑','告知仪器信息，但延伸到&quot;仪器安全不等于用法安全&quot;，解释为什么先有顾问分析这一步','操作严谨，顾客安全高于效率')">
       <div class="scene-num">场景9</div><div class="scene-title">仪器认证</div><div class="scene-tag">仪器质疑</div>
     </div>
     <div class="scene-btn" onclick="showScene('sc_10','顾客说朋友做了没变化','闲聊中质疑 — 朋友经历','从朋友案例转向顾客自身，强调个性化：她的方案是专门针对她的数据和问题设计的','个性化，方向比努力重要')">
       <div class="scene-num">场景10</div><div class="scene-title">朋友没效果</div><div class="scene-tag">闲聊中质疑</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_11','做完效果好，顾客说"没想到这么明显"','效果后加深 — 黄金时刻','把效果归因到"做了正确的事"，说清检测分析是核心，用这个时机打开对后续方案的开放度','方法论是核心竞争力')">
+    <div class="scene-btn" onclick="showScene('sc_11','做完效果好，顾客说&quot;没想到这么明显&quot;','效果后加深 — 黄金时刻','把效果归因到&quot;做了正确的事&quot;，说清检测分析是核心，用这个时机打开对后续方案的开放度','方法论是核心竞争力')">
       <div class="scene-num">场景11</div><div class="scene-title">效果超预期</div><div class="scene-tag">效果后黄金期</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_12','顾客问有没有打折优惠','价格谈判 — 成交前','解释不打折的逻辑（打折=原价是虚的），给"加赠"和"方案拆解"两个替代方案','价格诚信，原价是真实的')">
+    <div class="scene-btn" onclick="showScene('sc_12','顾客问有没有打折优惠','价格谈判 — 成交前','解释不打折的逻辑（打折=原价是虚的），给&quot;加赠&quot;和&quot;方案拆解&quot;两个替代方案','价格诚信，原价是真实的')">
       <div class="scene-num">场景12</div><div class="scene-title">要打折优惠</div><div class="scene-tag">成交谈判</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_13','老客带朋友来说帮你们带新客了','转介绍 — 最高价值行为','高度认可并承诺"对她比对您还认真"，邀请老客来做见证，建立共同荣誉感','口碑是最重要的资产')">
+    <div class="scene-btn" onclick="showScene('sc_13','老客带朋友来说帮你们带新客了','转介绍 — 最高价值行为','高度认可并承诺&quot;对她比对您还认真&quot;，邀请老客来做见证，建立共同荣誉感','口碑是最重要的资产')">
       <div class="scene-num">场景13</div><div class="scene-title">老客带新客</div><div class="scene-tag">转介绍</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_14','老客说皮肤没上次好了','老客管理 — 信任危机初期','感谢她说出来，对比数据说清楚，建立"我们一起管理皮肤"的伙伴关系','开放面对问题，伙伴关系')">
+    <div class="scene-btn" onclick="showScene('sc_14','老客说皮肤没上次好了','老客管理 — 信任危机初期','感谢她说出来，对比数据说清楚，建立&quot;我们一起管理皮肤&quot;的伙伴关系','开放面对问题，伙伴关系')">
       <div class="scene-num">场景14</div><div class="scene-title">老客说退步了</div><div class="scene-tag">信任危机</div>
     </div>
-    <div class="scene-btn" onclick="showScene('sc_15','送客时说"下次不知道什么时候来"','留住关键 — 隐性流失','不催来，发专业建议文稿，说"不是来了才能问我"——建立开放通道而非消费关系','服务不止于到店')">
+    <div class="scene-btn" onclick="showScene('sc_15','送客时说&quot;下次不知道什么时候来&quot;','留住关键 — 隐性流失','不催来，发专业建议文稿，说&quot;不是来了才能问我&quot;——建立开放通道而非消费关系','服务不止于到店')">
       <div class="scene-num">场景15</div><div class="scene-title">不知道何时再来</div><div class="scene-tag">流失预兆</div>
     </div>
   </div>
