@@ -753,7 +753,10 @@ async function sendHeartbeat(chKey) {
 }
 
 document.addEventListener('visibilitychange', () => {
-  // startHeartbeat already skips when document.hidden; nothing extra needed
+  // 切回前台立即发一次心跳，让"被其他设备挤下线"的提示尽快弹出（不必等下一个 30s tick）
+  if (!document.hidden && currentChKey && getToken()) {
+    sendHeartbeat(currentChKey);
+  }
 });
 
 // ── 签到 ──────────────────────────────────────────────────────────────────────
