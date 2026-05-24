@@ -82,6 +82,8 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans SC',sans-serif;}
 .nav-item.completed .nav-num{background:var(--gold);color:var(--ink);}
 .nav-item.locked{opacity:.55;cursor:not-allowed;}
 .nav-item.locked .nav-num{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3);font-size:13px;}
+.nav-item.unallowed{opacity:.38;cursor:not-allowed;}
+.nav-item.unallowed .nav-num{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.25);font-size:13px;}
 .nav-label .nav-title{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.5;}
 .nav-label .nav-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;line-height:1.4;}
 .nav-item.active .nav-label .nav-title{color:#fff;font-weight:500;}
@@ -450,6 +452,7 @@ const CHAPTER_TITLES = {
 let userStats       = null;
 let currentChKey    = null;
 let heartbeatTimer  = null;
+let statsRefreshTimer = null;
 let quizState       = makeEmptyQuiz();
 
 function makeEmptyQuiz() {
@@ -464,6 +467,7 @@ function makeEmptyQuiz() {
     const res = await fetch(`${API}/teach/auth/verify`, {
       headers: { Authorization: `Bearer ${token}` }
     });
+    if (await checkKicked(res)) return;
     if (res.ok) {
       const data = await res.json();
       showApp(data.username || localStorage.getItem(USER_KEY) || '—');
@@ -478,6 +482,23 @@ function makeEmptyQuiz() {
 function getToken() { return localStorage.getItem(TOKEN_KEY); }
 function authHdr() {
   return { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' };
+}
+
+// 服务端用 session_id 强制单设备登录：被新设备挤掉时返回 401 + kicked_out:true。
+// 这里在每个 fetch 后调用，命中即弹提示并退出登录。
+let _kickedOut = false;
+async function checkKicked(res) {
+  if (_kickedOut) return true;
+  if (res.status !== 401) return false;
+  let data = null;
+  try { data = await res.clone().json(); } catch {}
+  if (data && data.kicked_out) {
+    _kickedOut = true;
+    alert('您的账号已在其他设备登录，当前设备已下线。\n如需继续使用，请重新登录。');
+    handleLogout();
+    return true;
+  }
+  return false;
 }
 
 // ── 页面切换 ──────────────────────────────────────────────────────────────────
@@ -497,6 +518,18 @@ function showApp(username) {
   currentChKey = 'beauty_consultant_training_courseware';
   startHeartbeat(currentChKey);
   loadStats();
+  startStatsRefresh();
+}
+
+// 定期重拉权限 / 进度,让 admin 在 platform 调整后无需用户重新登录即可生效。
+function startStatsRefresh() {
+  stopStatsRefresh();
+  statsRefreshTimer = setInterval(() => {
+    if (!document.hidden) loadStats();
+  }, 30_000);
+}
+function stopStatsRefresh() {
+  if (statsRefreshTimer) { clearInterval(statsRefreshTimer); statsRefreshTimer = null; }
 }
 
 // ── 登录 / 退出 ───────────────────────────────────────────────────────────────
@@ -515,6 +548,7 @@ async function handleLogin(e) {
     });
     const data = await res.json();
     if (res.ok && data.token) {
+      _kickedOut = false;
       localStorage.setItem(TOKEN_KEY, data.token);
       localStorage.setItem(USER_KEY,  data.username);
       showApp(data.username);
@@ -532,6 +566,7 @@ async function handleLogin(e) {
 
 function handleLogout() {
   stopHeartbeat();
+  stopStatsRefresh();
   userStats = null; currentChKey = null;
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);
@@ -546,12 +581,33 @@ async function loadStats() {
     const res = await fetch(`${API}/teach/me/stats`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     });
+    if (await checkKicked(res)) return;
     if (!res.ok) return;
     userStats = await res.json();
     updatePanel(userStats);
     updateNavItems(userStats.progress.chapters);
+    ensureCurrentChapterAccessible();
     updateQuizBtn(currentChKey);
   } catch {}
+}
+
+// 当默认/当前章节用户没权限或未解锁时，自动切到第一个可访问的章节，
+// 避免界面停在一个其实点不开的章节上。
+function ensureCurrentChapterAccessible() {
+  if (!userStats || !userStats.progress) return;
+  const chapters = userStats.progress.chapters;
+  const cur = chapters.find(c => c.key === currentChKey);
+  if (cur && cur.allowed !== false && cur.unlocked) return;
+  const next = chapters.find(c => c.allowed !== false && c.unlocked);
+  if (!next || next.key === currentChKey) return;
+  const item = document.querySelector(`.nav-item[data-key="${next.key}"]`);
+  if (!item) return;
+  document.querySelectorAll('.nav-item[data-key]').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+  frame.src = item.dataset.file;
+  titleEl.textContent = item.dataset.title;
+  currentChKey = next.key;
+  startHeartbeat(currentChKey);
 }
 
 function updatePanel(s) {
@@ -598,12 +654,15 @@ function updateNavItems(chapters) {
   document.querySelectorAll('.nav-item[data-key]').forEach(item => {
     const ch = map[item.dataset.key];
     if (!ch) return;
-    item.classList.remove('completed', 'locked');
+    item.classList.remove('completed', 'locked', 'unallowed');
     const numEl  = item.querySelector('.nav-num');
     const dotsEl = item.querySelectorAll('.quiz-dot');
     const idx    = CHAPTER_ORDER.indexOf(item.dataset.key) + 1;
 
-    if (ch.completed) {
+    if (ch.allowed === false) {
+      item.classList.add('unallowed');
+      numEl.textContent = '🚫';
+    } else if (ch.completed) {
       item.classList.add('completed');
       numEl.textContent = '✓';
     } else if (!ch.unlocked) {
@@ -631,8 +690,12 @@ const overlay  = document.getElementById('overlay');
 navItems.forEach(item => {
   item.addEventListener('click', e => {
     e.preventDefault();
+    if (item.classList.contains('unallowed')) {
+      showToast('该章节未开通权限，请联系管理员开通');
+      return;
+    }
     if (item.classList.contains('locked')) {
-      showToast('请先完成前一章节的三套题，解锁该章节');
+      showToast('请先完成前一章节的三套题闯关，再继续学习');
       return;
     }
     navItems.forEach(i => i.classList.remove('active'));
@@ -677,6 +740,7 @@ async function sendHeartbeat(chKey) {
       method: 'POST', headers: authHdr(),
       body: JSON.stringify({ chapter: chKey })
     });
+    if (await checkKicked(res)) return;
     if (res.ok && userStats) {
       const data = await res.json();
       if (!data.throttled) {
@@ -700,6 +764,7 @@ async function handleCheckin() {
     const res  = await fetch(`${API}/teach/checkin`, {
       method: 'POST', headers: authHdr()
     });
+    if (await checkKicked(res)) return;
     const data = await res.json();
     if (data.ok) {
       showToast(`签到成功！连续签到 ${data.streak} 天 🎉`);
@@ -720,7 +785,7 @@ function updateQuizBtn(chKey) {
   const btn  = document.getElementById('quizBtn');
   if (!userStats || !chKey) { wrap.style.display = 'none'; return; }
   const ch = userStats.progress.chapters.find(c => c.key === chKey);
-  if (!ch || !ch.unlocked) { wrap.style.display = 'none'; return; }
+  if (!ch || ch.allowed === false || !ch.unlocked) { wrap.style.display = 'none'; return; }
 
   wrap.style.display = 'block';
   let next = 1;
@@ -754,6 +819,7 @@ async function openQuizModal(chapter, quizIndex) {
     const res = await fetch(`${API}/teach/quiz/${chapter}/${quizIndex}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     });
+    if (await checkKicked(res)) return;
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       body.innerHTML = `<div style="text-align:center;padding:40px 0;color:#b84040">${err.error || '加载失败，请重试'}</div>`;
@@ -861,6 +927,7 @@ async function submitQuiz() {
       method: 'POST', headers: authHdr(),
       body: JSON.stringify({ chapter, quiz_index: quizIndex, answers })
     });
+    if (await checkKicked(res)) return;
     const data = await res.json();
     if (!data.ok) {
       body.innerHTML = `<div style="text-align:center;padding:40px 0;color:#b84040">${data.error || '提交失败'}</div>`;

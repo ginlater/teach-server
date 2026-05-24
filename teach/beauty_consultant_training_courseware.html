@@ -83,6 +83,21 @@ h4{font-size:14px;font-weight:500;color:var(--ink);margin:16px 0 8px}
 p{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:8px}
 ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
 @media(max-width:600px){.grid2{grid-template-columns:1fr}.week-grid{grid-template-columns:repeat(4,1fr)}.hero h1{font-size:20px}.hero-kpi{gap:12px}}
+.audio-player{display:flex;align-items:center;gap:12px;background:#FEFBF4;border:1px solid rgba(201,168,108,0.3);border-left:3px solid var(--gold);border-radius:8px;padding:10px 14px;margin:14px 0}
+.ap-btn{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--rose);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1;padding:0;transition:background .15s}
+.ap-btn:hover{background:var(--rose-deep)}
+.ap-btn.playing{background:var(--rose-deep)}
+.ap-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.ap-title{font-size:12px;color:var(--rose-deep);font-weight:500;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ap-track{display:flex;align-items:center;gap:10px}
+.ap-range{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:10px;background:var(--border);outline:none;cursor:pointer;padding:0;margin:0;background-image:linear-gradient(90deg,var(--rose),var(--rose-light));background-size:0% 100%;background-repeat:no-repeat}
+.ap-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--rose);border:2px solid #fff;box-shadow:0 1px 3px rgba(92,32,64,0.25);cursor:pointer}
+.ap-range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--rose);border:2px solid #fff;box-shadow:0 1px 3px rgba(92,32,64,0.25);cursor:pointer}
+.ap-time{font-size:11px;color:var(--ink3);font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
+.ap-rate{font-size:11px;color:var(--rose-deep);background:#fff;border:1px solid var(--border);border-radius:6px;padding:3px 4px 3px 6px;outline:none;cursor:pointer;font-family:inherit;flex-shrink:0;line-height:1.2}
+.ap-rate:hover{border-color:var(--rose-light)}
+.ap-rate:focus{border-color:var(--rose)}
+@media(max-width:600px){.ap-title{white-space:normal;font-size:11px}.audio-player{padding:8px 10px;gap:8px}.ap-btn{width:32px;height:32px;font-size:12px}.ap-rate{font-size:10px;padding:2px 3px 2px 5px}}
 </style>
 
 <div class="wrap">
@@ -125,6 +140,19 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
     <div class="day-box highlight"><div class="day-label">Day 7</div><div class="day-content">独立试接<br>带教辅助<br>考核达标</div></div>
   </div>
 
+  <div class="audio-player">
+    <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+    <div class="ap-main">
+      <div class="ap-title">【刁姐定制版课件讲解】课程总览 + 七天计划说明</div>
+      <div class="ap-track">
+        <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+        <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+      </div>
+    </div>
+    <audio preload="metadata" src="/audio/音频01.m4a"></audio>
+  </div>
+
   <div class="card" id="c00">
     <div class="card-head" onclick="toggleCard('c00')">
       <div class="card-num">1</div>
@@ -133,18 +161,54 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】Day 1-2 第一节：品牌与服务认知</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频02.m4a"></audio>
+      </div>
       <h4>品牌与服务认知</h4>
       <ul>
         <li>品牌定位、核心价值观、服务差异点</li>
         <li>顾问岗位职责与职业形象标准（仪容/着装/话术用语）</li>
         <li>门店服务流程全貌概览（接待→检测→分析→方案→项目→对比→成交→复购）</li>
       </ul>
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】Day 1-2 第二节：皮肤基础知识</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频03.m4a"></audio>
+      </div>
       <h4>皮肤基础知识（重点）</h4>
       <div class="grid2">
         <div class="mini-card"><h4>皮肤结构</h4><p>表皮层、真皮层、皮下组织的功能认知，角质层屏障意义</p></div>
         <div class="mini-card"><h4>六大皮肤类型</h4><p>干性/油性/混合性/敏感性/衰老性/问题性，判断维度与特征</p></div>
         <div class="mini-card"><h4>常见肌肤问题</h4><p>痘痘/色斑/敏感/干燥/毛孔/细纹——成因链路理解</p></div>
         <div class="mini-card"><h4>皮肤代谢周期</h4><p>28天更新周期，年龄与季节对代谢速度的影响，客诉预期管理</p></div>
+      </div>
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】Day 1-2 第三节：皮肤检测仪器认知</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频04.m4a"></audio>
       </div>
       <h4>皮肤检测仪器认知</h4>
       <ul>
@@ -163,6 +227,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】Day 3-4：流程话术训练（破冰、问诊、分析、方案）</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频05.m4a"></audio>
+      </div>
       <div class="tip"><strong>练习方法：</strong>两人一组角色扮演，一人扮顾客（含刁难型/沉默型/急性子型），一人扮顾问，老人点评录音复盘</div>
       <h4>训练重点</h4>
       <div class="steps">
@@ -188,6 +264,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】Day 5-7：成交能力训练（报价、异议、实战）</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频06.m4a"></audio>
+      </div>
       <h4>报价五步法练习</h4>
       <div class="flow">
         <div class="flow-item">获取满意共识</div><div class="flow-arrow">→</div>
@@ -223,6 +311,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】破冰接待技巧（一）：五大破冰切入方式</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频07.m4a"></audio>
+      </div>
       <div class="grid2">
         <div class="mini-card">
           <h4>① 赞美亮点破冰</h4>
@@ -256,6 +356,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】破冰接待技巧（二）：标准话术示范 + 破冰成功判断</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频08.m4a"></audio>
+      </div>
       <div class="script">
         <div class="script-label">赞美型</div>
         <p>"您今天这个发型好适合您，整个人感觉精神好很多，是刚做的吗？"</p>
@@ -308,6 +420,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】检测问诊流程（一）：12项核心问诊维度</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频09.m4a"></audio>
+      </div>
       <table class="table">
         <tr><th>问诊维度</th><th>核心问题</th><th>目的</th></tr>
         <tr><td><b>问题存在时间</b></td><td>这个情况大概是什么时候开始的？</td><td>判断急慢性、改善难度</td></tr>
@@ -334,6 +458,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】检测问诊流程（二）：问诊节奏控制 + 饮食皮肤关联</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频10.m4a"></audio>
+      </div>
       <div class="tip"><strong>核心原则：</strong>问诊要像朋友聊天，不是警察审讯。每问一个问题后，先共情回应，再追问下一个。</div>
       <h4>过渡话术模板</h4>
       <div class="script">
@@ -386,6 +522,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】皮肤图谱分析（一）：六大检测图谱解读</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频11.m4a"></audio>
+      </div>
       <table class="table">
         <tr><th>图谱类型</th><th>重点看什么</th><th>顾客诉求场景</th></tr>
         <tr><td><b>红区图</b></td><td>皮肤炎症、毛细血管、敏感分布</td><td>顾客关注健康屏障/修复/敏感问题</td></tr>
@@ -407,6 +555,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】皮肤图谱分析（二）：结论表达公式 + 医美史顾客特殊策略</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频12.m4a"></audio>
+      </div>
       <div class="flow">
         <div class="flow-item">指出图谱现象</div><div class="flow-arrow">→</div>
         <div class="flow-item">解释成因关联</div><div class="flow-arrow">→</div>
@@ -459,6 +619,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】方案设计与美容师交接</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频13.m4a"></audio>
+      </div>
       <div class="grid2">
         <div class="mini-card">
           <h4>新客方案逻辑</h4>
@@ -514,6 +686,19 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
 <div class="tab" id="t5">
   <div class="section-title">效果对比引导</div>
   <div class="section-sub">对比是成交的最强推力，也是顾客续购的核心动力</div>
+
+  <div class="audio-player">
+    <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+    <div class="ap-main">
+      <div class="ap-title">【刁姐定制版课件讲解】效果对比引导（全节）</div>
+      <div class="ap-track">
+        <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+        <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+      </div>
+    </div>
+    <audio preload="metadata" src="/audio/音频14.m4a"></audio>
+  </div>
 
   <div class="card" id="c50">
     <div class="card-head" onclick="toggleCard('c50')">
@@ -591,6 +776,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】报价成交流程（一）：报价五步法 + 踢单工具详解</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频15.m4a"></audio>
+      </div>
       <div class="steps">
         <div class="step">
           <div class="step-n">1</div>
@@ -680,6 +877,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】报价成交流程（二）：身体语言 + 家居护理建议</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频16.m4a"></audio>
+      </div>
       <div class="tip"><strong>为什么在成交环节讲家居护理：</strong>给顾客一些"专业干货"，让她感受到你不只是在卖东西，而是真心想帮她把皮肤管好——这会大幅提升信任度，促进成交</div>
       <h4>家居护理避坑建议示范</h4>
       <div class="script">
@@ -707,6 +916,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】送客与情绪价值（全节）</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频17.m4a"></audio>
+      </div>
       <div class="steps">
         <div class="step"><div class="step-n">1</div><div class="step-text">不要快速送客，在门口多停留1-2分钟，继续提供情绪价值</div></div>
         <div class="step"><div class="step-n">2</div><div class="step-text">再次<b>给出专业建议总结</b>："今天最重要的一件事，是回家不要用酒精成分的爽肤水……"</div></div>
@@ -757,6 +978,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】专业知识库（一）：皮肤生理学 + 成分知识</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频18.m4a"></audio>
+      </div>
       <table class="table">
         <tr><th>知识点</th><th>顾问需要掌握的程度</th></tr>
         <tr><td>皮肤屏障功能</td><td>能解释为什么屏障受损会导致各种问题，及修复思路</td></tr>
@@ -799,6 +1032,18 @@ ul{padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9}
       <div class="card-arrow">▼</div>
     </div>
     <div class="card-body open">
+      <div class="audio-player">
+        <button class="ap-btn" type="button" aria-label="播放/暂停">▶</button>
+        <div class="ap-main">
+          <div class="ap-title">【刁姐定制版课件讲解】专业知识库（二）：顾问心理学 + 岗位关键能力清单</div>
+          <div class="ap-track">
+            <input class="ap-range" type="range" min="0" max="100" step="0.1" value="0">
+            <div class="ap-time"><span class="ap-cur">0:00</span> / <span class="ap-dur">--:--</span></div>
+            <select class="ap-rate" aria-label="倍速"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option></select>
+          </div>
+        </div>
+        <audio preload="metadata" src="/audio/音频19.m4a"></audio>
+      </div>
       <div class="grid2">
         <div class="mini-card">
           <h4>成交心态</h4>
@@ -893,4 +1138,69 @@ document.querySelectorAll('.card-head').forEach(function(head){
     }
   });
 });
+
+(function initAudioPlayers(){
+  var ICON_PLAY='▶';
+  var ICON_PAUSE='❚❚';
+  var BASE_RATE=0.88;
+  function fmt(s){
+    if(!isFinite(s)||s<0)return '0:00';
+    s=Math.floor(s);
+    var m=Math.floor(s/60),r=s%60;
+    return m+':'+(r<10?'0':'')+r;
+  }
+  var players=document.querySelectorAll('.audio-player');
+  var audios=[];
+  players.forEach(function(p){
+    var audio=p.querySelector('audio');
+    var btn=p.querySelector('.ap-btn');
+    var range=p.querySelector('.ap-range');
+    var cur=p.querySelector('.ap-cur');
+    var dur=p.querySelector('.ap-dur');
+    var rate=p.querySelector('.ap-rate');
+    if(!audio||!btn||!range)return;
+    function applyRate(){
+      var m=rate?(parseFloat(rate.value)||1):1;
+      audio.playbackRate=BASE_RATE*m;
+    }
+    applyRate();
+    if(rate)rate.addEventListener('change',applyRate);
+    audios.push(audio);
+    btn.textContent=ICON_PLAY;
+    function setBg(){
+      var v=parseFloat(range.value)||0;
+      range.style.backgroundSize=v+'% 100%';
+    }
+    setBg();
+    btn.addEventListener('click',function(){
+      if(audio.paused){
+        audios.forEach(function(a){if(a!==audio&&!a.paused)a.pause();});
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+    audio.addEventListener('play',function(){btn.textContent=ICON_PAUSE;btn.classList.add('playing');});
+    audio.addEventListener('pause',function(){btn.textContent=ICON_PLAY;btn.classList.remove('playing');});
+    audio.addEventListener('ended',function(){btn.textContent=ICON_PLAY;btn.classList.remove('playing');range.value=0;setBg();});
+    audio.addEventListener('loadedmetadata',function(){if(dur)dur.textContent=fmt(audio.duration);});
+    audio.addEventListener('timeupdate',function(){
+      if(!audio.duration)return;
+      var pct=(audio.currentTime/audio.duration)*100;
+      range.value=pct;
+      setBg();
+      if(cur)cur.textContent=fmt(audio.currentTime);
+    });
+    var seeking=false;
+    range.addEventListener('input',function(){
+      seeking=true;
+      setBg();
+      if(audio.duration&&cur)cur.textContent=fmt(audio.duration*(range.value/100));
+    });
+    range.addEventListener('change',function(){
+      if(audio.duration)audio.currentTime=audio.duration*(range.value/100);
+      seeking=false;
+    });
+  });
+})();
 </script>

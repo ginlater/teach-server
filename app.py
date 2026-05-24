@@ -10,6 +10,7 @@ teach.aibeautyfulwomen.com — 独立 FastAPI 服务
 """
 
 import re
+import secrets
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -68,6 +69,29 @@ class UpdateTeachUserRequest(BaseModel):
 
 # ── 鉴权辅助 ──────────────────────────────────────────────────────────────────
 
+def _check_single_device(payload: dict) -> JSONResponse | None:
+    """
+    校验单设备登录：token 里的 sid 必须等于服务端记录的 session_id。
+    admin 账号不受限制；用户记录没有 session_id 时也跳过（向后兼容）。
+    """
+    username = payload.get("phone")
+    if not username:
+        return None
+    info = _teach_store.get_user_info(username)
+    if info.get("role") == "admin":
+        return None
+    saved_sid = info.get("session_id", "")
+    if not saved_sid:
+        return None
+    if payload.get("sid") != saved_sid:
+        return JSONResponse(status_code=401, content={
+            "ok": False,
+            "error": "您的账号已在其他设备登录，已被挤下线",
+            "kicked_out": True,
+        })
+    return None
+
+
 def _teach_require(request: Request):
     """返回 (username, None) 或 (None, JSONResponse)。"""
     auth = request.headers.get("Authorization", "")
@@ -76,6 +100,9 @@ def _teach_require(request: Request):
     payload = verify_token(auth[7:])
     if not payload or payload.get("company") != "teach":
         return None, JSONResponse(status_code=401, content={"ok": False, "error": "token 无效或已过期"})
+    kicked = _check_single_device(payload)
+    if kicked:
+        return None, kicked
     username = payload.get("phone")
     active, reason = _teach_store.is_user_active(username)
     if not active:
@@ -91,6 +118,9 @@ def _teach_token_required(request: Request):
     payload = verify_token(auth_header[7:])
     if not payload or payload.get("company") != "teach":
         return None, JSONResponse(status_code=401, content={"error": "token 无效或已过期"})
+    kicked = _check_single_device(payload)
+    if kicked:
+        return None, kicked
     return payload, None
 
 
@@ -105,6 +135,44 @@ def _require_platform(request: Request):
     return None, payload
 
 
+def _user_chapter_access(username: str, info: dict) -> dict[str, dict]:
+    """
+    计算用户对每个章节的访问状态：{chapter_key: {'allowed','unlocked','completed'}}。
+
+    - allowed：在 allowed_chapters 列表里（或用户没有 allowed_chapters 设置，视作全开）
+    - unlocked：用户「已开通的章节序列」中处于已解锁位置——
+      序列中第一个永远解锁，后续每个仅当前一个已 completed 才解锁
+    - completed：该章节三套题均通过
+    """
+    allowed_chapters = info.get("allowed_chapters")
+    progress = _progress_store.get_progress(username)
+    chapter_map = {c["key"]: c for c in progress["chapters"]}
+    completed_set = {k for k, c in chapter_map.items() if c["completed"]}
+
+    if allowed_chapters is None:
+        sequence = list(_progress_store.CHAPTER_ORDER)
+    else:
+        allowed_set = set(allowed_chapters)
+        sequence = [k for k in _progress_store.CHAPTER_ORDER if k in allowed_set]
+
+    seq_unlocked: set[str] = set()
+    prev_completed = True  # 第一个永远视作"前一个已完成"
+    for k in sequence:
+        if prev_completed:
+            seq_unlocked.add(k)
+        prev_completed = k in completed_set
+
+    sequence_set = set(sequence)
+    return {
+        k: {
+            "allowed":   k in sequence_set,
+            "unlocked":  k in seq_unlocked,
+            "completed": k in completed_set,
+        }
+        for k in _progress_store.CHAPTER_ORDER
+    }
+
+
 def _teach_chapter_allowed(username: str, chapter: str, quiz_index: int | None = None):
     """
     统一的章节/题目访问权限检查。返回 None 表示允许，返回 JSONResponse 表示拒绝。
@@ -114,23 +182,15 @@ def _teach_chapter_allowed(username: str, chapter: str, quiz_index: int | None =
     if info.get("role") == "admin":
         return None
 
-    allowed_chapters = info.get("allowed_chapters")
-    if allowed_chapters is not None:
-        if chapter not in allowed_chapters:
-            return JSONResponse(status_code=403, content={
-                "ok": False, "error": "该章节未购买，请联系管理员开通"
-            })
-        if quiz_index is not None:
-            allowed_q = info.get("allowed_quizzes", {}).get(chapter)
-            if allowed_q is not None and quiz_index not in allowed_q:
-                return JSONResponse(status_code=403, content={
-                    "ok": False, "error": "该套题未开放，请联系管理员开通"
-                })
-        return None
-
-    if not _progress_store.is_chapter_unlocked(username, chapter):
+    access = _user_chapter_access(username, info)
+    state = access.get(chapter)
+    if not state or not state["allowed"]:
         return JSONResponse(status_code=403, content={
-            "ok": False, "error": "该章节尚未解锁，请先完成前一章节的闯关"
+            "ok": False, "error": "该章节未开通权限，请联系管理员开通"
+        })
+    if not state["unlocked"]:
+        return JSONResponse(status_code=403, content={
+            "ok": False, "error": "请先完成前一章节的三套题闯关后再访问该章节"
         })
     return None
 
@@ -185,8 +245,19 @@ def teach_login(req: TeachLoginRequest, request: Request):
         _teach_store.append_log(req.username, "login_fail", ip)
         return JSONResponse(status_code=403, content={"error": reason})
     ip = request.client.host if request.client else None
+    # admin 不受单设备限制；其他账号每次登录刷新 session_id 把旧设备挤下线
+    info = _teach_store.get_user_info(req.username)
+    session_id: str | None = None
+    if info.get("role") != "admin":
+        old_sid = info.get("session_id", "")
+        session_id = secrets.token_urlsafe(16)
+        _teach_store.set_session_id(req.username, session_id)
+        if old_sid:
+            _teach_store.append_log(req.username, "kicked_previous_device", ip)
     _teach_store.append_log(req.username, "login", ip)
-    token = create_token(req.username, f"teach:{req.username}", company="teach")
+    token = create_token(
+        req.username, f"teach:{req.username}", company="teach", session_id=session_id,
+    )
     return {"token": token, "username": req.username}
 
 
@@ -200,6 +271,9 @@ def teach_verify(request: Request):
     payload = verify_token(auth_header[7:])
     if not payload or payload.get("company") != "teach":
         return JSONResponse(status_code=401, content={"error": "token 无效或已过期"})
+    kicked = _check_single_device(payload)
+    if kicked:
+        return kicked
     return {"ok": True, "username": payload.get("phone")}
 
 
@@ -297,6 +371,7 @@ def teach_me_stats(request: Request):
             {
                 "key":         key,
                 "title":       _progress_store.CHAPTER_TITLES.get(key, key),
+                "allowed":     True,
                 "unlocked":    True,
                 "read_done":   True,
                 "quiz1_score": 100,
@@ -314,15 +389,13 @@ def teach_me_stats(request: Request):
         }
     else:
         progress = _progress_store.get_progress(username)
-        allowed_chapters = info.get("allowed_chapters")
-        if allowed_chapters is not None:
-            allowed_set = set(allowed_chapters)
-            for ch in progress["chapters"]:
-                if ch["key"] in allowed_set:
-                    ch["unlocked"] = True
-                else:
-                    ch["unlocked"] = False
-                    ch["completed"] = False
+        access = _user_chapter_access(username, info)
+        for ch in progress["chapters"]:
+            st = access.get(ch["key"], {})
+            ch["allowed"]  = st.get("allowed", False)
+            ch["unlocked"] = st.get("unlocked", False)
+            if not st.get("allowed"):
+                ch["completed"] = False
 
     return {
         "ok":       True,
@@ -530,6 +603,7 @@ def platform_update_teach_user(username: str, req: UpdateTeachUserRequest, reque
 
 # ── 静态站点挂载（放最后，避免吞掉上面的 API） ─────────────────────────────────
 
+app.mount("/audio", StaticFiles(directory=str(ROOT / "audio")), name="audio")
 app.mount("/", StaticFiles(directory=str(TEACH_DIR), html=True), name="teach")
 
 

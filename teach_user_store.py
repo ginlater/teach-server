@@ -189,6 +189,24 @@ def set_enabled(username: str, enabled: bool) -> bool:
     return True
 
 
+# ── 单设备登录会话 ────────────────────────────────────────────────────────────
+
+def set_session_id(username: str, session_id: str) -> None:
+    """登录时调用：把最新 session_id 写入用户记录，旧设备 token 自然失效。"""
+    with _lock:
+        users = _read_users()
+        if username not in users:
+            return
+        users[username]["session_id"] = session_id
+        _write_users(users)
+
+
+def get_session_id(username: str) -> str:
+    with _lock:
+        users = _read_users()
+    return users.get(username, {}).get("session_id", "")
+
+
 # ── 账号密码台账（管理员可查） ────────────────────────────────────────────────
 
 def _append_cred_log(username: str, key: str, note: str, action: str) -> None:

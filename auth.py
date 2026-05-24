@@ -10,7 +10,12 @@ JWT_ALGORITHM = "HS256"
 JWT_EXPIRE_SECONDS = 7 * 24 * 3600  # 7 天
 
 
-def create_token(phone: str, openid: str, company: str | None = None) -> str:
+def create_token(
+    phone: str,
+    openid: str,
+    company: str | None = None,
+    session_id: str | None = None,
+) -> str:
     payload = {
         "phone": phone,
         "openid": openid,
@@ -19,6 +24,8 @@ def create_token(phone: str, openid: str, company: str | None = None) -> str:
     }
     if company:
         payload["company"] = company
+    if session_id:
+        payload["sid"] = session_id
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
 
 
