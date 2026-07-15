@@ -36,6 +36,11 @@ class TeachLoginRequest(BaseModel):
     password: str
 
 
+class TeachChangePwdRequest(BaseModel):
+    old_password: str
+    new_password: str
+
+
 class TeachHeartbeatRequest(BaseModel):
     chapter: str = ""
 
@@ -54,17 +59,20 @@ class TeachUserRequest(BaseModel):
 
 class CreateTeachUsersRequest(BaseModel):
     mode: str  # "batch" | "single"
+    password: str | None = None  # ★2026-07-15 多系统统一密码:单个模式可指定,不传则随机
     company_prefix: str | None = None
     count: int | None = None
     username: str | None = None
     expires_on: str
     allowed_chapters: list[str] | None = None
+    company: str | None = None
 
 
 class UpdateTeachUserRequest(BaseModel):
     expires_on: str = ""
     enabled: bool = True
     allowed_chapters: list[str] | None = None
+    company: str | None = None
 
 
 # ── 鉴权辅助 ──────────────────────────────────────────────────────────────────
@@ -111,7 +119,12 @@ def _teach_require(request: Request):
 
 
 def _teach_token_required(request: Request):
-    """轻量校验（不查账号状态），适用于 /teach/users、/teach/credentials 这类管理路由。"""
+    """管理路由鉴权：校验 token 有效 + 账号为 admin 角色。
+
+    适用于 /teach/users、/teach/credentials、/teach/logs 这类只应由管理员访问的路由。
+    普通学员 token 虽然 company=="teach"，但 role 非 admin，一律拒绝——防止学员拖走
+    全站账号/明文密码或增删账号。
+    """
     auth_header = request.headers.get("Authorization", "")
     if not auth_header.startswith("Bearer "):
         return None, JSONResponse(status_code=401, content={"error": "未登录"})
@@ -121,6 +134,9 @@ def _teach_token_required(request: Request):
     kicked = _check_single_device(payload)
     if kicked:
         return None, kicked
+    info = _teach_store.get_user_info(payload.get("phone"))
+    if info.get("role") != "admin":
+        return None, JSONResponse(status_code=403, content={"error": "仅管理员可访问"})
     return payload, None
 
 
@@ -339,6 +355,17 @@ def teach_checkin(request: Request):
     return {"ok": True, **result}
 
 
+@app.post("/teach/change-password")
+def teach_change_password(req: TeachChangePwdRequest, request: Request):
+    username, err = _teach_require(request)
+    if err:
+        return err
+    ok, msg = _teach_store.change_password(username, req.old_password, req.new_password)
+    if not ok:
+        return JSONResponse(status_code=400, content={"ok": False, "error": msg})
+    return {"ok": True}
+
+
 # ── /teach/heartbeat ──────────────────────────────────────────────────────────
 
 @app.post("/teach/heartbeat")
@@ -522,6 +549,7 @@ def platform_list_teach_users(request: Request):
             "expires_on": v.get("expires_on", ""),
             "allowed_chapters": v.get("allowed_chapters"),
             "note": v.get("note", ""),
+            "company": v.get("company", ""),
         }
         for u, v in users.items()
     ]
@@ -558,6 +586,7 @@ def platform_create_teach_users(req: CreateTeachUsersRequest, request: Request):
                 uname = f"{prefix}{num:02d}"
                 pw = _gen_pw()
                 entry = {"key": pw, "enabled": True, "note": prefix, "expires_on": req.expires_on}
+                if (req.company or "").strip(): entry["company"] = req.company.strip()
                 if req.allowed_chapters is not None:
                     entry["allowed_chapters"] = req.allowed_chapters
                 users[uname] = entry
@@ -566,8 +595,9 @@ def platform_create_teach_users(req: CreateTeachUsersRequest, request: Request):
         else:
             if not req.username:
                 return JSONResponse(status_code=400, content={"error": "单个模式需要填写账号名"})
-            pw = _gen_pw()
+            pw = (req.password or "").strip() or _gen_pw()  # ★统一密码:有就用,没有随机
             entry = {"key": pw, "enabled": True, "note": "", "expires_on": req.expires_on}
+            if (req.company or "").strip(): entry["company"] = req.company.strip()
             if req.allowed_chapters is not None:
                 entry["allowed_chapters"] = req.allowed_chapters
             users[req.username] = entry
@@ -594,7 +624,7 @@ def platform_update_teach_user(username: str, req: UpdateTeachUserRequest, reque
     if err:
         return err
     ok = _teach_store.update_user_fields(
-        username, req.expires_on, req.enabled, req.allowed_chapters
+        username, req.expires_on, req.enabled, req.allowed_chapters, req.company
     )
     if not ok:
         return JSONResponse(status_code=404, content={"error": "账号不存在"})
