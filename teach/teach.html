@@ -379,11 +379,26 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans SC',sans-serif;}
       <div class="user-row">
         <div class="user-avatar" id="userAvatar">?</div>
         <div class="user-name" id="userName">—</div>
+        <button class="logout-btn" onclick="openChangePwd()" style="margin-right:6px">改密码</button>
         <button class="logout-btn" onclick="handleLogout()">退出</button>
       </div>
       <div class="footer-copy">© 2026 aibeautyfulwomen.com<br>内部培训资料，请勿外传</div>
     </div>
   </aside>
+
+  <div id="cpwdMask" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:24px;border-radius:12px;width:90%;max-width:320px;box-shadow:0 10px 40px rgba(0,0,0,.25);">
+      <h3 style="margin:0 0 16px;font-size:16px;color:#333;">修改密码</h3>
+      <input id="cpwdOld" type="password" placeholder="原密码" autocomplete="current-password" style="width:100%;box-sizing:border-box;padding:9px 11px;margin-bottom:10px;border:1px solid #ccc;border-radius:8px;font-size:14px;">
+      <input id="cpwdNew" type="password" placeholder="新密码（至少6位）" autocomplete="new-password" style="width:100%;box-sizing:border-box;padding:9px 11px;margin-bottom:10px;border:1px solid #ccc;border-radius:8px;font-size:14px;">
+      <input id="cpwdNew2" type="password" placeholder="确认新密码" autocomplete="new-password" style="width:100%;box-sizing:border-box;padding:9px 11px;margin-bottom:10px;border:1px solid #ccc;border-radius:8px;font-size:14px;">
+      <div id="cpwdErr" style="color:#e74c3c;font-size:12px;min-height:16px;margin-bottom:8px;"></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button onclick="closeChangePwd()" style="padding:8px 18px;border:1px solid #ccc;background:#fff;color:#333;border-radius:8px;cursor:pointer;font-size:14px;">取消</button>
+        <button id="cpwdSubmit" onclick="submitChangePwd()" style="padding:8px 18px;border:none;background:#6a8caf;color:#fff;border-radius:8px;cursor:pointer;font-size:14px;">确定</button>
+      </div>
+    </div>
+  </div>
 
   <main class="main">
     <div class="main-topbar">
@@ -561,6 +576,42 @@ async function handleLogin(e) {
     errEl.style.display = 'block';
   } finally {
     btn.disabled = false; btn.textContent = '登 录';
+  }
+}
+
+function openChangePwd() {
+  ['cpwdOld','cpwdNew','cpwdNew2'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('cpwdErr').textContent = '';
+  document.getElementById('cpwdMask').style.display = 'flex';
+}
+function closeChangePwd() {
+  document.getElementById('cpwdMask').style.display = 'none';
+}
+async function submitChangePwd() {
+  const oldp = document.getElementById('cpwdOld').value;
+  const newp = document.getElementById('cpwdNew').value;
+  const newp2 = document.getElementById('cpwdNew2').value;
+  const err = document.getElementById('cpwdErr');
+  const btn = document.getElementById('cpwdSubmit');
+  err.textContent = '';
+  if (!oldp || !newp) { err.textContent = '请填写完整'; return; }
+  if (newp.length < 6) { err.textContent = '新密码至少 6 位'; return; }
+  if (newp === oldp) { err.textContent = '新密码不能与原密码相同'; return; }
+  if (newp !== newp2) { err.textContent = '两次输入的新密码不一致'; return; }
+  btn.disabled = true; btn.textContent = '提交中…';
+  try {
+    const res = await fetch(`${API}/teach/change-password`, {
+      method: 'POST', headers: authHdr(),
+      body: JSON.stringify({ old_password: oldp, new_password: newp })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) { err.textContent = data.error || '修改失败'; return; }
+    closeChangePwd();
+    showToast('密码已修改，下次登录请使用新密码');
+  } catch (e) {
+    err.textContent = '网络错误，请重试';
+  } finally {
+    btn.disabled = false; btn.textContent = '确定';
   }
 }
 

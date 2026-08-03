@@ -159,8 +159,9 @@ def update_user_fields(
     expires_on: str,
     enabled: bool,
     allowed_chapters,  # list[str] | None; None 表示不限制章节
+    company=None,      # None=不修改；""=清除；其它=设置
 ) -> bool:
-    """更新账号的 expires_on / enabled / allowed_chapters。"""
+    """更新账号的 expires_on / enabled / allowed_chapters / company。"""
     with _lock:
         users = _read_users()
         if username not in users:
@@ -175,6 +176,11 @@ def update_user_fields(
             u.pop("allowed_chapters", None)
         else:
             u["allowed_chapters"] = allowed_chapters
+        if company is not None:
+            if str(company).strip():
+                u["company"] = str(company).strip()
+            else:
+                u.pop("company", None)
         _write_users(users)
     return True
 
@@ -199,6 +205,25 @@ def set_session_id(username: str, session_id: str) -> None:
             return
         users[username]["session_id"] = session_id
         _write_users(users)
+
+
+def change_password(username: str, old_key: str, new_key: str) -> tuple[bool, str]:
+    """用户自助改密码：验旧密码 -> 校验新密码 -> 写入并记台账。"""
+    if not new_key or len(new_key) < 6:
+        return False, "新密码至少 6 位"
+    with _lock:
+        users = _read_users()
+        user = users.get(username)
+        if not user:
+            return False, "账号不存在"
+        if not secrets.compare_digest(user.get("key", ""), old_key):
+            return False, "原密码不正确"
+        if new_key == old_key:
+            return False, "新密码不能与原密码相同"
+        users[username]["key"] = new_key
+        _write_users(users)
+        _append_cred_log(username, new_key, "用户自助修改密码", "password_change")
+    return True, ""
 
 
 def get_session_id(username: str) -> str:
